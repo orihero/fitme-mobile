@@ -65,6 +65,7 @@ const SchemaNutritionView = () => {
           setActive={setActiveTab}
           containerStyle={styles.btnCont}
           titles={["Жиросжигание", "Массанабор"]}
+          scroll={false}
         />
       )}
 

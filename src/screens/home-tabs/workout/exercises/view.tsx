@@ -38,6 +38,7 @@ const WorkoutExercisesScreen = () => {
         setActive={setIsFavorite}
         titles={["Выбранные", "База упражнений"]}
         containerStyle={styles.favoriteBtnCont}
+        scroll={false}
       />
 
       <ButtonTabs

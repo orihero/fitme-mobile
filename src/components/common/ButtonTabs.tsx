@@ -6,7 +6,9 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  ScrollView,
 } from "react-native";
+import React from "react";
 import { COLORS } from "../../constants/COLORS";
 import ButtonSecondary from "./ButtonSecondary";
 import ButtonUnderline from "./ButtonUnderline";
@@ -24,6 +26,7 @@ interface IProps {
   inActiveTextStyle?: StyleProp<TextStyle>;
   marginLeft?: number;
   marginLeft2?: number;
+  scroll?: boolean;
 }
 
 const ButtonTabs = ({
@@ -39,66 +42,81 @@ const ButtonTabs = ({
   inActiveTextStyle,
   marginLeft = 10,
   marginLeft2,
-}: IProps) => (
-  <View style={[styles.container, containerStyle]}>
-    {titles.map((title, i) =>
-      primary ? (
-        <TouchableOpacity
-          key={i}
-          onPress={() => setActive(i)}
-          style={[styles.col, active === i ? styles.activeCol : undefined]}
-        >
-          <Text style={styles.text}>{title}</Text>
-        </TouchableOpacity>
-      ) : secondary ? (
-        active === i ? (
-          <ButtonSecondary
-            key={i}
-            text={title}
-            textStyle={textStyle}
-            onPress={() => setActive(i)}
-            containerStyle={[{ marginLeft: i ? marginLeft : 0 }, buttonStyle]}
-          />
-        ) : (
-          <TouchableOpacity
-            key={i}
-            onPress={() => setActive(i)}
-            style={[
-              {
-                marginLeft: i
-                  ? marginLeft2 && i - 1 !== active
-                    ? marginLeft2
-                    : marginLeft
-                  : 0,
-              },
-              buttonStyle,
-              inActiveBtnStyle,
-            ]}
-          >
-            <Text style={[styles.inActiveText, inActiveTextStyle]}>
-              {title}
-            </Text>
-          </TouchableOpacity>
-        )
-      ) : active === i ? (
-        <ButtonUnderline
-          key={i}
-          text={title}
-          onPress={() => setActive(i)}
-          style={{ marginLeft: i ? marginLeft : 0 }}
-        />
-      ) : (
-        <TouchableOpacity
-          key={i}
-          onPress={() => setActive(i)}
-          style={{ marginLeft: i ? marginLeft : 0 }}
-        >
-          <Text style={styles.inActiveText}>{title}</Text>
-        </TouchableOpacity>
-      )
-    )}
-  </View>
-);
+  scroll = true,
+}: IProps) => {
+  const Wrapper = scroll ? ScrollView : React.Fragment;
+  return (
+    <View style={[styles.container, containerStyle]}>
+      <Wrapper
+        horizontal
+        contentContainerStyle={{
+          alignItems: "baseline",
+          justifyContent: "center",
+        }}
+      >
+        {titles.map((title, i) =>
+          primary ? (
+            <TouchableOpacity
+              key={i}
+              onPress={() => setActive(i)}
+              style={[styles.col, active === i ? styles.activeCol : undefined]}
+            >
+              <Text style={styles.text}>{title}</Text>
+            </TouchableOpacity>
+          ) : secondary ? (
+            active === i ? (
+              <ButtonSecondary
+                key={i}
+                text={title}
+                textStyle={textStyle}
+                onPress={() => setActive(i)}
+                containerStyle={[
+                  { marginLeft: i ? marginLeft : 0 },
+                  buttonStyle,
+                ]}
+              />
+            ) : (
+              <TouchableOpacity
+                key={i}
+                onPress={() => setActive(i)}
+                style={[
+                  {
+                    marginLeft: i
+                      ? marginLeft2 && i - 1 !== active
+                        ? marginLeft2
+                        : marginLeft
+                      : 0,
+                  },
+                  buttonStyle,
+                  inActiveBtnStyle,
+                ]}
+              >
+                <Text style={[styles.inActiveText, inActiveTextStyle]}>
+                  {title}
+                </Text>
+              </TouchableOpacity>
+            )
+          ) : active === i ? (
+            <ButtonUnderline
+              key={i}
+              text={title}
+              onPress={() => setActive(i)}
+              style={{ marginLeft: i ? marginLeft : 0 }}
+            />
+          ) : (
+            <TouchableOpacity
+              key={i}
+              onPress={() => setActive(i)}
+              style={{ marginLeft: i ? marginLeft : 0 }}
+            >
+              <Text style={styles.inActiveText}>{title}</Text>
+            </TouchableOpacity>
+          )
+        )}
+      </Wrapper>
+    </View>
+  );
+};
 
 export default ButtonTabs;
 
@@ -135,6 +153,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: COLORS.GREY8,
     textAlignVertical: "center",
-    marginHorizontal: 15,
+    // marginHorizontal: 15,
   },
 });

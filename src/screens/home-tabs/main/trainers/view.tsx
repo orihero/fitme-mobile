@@ -67,6 +67,7 @@ const TrainersView = () => {
           justifyContent: "center",
           marginVertical: 20,
         }}
+        scroll={false}
       />
 
       <ScrollView showsVerticalScrollIndicator={false}>

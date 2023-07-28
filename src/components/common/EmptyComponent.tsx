@@ -11,7 +11,7 @@ const EmptyComponent = ({
   return (
     <View style={[styles.box, !!bgColor && { backgroundColor: bgColor }]}>
       <Text style={[styles.text, !!textColor && { color: textColor }]}>
-        {"No data yet"}
+        {`Для добавления упражнений в дневник тренировок, выберите необходимую программу тренировок в разделе " Мои Программы"`}
       </Text>
     </View>
   );

@@ -1,13 +1,14 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import AddProducts from "./add-products";
+import ExerciseScreen from "./exercise";
 import ProfileHome from "./home";
 import MyData from "./my-data";
 import MyTrainer from "./my-trainer";
 import Notifications from "./notifications";
-import Settings from "./settings";
-import AddProducts from "./add-products";
 import Recommendation from "./recommendation";
-import ExerciseScreen from "./exercise";
+import Settings from "./settings";
+import Users from "./users";
 import WorkoutResults from "./workout-results";
 
 import { PROFILE } from "../../../navigation/ROUTES";
@@ -24,6 +25,7 @@ export type ProfileStackParamList = {
   [PROFILE.MY_TRAINER]: undefined;
   [PROFILE.NOTIFICATIONS]: undefined;
   [PROFILE.SETTINGS]: undefined;
+  [PROFILE.USERS]: undefined;
   [PROFILE.RECOMMENDATION]: undefined;
   [PROFILE.WORKOUT_RESULTS]: {
     schedule: ScheduleWorkout;
@@ -87,6 +89,11 @@ const ProfileStack = () => {
       <Stack.Screen
         name={PROFILE.ADD_PRODUCTS}
         component={AddProducts}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={PROFILE.USERS}
+        component={Users}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

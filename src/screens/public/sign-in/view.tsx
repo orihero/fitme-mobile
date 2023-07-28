@@ -12,7 +12,7 @@ const SignInView = () => {
       <View style={styles.headerContainer}>
         <Text style={styles.textHeader}>Авторизация</Text>
         <InputPrimary
-          placeholder="Введите ваш номер телефона"
+          placeholder="Введите вашу почту"
           placeholderColor="#404B52"
           value={phone}
           onChange={(value) => setPhone(value)}
@@ -24,6 +24,8 @@ const SignInView = () => {
             backgroundColor: COLORS.GREY4,
             color: COLORS.GREY,
           }}
+          keyboardType="email-address"
+
         />
         <ButtonPrimary
           text="Зарегистрироваться"

@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   line: {
     height: 2,
     marginTop: 3,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     backgroundColor: COLORS.WHITE,
   },
 });

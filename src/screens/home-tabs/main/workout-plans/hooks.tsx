@@ -51,7 +51,8 @@ export const WorkoutPlansHooks = () => {
 
   useEffect(() => {
     getWorkoutPlans();
-  }, [activeGender, activeLevel]);
+    setActiveLevel(0);
+  }, [activeGender]);
 
   const onPress = (index: number) => {
     navigation.navigate(MAIN.WORKOUT_PLAN, {

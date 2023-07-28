@@ -9,6 +9,7 @@ import { selectProductCategories } from "../../../../../store/slices/categorySli
 import { ApiService } from "../../../../../services";
 import { Product } from "../../../../../types";
 import { selectProducts } from "../../../../../store/slices/productSlice";
+import { useNavigation } from "@react-navigation/native";
 
 export const BaseProductsHooks = () => {
   const [language] = useRedux(selectLanguage);
@@ -20,6 +21,8 @@ export const BaseProductsHooks = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [selected, setSelected] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const navigation = useNavigation();
 
   const getProducts = () => {
     if (user) {
@@ -69,6 +72,10 @@ export const BaseProductsHooks = () => {
       setLoading(false);
       setSelected([]);
     }
+  };
+
+  const onCreate = () => {
+    // navigation.navigate()
   };
 
   return {

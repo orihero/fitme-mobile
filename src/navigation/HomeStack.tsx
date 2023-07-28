@@ -50,5 +50,6 @@ const styles = StyleSheet.create({
     height: Platform.OS === "ios" ? 80 : 55,
     paddingTop: Platform.OS === "ios" ? 20 : 0,
     paddingHorizontal: 25,
+    
   },
 });

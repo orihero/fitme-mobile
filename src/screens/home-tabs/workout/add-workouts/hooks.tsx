@@ -72,23 +72,23 @@ export const AddWorkoutHooks = () => {
       setApproach(approach.replace(/[^\d.-]+/g, ""));
     }
 
-    if (repetitions) {
-      let str = repetitions.replace(/[^\d.-]+/g, "");
+    // if (repetitions) {
+    //   let str = repetitions.replace(/[^\d.-]+/g, "");
 
-      if (str.length === 1) {
-        str = str + "-";
-      }
+    //   if (str.length === 1) {
+    //     str = str + "-";
+    //   }
 
-      if (str.length === 2 && str[1] !== "-") {
-        str = str[0] + "-" + str.slice(1);
-      }
+    //   if (str.length === 2 && str[1] !== "-") {
+    //     str = str[0] + "-" + str.slice(1);
+    //   }
 
-      if (str.length === 3 && str[1] !== "-") {
-        str = str[0] + "-" + str.slice(1);
-      }
+    //   if (str.length === 3 && str[1] !== "-") {
+    //     str = str[0] + "-" + str.slice(1);
+    //   }
 
-      setRepetitions(str);
-    }
+    //   setRepetitions(str);
+    // }
   }, [approach, repetitions]);
 
   const onSet = () => {
@@ -151,5 +151,42 @@ export const AddWorkoutHooks = () => {
     workouts,
     onAddExercise,
     onSave,
+  };
+};
+
+export const WeightAndRepititionHooks = () => {
+  const [weightAndRepititions, setWeightAndRepititions] = useState<
+    { weight: number; repititions: number }[]
+  >([]);
+  const [currentIndex, setCurrentIndex] = useState(-1);
+  const onShow = (i: number) => {
+    setCurrentIndex(i);
+  };
+  const onDissmiss = () => {
+    setCurrentIndex(-1);
+  };
+
+  const onSubmit = () => {};
+
+  const setItem =
+    (key: "weight" | "repititions",index:number) => (value: number | string) => {
+      let el = {};
+      if(!!weightAndRepititions?.[index]){
+          
+      }
+    };
+
+  const currentItem =
+    currentIndex === -1 || !weightAndRepititions[currentIndex]
+      ? { weight: 40, repititions: 8 }
+      : weightAndRepititions[currentIndex];
+
+  return {
+    onShow,
+    onDissmiss,
+    onSubmit,
+    currentIndex,
+    weight: currentItem.weight,
+    repititions: currentItem.repititions,
   };
 };

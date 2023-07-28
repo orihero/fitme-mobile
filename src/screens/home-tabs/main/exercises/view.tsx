@@ -1,8 +1,12 @@
-import { View, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
-import { styles } from "./style";
-import { Box, ButtonTabs, Header } from "../../../../components/common";
+import { SafeAreaView, ScrollView, TouchableOpacity, View } from "react-native";
+import {
+  Box,
+  ButtonPrimary,
+  ButtonTabs,
+  Header,
+} from "../../../../components/common";
 import { ExercisesHooks } from "./hooks";
-import { Env } from "../../../../../env";
+import { styles } from "./style";
 
 const ExercisesView = () => {
   const {
@@ -14,6 +18,8 @@ const ExercisesView = () => {
     exerciseCategories,
     language,
     exercises,
+    onCreate,
+    isSuperAdmin,
   } = ExercisesHooks();
 
   return (
@@ -23,7 +29,6 @@ const ExercisesView = () => {
       <View style={styles.header}>
         <Header title="База упражнений" />
       </View>
-
       <ButtonTabs
         secondary
         active={activeCategory}
@@ -35,11 +40,15 @@ const ExercisesView = () => {
         active={activeSubCategory}
         setActive={setActiveSubCategory}
         containerStyle={styles.subCategoryBtnCont}
-        titles={[
-          ...exerciseCategories[activeCategory].children.map(
-            (a) => a.name[language]
-          ),
-        ]}
+        titles={
+          exerciseCategories
+            ? [
+                ...exerciseCategories[activeCategory]?.children.map(
+                  (a) => a.name[language]
+                ),
+              ]
+            : []
+        }
       />
 
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -59,6 +68,11 @@ const ExercisesView = () => {
           ))}
         </View>
       </ScrollView>
+      {isSuperAdmin && (
+        <View style={styles.createButtonContainer}>
+          <ButtonPrimary text="Добавить упражнения" onPress={onCreate} />
+        </View>
+      )}
     </View>
   );
 };

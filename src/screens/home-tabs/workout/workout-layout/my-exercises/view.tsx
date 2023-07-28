@@ -38,6 +38,7 @@ const MyExercisesView = () => {
         setActive={setIsFavorite}
         titles={["Выбранные", "Выбрать из общей базы"]}
         containerStyle={styles.favoriteBtnCont}
+        scroll={false}
       />
 
       <ButtonTabs

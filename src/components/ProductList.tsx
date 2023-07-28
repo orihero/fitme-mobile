@@ -84,6 +84,7 @@ const ProductList = ({
           onDecrement={onRemove}
           onIncrement={() => navigateAddProducts()}
           loading={typeof loading === "boolean" && loading}
+          textStyle={{ marginTop: 3 }}
         />
       )}
     </View>

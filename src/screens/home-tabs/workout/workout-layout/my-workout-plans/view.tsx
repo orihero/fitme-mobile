@@ -44,7 +44,7 @@ const MyWorkoutPlansView = () => {
         </View>
       </ScrollView>
 
-      {/* <View style={{ paddingBottom: 90, paddingTop: 20 }}>
+      <View style={{ paddingBottom: 90, paddingTop: 20 }}>
         <ButtonPrimary
           fill
           onPress={onCreate}
@@ -52,7 +52,7 @@ const MyWorkoutPlansView = () => {
           text="Составить свою программу"
           textStyle={styles.buttonText}
         />
-      </View> */}
+      </View>
     </View>
   );
 };

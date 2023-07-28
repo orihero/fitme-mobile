@@ -1,5 +1,12 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { combineUrls, combineConfig } from "../utils/api";
+import store from "../store/configureStore";
+
+// axios.interceptors.request.use((e) => {
+//   const token = store.getState().app.token;
+//   if (!!token) e.headers = { ...e.headers, Authorization: `Bearer ${token.access_token}` };
+//   return e;
+// });
 
 const ApiService = {
   get: <R>(url: string, config?: AxiosRequestConfig): Promise<R> => {

@@ -42,6 +42,8 @@ const Root = () => {
   const getUser = async () => {
     try {
       if (token) {
+        console.log("GETTING USER");
+        
         const resUser = await ApiService.get<Response<User>>("/users/me");
 
         // const { scheduleWorkouts, ...rest } = res.data.data;
@@ -52,6 +54,9 @@ const Root = () => {
         setIsAuthenticated(false);
       }
     } catch (e: any) {
+
+      console.log(JSON.stringify(e),"ERRROR");
+
       try {
         const resToken = await customRequests.getNewAccessToken();
 
@@ -97,6 +102,11 @@ const Root = () => {
       );
 
       const resDishes = await ApiService.get<Response<Dish[]>>("/dishes");
+
+      const resUser = await ApiService.get<Response<User>>("/users/me");
+      console.log({ usr: resUser });
+
+      dispatch(setUser(resUser.data));
 
       dispatch(
         setCategoriesByType({

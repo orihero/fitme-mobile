@@ -33,6 +33,7 @@ const NutritionPlansView = () => {
           justifyContent: "center",
           marginVertical: 15,
         }}
+        scroll={false}
       />
       {state !== 1 && (
         <ButtonTabs
@@ -45,6 +46,7 @@ const NutritionPlansView = () => {
             backgroundColor: "transparent",
             marginBottom: 10,
           }}
+        scroll={false}
         />
       )}
 

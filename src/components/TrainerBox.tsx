@@ -8,12 +8,13 @@ import {
 import { COLORS } from "../constants/COLORS";
 
 interface IProps {
-  avatar: ImageSourcePropType;
+  avatar?: ImageSourcePropType;
   name: string;
-  speciality: string;
+  speciality?: string;
   age?: number;
-  city: string;
-  experience: number;
+  city?: string;
+  experience?: number;
+  id?: string;
 }
 
 const TrainerBox = ({
@@ -23,12 +24,19 @@ const TrainerBox = ({
   age,
   city,
   experience,
+  id
 }: IProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
         <Image
-          source={avatar}
+          source={
+            !!avatar
+              ? avatar
+              : {
+                  uri: "https://i.pinimg.com/280x280_RS/df/59/82/df59828572828e074eeac6fe46b4c187.jpg",
+                }
+          }
           resizeMode="cover"
           style={{ width: "100%", height: "100%" }}
         />
@@ -37,11 +45,14 @@ const TrainerBox = ({
         <View>
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.speciality}>{speciality}</Text>
+          {!!id && <Text style={styles.speciality}>ID: {id}</Text>}
           {age && <Text style={styles.age}>{`${age} лет`}</Text>}
         </View>
         <View style={styles.bottom}>
           <Text style={styles.city}>{city}</Text>
-          <Text style={styles.experience}>{`Опыт - ${experience} лет`}</Text>
+          {!!experience && (
+            <Text style={styles.experience}>{`Опыт - ${experience} лет`}</Text>
+          )}
         </View>
       </View>
     </View>

@@ -13,19 +13,19 @@ export type SignInScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 export const SignInHooks = () => {
-  const [phone, setPhone] = useState("+998");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation<SignInScreenNavigationProp>();
 
-  useEffect(() => {
-    if (phone.length < 4 || phone.slice(0, 4) !== "+998") {
-      setPhone("+998");
-    }
-    if (phone.length > 13) {
-      setPhone(phone.slice(0, 13));
-    }
-  }, [phone]);
+  // useEffect(() => {
+  //   if (phone.length < 4 || phone.slice(0, 4) !== "+998") {
+  //     setPhone("+998");
+  //   }
+  //   if (phone.length > 13) {
+  //     setPhone(phone.slice(0, 13));
+  //   }
+  // }, [phone]);
 
   const onRegisterPress = () => {
     navigation.navigate(PUBLIC.SIGN_UP);
@@ -33,10 +33,10 @@ export const SignInHooks = () => {
 
   const onPress = async () => {
     try {
-      if (phone.length !== 13) {
-        showErrToast("Please enter correct phone number");
-        return;
-      }
+      // if (phone.length !== 13) {
+      //   showErrToast("Please enter correct phone number");
+      //   return;
+      // }
 
       setLoading(true);
 
@@ -45,11 +45,11 @@ export const SignInHooks = () => {
       });
 
       setLoading(false);
-      
+
       navigation.navigate(PUBLIC.VERIFY_CODE, { phone, from: "signin" });
     } catch (e: any) {
       setLoading(false);
-      if (e.data && e.data.error && e.data.error.message) {
+      if (!!e && e.data && e.data.error && e.data.error.message) {
         showErrToast(e.data.error.message);
       } else {
         console.log("e: ", JSON.stringify(e, null, 4));

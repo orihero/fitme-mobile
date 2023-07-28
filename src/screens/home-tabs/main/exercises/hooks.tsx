@@ -2,12 +2,13 @@ import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import { MainStackParamList } from "..";
-import { MAIN, ROUTES } from "../../../../navigation/ROUTES";
+import { MAIN } from "../../../../navigation/ROUTES";
 import { ApiService } from "../../../../services";
 import { useRedux } from "../../../../store/hooks";
-import { selectLanguage } from "../../../../store/slices/appSlice";
+import { selectLanguage, selectUser } from "../../../../store/slices/appSlice";
 import { selectExerciseCategories } from "../../../../store/slices/categorySlice";
-import { Exercise, Response } from "../../../../types";
+import { Exercise, ROLES, Response } from "../../../../types";
+import { useSelector } from "react-redux";
 
 export type ExercisesScreenNavigationProp = NativeStackNavigationProp<
   MainStackParamList,
@@ -22,6 +23,10 @@ export const ExercisesHooks = () => {
   const navigation = useNavigation<ExercisesScreenNavigationProp>();
   const [exerciseCategories] = useRedux(selectExerciseCategories);
   const [language] = useRedux(selectLanguage);
+  const user = useSelector(selectUser);
+  console.log(user);
+
+  const isSuperAdmin = user?.role === ROLES.SUPERADMIN;
 
   useEffect(() => {
     setActiveSubCategory(0);
@@ -46,6 +51,10 @@ export const ExercisesHooks = () => {
     navigation.navigate(MAIN.EXERCISE, { exercise: exercises[index] });
   };
 
+  const onCreate = () => {
+    navigation.navigate(MAIN.CREATE_EXERCISE);
+  };
+
   return {
     activeCategory,
     setActiveCategory,
@@ -55,5 +64,7 @@ export const ExercisesHooks = () => {
     language,
     onPress,
     exercises,
+    onCreate,
+    isSuperAdmin,
   };
 };

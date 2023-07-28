@@ -28,6 +28,7 @@ export const CreateWorkoutPlanHooks = () => {
 
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [week, setWeek] = useState(1);
   const [groupWorkouts, setGroupWorkouts] = useState<Workout[][]>([[]]);
@@ -163,5 +164,7 @@ export const CreateWorkoutPlanHooks = () => {
     removeGroupWorkout,
     onAddWorkouts,
     onSave,
+    name,
+    setName,
   };
 };

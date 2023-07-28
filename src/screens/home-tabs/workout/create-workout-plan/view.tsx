@@ -24,6 +24,8 @@ const CreateWorkoutPlanView = () => {
     removeGroupWorkout,
     onAddWorkouts,
     onSave,
+    name,
+    setName,
   } = CreateWorkoutPlanHooks();
 
   return (
@@ -33,7 +35,15 @@ const CreateWorkoutPlanView = () => {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ marginBottom: 90 }}>
-          <Text style={styles.inputTopText}>{"Имя составителя"}</Text>
+          {/* <Text style={styles.inputTopText}>{"Имя составителя"}</Text>
+          <InputPrimary
+            value={title}
+            onChange={(t) => setTitle(t)}
+            disablePlaceholder
+            containerStyle={styles.input}
+            inputStyle={styles.inputInner}
+          /> */}
+          <Text style={styles.inputTopText}>{"Название программы"}</Text>
           <InputPrimary
             value={title}
             onChange={(t) => setTitle(t)}
@@ -41,15 +51,14 @@ const CreateWorkoutPlanView = () => {
             containerStyle={styles.input}
             inputStyle={styles.inputInner}
           />
-
-          <Text style={styles.inputTopText}>{"Название программы"}</Text>
+          {/* <Text style={styles.inputTopText}>{"Название программы"}</Text>
           <View style={styles.descriptionBox}>
             <Text style={styles.text}>
               {
                 "Для достижения видимого результата в тренировках груди важен прогресс рабочих весов."
               }
             </Text>
-          </View>
+          </View> */}
 
           <Text style={styles.inputTopText}>
             {"Кол-во тренировок в неделю"}
@@ -70,6 +79,7 @@ const CreateWorkoutPlanView = () => {
             text="Тренировка"
             onIncrement={addGroupWorkout}
             onDecrement={removeGroupWorkout}
+            textStyle={{ marginTop: 3 }}
           />
 
           <Text style={styles.inputTopText}>{"Кол-во недель"}</Text>
@@ -82,7 +92,12 @@ const CreateWorkoutPlanView = () => {
             </View>
           ))}
 
-          <Controls text="Недели" onDecrement={decWeek} onIncrement={incWeek} />
+          <Controls
+            textStyle={{ marginTop: 3 }}
+            text="Недели"
+            onDecrement={decWeek}
+            onIncrement={incWeek}
+          />
 
           <Text style={styles.inputTopText}>{"Описание"}</Text>
           <InputPrimary

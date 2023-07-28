@@ -15,6 +15,12 @@ import {
 } from "../../../../components/common";
 import { WorkoutPlansHooks } from "./hooks";
 
+const textsMapper = {
+  0: "Тренировочный опыт 0 - 6 месяцев",
+  1: "Тренировочный опыт  0,5 - 3 года",
+  2: "Тренировочный опыт 3 и более лет",
+};
+
 const WorkoutPlansView = () => {
   const {
     activeGender,
@@ -33,13 +39,13 @@ const WorkoutPlansView = () => {
       <View style={styles.header}>
         <Header title="Програмы тренировок" />
       </View>
-
       <ButtonTabs
         primary
         active={activeGender}
         setActive={setActiveGender}
         titles={["Мужчины", "Женщины"]}
         containerStyle={styles.genderBtnCont}
+        scroll={false}
       />
       <ButtonTabs
         secondary
@@ -49,11 +55,7 @@ const WorkoutPlansView = () => {
         containerStyle={styles.levelBtnCont}
       />
 
-      <Text style={styles.text}>
-        {
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        }
-      </Text>
+      <Text style={styles.text}>{textsMapper[activeLevel]}</Text>
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.main}>

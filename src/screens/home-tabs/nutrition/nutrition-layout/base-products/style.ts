@@ -90,4 +90,12 @@ export const styles = StyleSheet.create({
   text: {
     color: COLORS.WHITE,
   },
+  createButtonContainer: {
+    position: "absolute",
+    bottom: 80,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
 });

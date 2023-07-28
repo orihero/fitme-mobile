@@ -28,12 +28,13 @@ export const styles = StyleSheet.create({
   },
   levelBtnCont: {
     marginVertical: 20,
-    marginHorizontal: 60,
     backgroundColor: "transparent",
     justifyContent: "space-between",
+    marginLeft: 35,
   },
   genderBtnCont: {
     marginHorizontal: 10,
     justifyContent: "center",
+    alignContent: "center",
   },
 });

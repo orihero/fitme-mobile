@@ -1,15 +1,16 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import MainHomeScreen from "./home";
-import ExercisesScreen from "./exercises";
+import CreateExerciseScreen from "./create-exercise/view";
 import ExerciseScreen from "./exercise";
-import WorkoutPlansScreen from "./workout-plans";
-import WorkoutPlanScreen from "./workout-plan";
-import NutritionPlansScreen from "./nutrition-plans";
+import ExercisesScreen from "./exercises";
+import MainHomeScreen from "./home";
 import NutritionPlanScreen from "./nutrition-plan";
-import TrainersScreen from "./trainers";
-import TrainerScreen from "./trainer";
+import NutritionPlansScreen from "./nutrition-plans";
 import PaymentScreen from "./payment";
+import TrainerScreen from "./trainer";
+import TrainersScreen from "./trainers";
+import WorkoutPlanScreen from "./workout-plan";
+import WorkoutPlansScreen from "./workout-plans";
 
 import { MAIN } from "../../../navigation/ROUTES";
 import { Exercise, NutritionPlan, Trainer, WorkoutPlan } from "../../../types";
@@ -17,6 +18,7 @@ import { Exercise, NutritionPlan, Trainer, WorkoutPlan } from "../../../types";
 export type MainStackParamList = {
   [MAIN.HOME]: undefined;
   [MAIN.EXERCISES]: undefined;
+  [MAIN.CREATE_EXERCISE]: undefined;
   [MAIN.EXERCISE]: {
     exercise: Exercise;
   };
@@ -55,6 +57,11 @@ const MainStack = () => {
       <Stack.Screen
         name={MAIN.EXERCISE}
         component={ExerciseScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={MAIN.CREATE_EXERCISE}
+        component={CreateExerciseScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

@@ -20,4 +20,12 @@ export const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   main: { marginHorizontal: 15, marginBottom: 110 },
+  createButtonContainer: {
+    position: "absolute",
+    bottom: 80,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
 });

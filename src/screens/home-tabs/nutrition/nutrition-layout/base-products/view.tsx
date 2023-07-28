@@ -81,6 +81,9 @@ const BaseProductsView = () => {
 
         <View style={{ marginBottom: 100 }} />
       </ScrollView>
+      <View style={styles.createButtonContainer}>
+        {/* <ButtonPrimary text="Добавить упражнения" onPress={onCreate} /> */}
+      </View>
     </View>
   );
 };

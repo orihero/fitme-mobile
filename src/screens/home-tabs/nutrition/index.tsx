@@ -22,9 +22,11 @@ import {
   Reception,
   SchemaNutrition,
 } from "../../../types";
+import CreateProductScreen from "./nutrition-layout/create-product";
 
 export type NutritionStackParamList = {
   [NUTRITION.NUTRITION_LAYOUT]: undefined;
+  [NUTRITION.CREATE_PRODUCT]: undefined;
   [NUTRITION.CALC_DAILY_NORM]: undefined;
   [NUTRITION.RECOMMENDATION]: undefined;
   [NUTRITION.CONSUME_CALENDAR]: undefined;
@@ -130,6 +132,11 @@ const NutritionStack = () => {
       <Stack.Screen
         name={NUTRITION.UPDATE_PART_PLAN}
         component={UpdatePartPlanScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NUTRITION.CREATE_PRODUCT}
+        component={CreateProductScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

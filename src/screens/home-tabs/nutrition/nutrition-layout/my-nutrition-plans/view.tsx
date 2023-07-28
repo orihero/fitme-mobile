@@ -16,6 +16,7 @@ const MyNutritionPlansView = () => {
         titles={["Жиросжигание", "Массанабор"]}
         primary
         containerStyle={styles.btnCont}
+        scroll={false}
       />
 
       <View style={{ flex: 1, marginBottom: 100 }}>

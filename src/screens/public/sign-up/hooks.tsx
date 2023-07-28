@@ -15,18 +15,18 @@ export type SignUpScreenNavigationProp = NativeStackNavigationProp<
 export const SignUpHooks = () => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("+998");
+  const [phone, setPhone] = useState("");
 
   const navigation = useNavigation<SignUpScreenNavigationProp>();
 
-  useEffect(() => {
-    if (phone.length < 4 || phone.slice(0, 4) !== "+998") {
-      setPhone("+998");
-    }
-    if (phone.length > 13) {
-      setPhone(phone.slice(0, 13));
-    }
-  }, [phone]);
+  // useEffect(() => {
+  //   if (phone.length < 4 || phone.slice(0, 4) !== "+998") {
+  //     setPhone("+998");
+  //   }
+  //   if (phone.length > 13) {
+  //     setPhone(phone.slice(0, 13));
+  //   }
+  // }, [phone]);
 
   const onPress = async () => {
     try {
@@ -35,17 +35,18 @@ export const SignUpHooks = () => {
         return;
       }
 
-      if (phone.length !== 13) {
-        showErrToast("Please enter correct phone number");
+      if (!phone) {
+        showErrToast("Please enter correct email address");
         return;
       }
 
       setLoading(true);
 
-      await ApiService.post<Response<SignUpResponse>>("/auth/signup", {
+      const res = await ApiService.post<Response<SignUpResponse>>("/auth/signup", {
         name,
         phone,
       });
+      console.log(JSON.stringify(res.data));
 
       setLoading(false);
 

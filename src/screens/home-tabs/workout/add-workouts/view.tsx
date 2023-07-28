@@ -16,9 +16,10 @@ import {
   InputPrimary,
   InputSecondary,
 } from "../../../../components/common";
-import { AddWorkoutHooks } from "./hooks";
+import { AddWorkoutHooks, WeightAndRepititionHooks } from "./hooks";
 import { Assets } from "../../../../utils/requireAssets";
 import { COLORS } from "../../../../constants/COLORS";
+import CustomModal from "../workout-results/modal";
 
 const { height } = Dimensions.get("screen");
 
@@ -38,6 +39,15 @@ const AddWorkoutView = () => {
     onAddExercise,
     onSave,
   } = AddWorkoutHooks();
+
+  const {
+    currentIndex,
+    onDissmiss,
+    onShow: onModalShow,
+    onSubmit,
+    repititions,
+    weight,
+  } = WeightAndRepititionHooks();
 
   return (
     <View style={styles.container}>
@@ -174,6 +184,17 @@ const AddWorkoutView = () => {
           </View>
         </View>
       </Modal>
+      {/* <CustomModal
+        show={currentIndex !== -1}
+        loading={false}
+        modalError={""}
+        weight={weight.toString()}
+        repeat={repetitions}
+        setRepeat={setRepeat}
+        onHide={onHide}
+        onSubmit={onSubmit}
+        setWeight={}
+      /> */}
     </View>
   );
 };

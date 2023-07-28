@@ -5,8 +5,15 @@ import SafeAreaView from "react-native-safe-area-view";
 import { ProfileHomeHooks } from "./hooks";
 
 const ProfileHomeView = () => {
-  const { onMyDataPress, onNotificationPress, onSettingsPress, onLogOut } =
-    ProfileHomeHooks();
+  const {
+    onMyDataPress,
+    onNotificationPress,
+    onSettingsPress,
+    onLogOut,
+    isAdmin,
+    user,
+    onUsersPress,
+  } = ProfileHomeHooks();
 
   return (
     <View style={styles.container}>
@@ -14,9 +21,9 @@ const ProfileHomeView = () => {
       <View style={styles.profileContainer}>
         <View style={{}}>
           <View style={styles.profileNameBox}>
-            <Text style={styles.profileName}>София</Text>
-            <Text style={styles.profileName}>Шамкина</Text>
-            <Text style={styles.profileId}>ID: 1074</Text>
+            <Text style={styles.profileName}>{user?.name}</Text>
+            {/* <Text style={styles.profileName}>{user.}</Text> */}
+            <Text style={styles.profileId}>ID: {user?._id}</Text>
           </View>
         </View>
       </View>
@@ -27,7 +34,9 @@ const ProfileHomeView = () => {
           <Profile_btn title="Мой тренер" />
           <Profile_btn onPress={onNotificationPress} title="Уведомления" />
           <Profile_btn onPress={onSettingsPress} title="Настройки приложения" />
-          <Profile_btn />
+          {!!isAdmin && (
+            <Profile_btn title="Пользователи" onPress={onUsersPress} />
+          )}
           <Profile_btn
             textStyle={styles.titleBtn}
             title="Выйти из аккаунта"

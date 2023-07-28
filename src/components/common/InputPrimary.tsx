@@ -6,13 +6,14 @@ import {
   TextStyle,
   ViewStyle,
   StyleSheet,
+  KeyboardTypeOptions,
 } from "react-native";
 import { COLORS } from "../../constants/COLORS";
 import { ButtonPrimary, Icon } from ".";
 import { Assets } from "../../utils/requireAssets";
 
 interface IProps {
-  multiline?:boolean,
+  multiline?: boolean;
   value?: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -21,6 +22,7 @@ interface IProps {
   containerStyle?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
   onSearch?: () => void;
+  keyboardType?: KeyboardTypeOptions;
 }
 
 const InputPrimary = ({
@@ -33,6 +35,7 @@ const InputPrimary = ({
   containerStyle,
   inputStyle,
   onSearch,
+  keyboardType = "default",
 }: IProps) => {
   return (
     <View style={[styles.container, containerStyle]}>
@@ -43,7 +46,12 @@ const InputPrimary = ({
         placeholder={!disablePlaceholder ? placeholder : undefined}
         placeholderTextColor={placeholderColor}
         textAlignVertical={"center"}
-        style={[styles.input, inputStyle]}
+        style={[
+          styles.input,
+          inputStyle,
+          multiline && { minHeight: 100, textAlignVertical: "top" },
+        ]}
+        keyboardType={keyboardType}
       />
       {onSearch && (
         <ButtonPrimary
@@ -63,10 +71,11 @@ export default InputPrimary;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
     flexDirection: "row",
     borderRadius: 4,
     backgroundColor: COLORS.WHITE,
+    paddingHorizontal: 15,
+    alignItems: "center",
   },
   input: {
     flex: 1,

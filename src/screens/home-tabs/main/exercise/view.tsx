@@ -23,10 +23,9 @@ const ExerciseView = () => {
       <View>
         {/* <View style={styles.videoContainer} /> */}
         <YouTube
-        controls={2}
           style={{ alignSelf: "stretch", height: 300 }}
           videoId={youtube_parser(exercise.video)}
-          apiKey=""
+          apiKey="AIzaSyCuNHo7MqxoBr0uB9X5jnTH-hnEavoqyZ0"
         />
         <Text style={styles.text}>{exercise.description}</Text>
         <Text style={styles.text}>{exercise.metadescription}</Text>

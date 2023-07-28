@@ -26,7 +26,7 @@ const SignUpView = () => {
           }}
         />
         <InputPrimary
-          placeholder="Ведите Ваш номер телефона"
+          placeholder="Ведите вашу почту"
           placeholderColor="#404B52"
           value={phone}
           onChange={(value) => setPhone(value)}

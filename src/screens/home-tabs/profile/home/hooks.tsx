@@ -5,6 +5,7 @@ import { ApiService } from "../../../../services";
 import { clearT } from "../../../../services/AuthService";
 import { useRedux } from "../../../../store/hooks";
 import { selectUser } from "../../../../store/slices/appSlice";
+import { ROLES } from "../../../../types";
 // import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export const ProfileHomeHooks = () => {
@@ -28,14 +29,17 @@ export const ProfileHomeHooks = () => {
   const onLogOut = async () => {
     try {
       const { phoneNumber: phone } = user ?? {};
+      clearT();
 
       await ApiService.post("/auth/logout", { phone });
-
-      clearT();
     } catch (e) {
       console.log("e: ", JSON.stringify(e, null, 4));
     }
   };
+
+  const onUsersPress = ()=>{
+    navigation.navigate(PROFILE.USERS as never);
+  }
 
   return {
     state,
@@ -44,5 +48,8 @@ export const ProfileHomeHooks = () => {
     onSettingsPress,
     onNotificationPress,
     onLogOut,
+    isAdmin: user?.role === ROLES.SUPERADMIN,
+    user,
+    onUsersPress
   };
 };
