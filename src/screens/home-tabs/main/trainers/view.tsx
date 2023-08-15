@@ -1,20 +1,20 @@
 import {
-  View,
-  Text,
   SafeAreaView,
   ScrollView,
+  Text,
   TouchableOpacity,
+  View,
 } from "react-native";
-import { styles } from "./style";
+import { TrainerBox } from "../../../../components";
 import {
+  ButtonPrimary,
   ButtonTabs,
   Header,
   InputPrimary,
 } from "../../../../components/common";
-import { TrainersHooks } from "./hooks";
 import { COLORS } from "../../../../constants/COLORS";
-import { TrainerBox } from "../../../../components";
-import { Env } from "../../../../../env";
+import { TrainersHooks } from "./hooks";
+import { styles } from "./style";
 
 const TrainersView = () => {
   const {
@@ -25,6 +25,8 @@ const TrainersView = () => {
     trainers,
     onPress,
     individual,
+    isSuperAdmin,
+    onCreateTrainer,
   } = TrainersHooks();
 
   return (
@@ -91,6 +93,11 @@ const TrainersView = () => {
           ))}
         </View>
       </ScrollView>
+      {isSuperAdmin && (
+        <View style={styles.createButtonContainer}>
+          <ButtonPrimary text="Добавить тренер" onPress={onCreateTrainer} />
+        </View>
+      )}
     </View>
   );
 };

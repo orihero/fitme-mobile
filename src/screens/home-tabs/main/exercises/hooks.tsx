@@ -24,8 +24,6 @@ export const ExercisesHooks = () => {
   const [exerciseCategories] = useRedux(selectExerciseCategories);
   const [language] = useRedux(selectLanguage);
   const user = useSelector(selectUser);
-  console.log(user);
-
   const isSuperAdmin = user?.role === ROLES.SUPERADMIN;
 
   useEffect(() => {

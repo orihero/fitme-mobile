@@ -1,0 +1,159 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import { Alert } from "react-native";
+import {
+  Category,
+  CategoryType,
+  Exercise,
+  Product,
+  Response,
+} from "../../../../../types";
+import { SelectItem } from "../../../../../components/common/SelectPrimary";
+import {
+  selectProductCategories,
+  setCategoriesByType,
+} from "../../../../../store/slices/categorySlice";
+import { ApiService } from "../../../../../services";
+import { NUTRITION } from "../../../../../navigation/ROUTES";
+import { selectUser } from "../../../../../store/slices/appSlice";
+
+type CustomCategory = Partial<
+  Omit<Product, "category"> & {
+    category: Category & SelectItem;
+  }
+>;
+
+export const CreateProductHook = () => {
+  const [product, setProduct] = useState<CustomCategory>({});
+  const [category, setCategory] = useState<Partial<Category>>({});
+  const [subcategories, setSubcategories] = useState<Category[]>();
+  const [categoryModalVisible, setCategoryModalVisible] = useState(false);
+  const categories = useSelector(selectProductCategories);
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
+
+  const fetchCategories = async () => {
+    const resCategories = await ApiService.get<Response<Category[]>>(
+      "/categories"
+    );
+    dispatch(
+      setCategoriesByType({
+        type: CategoryType.EXERCISE,
+        categories: resCategories.data.filter(
+          (v) => v.type === CategoryType.EXERCISE
+        ),
+      })
+    );
+    dispatch(
+      setCategoriesByType({
+        type: CategoryType.PRODUCT,
+        categories: resCategories.data.filter(
+          (v) => v.type === CategoryType.PRODUCT
+        ),
+      })
+    );
+    dispatch(
+      setCategoriesByType({
+        type: CategoryType.DISH,
+        categories: resCategories.data.filter(
+          (v) => v.type === CategoryType.DISH
+        ),
+      })
+    );
+  };
+
+  const onCategoryRemove = async (e: string) => {
+    try {
+      await ApiService.delete(`/categories/${e}`);
+      Alert.alert("Внимание", "Категория успешно удалена");
+      await fetchCategories();
+    } catch (error) {}
+  };
+
+  const onModalToggle = () => {
+    setCategoryModalVisible((e) => !e);
+  };
+
+  const onChange = (key: keyof Product) => (value: any) => {
+    if (key.indexOf(".") !== -1) {
+      const [name, lang] = key.split(".");
+      setProduct({
+        ...product,
+        //@ts-ignore
+        [name]: { ...(product[name] || {}), [lang]: value },
+      });
+      return;
+    }
+    setProduct({ ...product, [key]: value });
+  };
+  const onCategoryChange = (key: string) => (value: any) => {
+    if (key.indexOf(".") !== -1) {
+      const [name, lang] = key.split(".");
+      setCategory({
+        ...category,
+        //@ts-ignore
+        [name]: { ...(category[name] || {}), [lang]: value },
+      });
+      return;
+    }
+    setCategory({ ...category, [key]: value });
+  };
+
+  const onCategorySubmit = async () => {
+    try {
+      const current = {
+        ...category,
+        parent: category?.parent?.value,
+        type: CategoryType.PRODUCT,
+      };
+      const res = await ApiService.post("/categories", current);
+      console.log("====================================");
+      console.log("CATEOGRY CREATED");
+      console.log("====================================");
+      console.log(res.data, category);
+      await fetchCategories();
+    } catch (error) {
+      console.log("ERROR", JSON.stringify(error));
+    }
+    setCategory({});
+    setCategoryModalVisible(false);
+  };
+
+  const onExerciseSubmit = async () => {
+    try {
+      const current = {
+        ...product,
+        category: product.category?.value,
+        creator: user?._id,
+      };
+      const res = await ApiService.post("/products", current);
+      console.log(res.data, current);
+    } catch (error) {
+      console.log(error);
+      console.log(JSON.stringify(error.response?.data));
+    }
+    navigation.navigate(NUTRITION.NUTRITION_LAYOUT);
+  };
+
+  useEffect(() => {
+    if (!!product.category) {
+      const found = categories.find((e) => e._id === product.category?.value);
+      setSubcategories(found?.children);
+    }
+  }, [product.category]);
+
+  return {
+    onChange,
+    subcategories,
+    categories,
+    categoryModalVisible,
+    onModalToggle,
+    onCategoryChange,
+    onCategorySubmit,
+    onExerciseSubmit,
+    onCategoryRemove,
+  };
+};

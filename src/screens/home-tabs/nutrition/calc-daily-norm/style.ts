@@ -90,7 +90,7 @@ export const styles = StyleSheet.create({
   },
   title3: {
     fontSize: 16,
-    marginTop: 40,
+    // marginTop: 40,
     lineHeight: 22,
     fontWeight: "700",
     textAlign: "center",

@@ -22,6 +22,7 @@ const MyDataView = () => {
             active={active}
             setActive={setActive}
             titles={["Моё питание", "Мой тренинг", "Мои замеры"]}
+            scroll={false}
           />
         </View>
       </View>

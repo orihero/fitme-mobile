@@ -9,14 +9,17 @@ const Header = ({
   title,
   right,
   bottom,
+  onBackPress,
 }: {
   title?: string;
   right?: boolean;
   bottom?: boolean;
+  onBackPress?: () => void;
 }) => {
   const navigation = useNavigation();
 
-  const onPress = () => {
+  const onPress = async() => {
+    onBackPress && await onBackPress();
     if (navigation.canGoBack()) {
       navigation.goBack();
     }

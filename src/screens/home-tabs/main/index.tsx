@@ -11,6 +11,7 @@ import TrainerScreen from "./trainer";
 import TrainersScreen from "./trainers";
 import WorkoutPlanScreen from "./workout-plan";
 import WorkoutPlansScreen from "./workout-plans";
+import CreateTrainerView from "./create-trainer/view";
 
 import { MAIN } from "../../../navigation/ROUTES";
 import { Exercise, NutritionPlan, Trainer, WorkoutPlan } from "../../../types";
@@ -37,6 +38,8 @@ export type MainStackParamList = {
     trainer: Trainer;
   };
   [MAIN.PAYMENT]: undefined;
+  [MAIN.PAYMENT]: undefined;
+  [MAIN.CREATE_TRAINER]: undefined;
 };
 
 const Stack = createNativeStackNavigator<MainStackParamList>();
@@ -97,6 +100,11 @@ const MainStack = () => {
       <Stack.Screen
         name={MAIN.PAYMENT}
         component={PaymentScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={MAIN.CREATE_TRAINER}
+        component={CreateTrainerView}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

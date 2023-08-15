@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import {
+  RouteProp,
+  useNavigation,
+  useRoute,
+  useFocusEffect,
+} from "@react-navigation/native";
 import { MainStackParamList } from "..";
 import { MAIN } from "../../../../navigation/ROUTES";
 import { ApiService } from "../../../../services";
-import { GENDER, Trainer, Response } from "../../../../types";
+import { GENDER, Trainer, Response, ROLES } from "../../../../types";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../../store/slices/appSlice";
 
 export type TrainersScreenNavigationProp = NativeStackNavigationProp<
   MainStackParamList,
@@ -20,6 +27,8 @@ export const TrainersHooks = () => {
   const [active, setActive] = useState(0);
   const [trainers, setTrainers] = useState<Trainer[]>([]);
   const [search, setSearch] = useState("");
+  const user = useSelector(selectUser);
+  const isSuperAdmin = user?.role === ROLES.SUPERADMIN;
 
   const navigation = useNavigation<TrainersScreenNavigationProp>();
   const route = useRoute<TrainersScreenRouteProp>();
@@ -36,12 +45,20 @@ export const TrainersHooks = () => {
     }
   };
 
+  // useFocusEffect(() => {
+  //   getTrainers();
+  // });
+
   useEffect(() => {
     getTrainers();
   }, [active]);
 
   const onPress = (index: number) => {
     navigation.navigate(MAIN.TRAINER, { trainer: trainers[index] });
+  };
+
+  const onCreateTrainer = () => {
+    navigation.navigate(MAIN.CREATE_TRAINER);
   };
 
   return {
@@ -52,5 +69,7 @@ export const TrainersHooks = () => {
     trainers,
     onPress,
     individual,
+    isSuperAdmin,
+    onCreateTrainer,
   };
 };

@@ -43,7 +43,7 @@ const Root = () => {
     try {
       if (token) {
         console.log("GETTING USER");
-        
+
         const resUser = await ApiService.get<Response<User>>("/users/me");
 
         // const { scheduleWorkouts, ...rest } = res.data.data;
@@ -54,8 +54,7 @@ const Root = () => {
         setIsAuthenticated(false);
       }
     } catch (e: any) {
-
-      console.log(JSON.stringify(e),"ERRROR");
+      console.log(JSON.stringify(e), "ERRROR");
 
       try {
         const resToken = await customRequests.getNewAccessToken();

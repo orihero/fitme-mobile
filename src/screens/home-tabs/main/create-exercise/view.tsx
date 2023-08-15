@@ -119,6 +119,11 @@ const CreateExerciseView = () => {
       >
         <View style={styles.modalContainer}>
           <Text style={[styles.modalTitle]}>Добавление категории</Text>
+          <Text style={{ color: "white", marginBottom: 30 }}>
+            Для добавления под-категории, выберите основную категорию нажав на
+            окно "Категория" внизу. Для добавления категории, введите названия
+            категории,игнорируя окно "Категория"
+          </Text>
           <SelectPrimary
             title="Категория"
             data={

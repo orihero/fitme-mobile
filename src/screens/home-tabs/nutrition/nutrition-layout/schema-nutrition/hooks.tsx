@@ -159,7 +159,42 @@ export const SchemaNutritionHooks = () => {
   }, [activeTab]);
 
   const onDailyNormPress = () => {
-    navigation.navigate(NUTRITION.CALC_DAILY_NORM);
+    console.log('====================================');
+    console.log("DALY NORM PRESS");
+    console.log('====================================');
+    //@ts-ignore
+    navigation.navigate(NUTRITION.CALC_DAILY_NORM, {
+      onSave: async (val: string) => {
+        console.log('====================================');
+        console.log({val});
+        console.log('====================================');
+        let data = {
+          ...schemaNutrition?.data,
+          nType: NUTRITION_TYPE[activeTab ? "THIN" : "FAT"],
+          dailyNorm: Number(val) || 0,
+        };
+        const date = {
+          year: cd.getFullYear(),
+          month: cd.getMonth() + 1,
+          day: cd.getDate(),
+        };
+        try {
+          await saveSchemaNutrition({
+            ...schemaNutrition,
+            date,
+            data,
+            products: schemaNutrition?.products.map((p) => p._id) || [],
+            dishes: schemaNutrition?.dishes.map((d) => d._id) || [],
+          });
+          console.log('====================================');
+          console.log("SAVING DAILY NORM");
+          console.log('====================================');
+          await effect();
+        } catch (e) {
+          console.log("e: ", e);
+        }
+      },
+    });
   };
 
   const onRecommendationPress = () => {

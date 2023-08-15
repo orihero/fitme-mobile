@@ -22,7 +22,6 @@ const ProfileHomeView = () => {
         <View style={{}}>
           <View style={styles.profileNameBox}>
             <Text style={styles.profileName}>{user?.name}</Text>
-            {/* <Text style={styles.profileName}>{user.}</Text> */}
             <Text style={styles.profileId}>ID: {user?._id}</Text>
           </View>
         </View>

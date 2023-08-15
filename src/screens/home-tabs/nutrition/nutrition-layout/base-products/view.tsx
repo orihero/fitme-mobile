@@ -15,6 +15,7 @@ const BaseProductsView = () => {
     productCategories,
     onSelect,
     onAdd,
+    onCreate,
   } = BaseProductsHooks();
 
   return (
@@ -82,7 +83,7 @@ const BaseProductsView = () => {
         <View style={{ marginBottom: 100 }} />
       </ScrollView>
       <View style={styles.createButtonContainer}>
-        {/* <ButtonPrimary text="Добавить упражнения" onPress={onCreate} /> */}
+        <ButtonPrimary text="Добавить продукт" onPress={onCreate} />
       </View>
     </View>
   );

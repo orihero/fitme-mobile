@@ -78,7 +78,7 @@ const SchemaNutritionView = () => {
               containerStyle={styles.titleBtn}
               onPress={onDailyNormPress}
             />
-            <TouchableOpacity style={styles.col3} onPress={() => onShow("a")}>
+            <TouchableOpacity style={styles.col3} onPress={onDailyNormPress}>
               {!!dailyNorm ? (
                 <Text style={styles.text1}>{dailyNorm}</Text>
               ) : (

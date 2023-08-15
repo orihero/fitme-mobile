@@ -1,21 +1,20 @@
 import {
-  View,
-  Text,
-  SafeAreaView,
   Image,
-  TouchableOpacity,
+  SafeAreaView,
   ScrollView,
-  TextInput,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { styles } from "./style";
 import { ButtonPrimary, Header } from "../../../../components/common";
-import { Assets } from "../../../../utils/requireAssets";
 import { COLORS } from "../../../../constants/COLORS";
 import { TrainerHooks } from "./hooks";
-import { Env } from "../../../../../env";
+import { styles } from "./style";
+import telegram from "../../../../assets/icons/telegram.png";
+import instagram from "../../../../assets/icons/instagram.png";
 
 const TrainerView = () => {
-  const { trainer } = TrainerHooks();
+  const { trainer, openLink, onPlansPress } = TrainerHooks();
 
   return (
     <View style={styles.container}>
@@ -30,45 +29,51 @@ const TrainerView = () => {
           <View>
             <Text style={styles.textName}>{trainer.name}</Text>
             <Text style={styles.textOld}>{`${trainer.age} лет`}</Text>
+            <Text style={styles.textOld}>{`${trainer.city} лет`}</Text>
           </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <View style={{ flexDirection: "row" }}>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                style={{ marginRight: 12 }}
-              ></TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.7}></TouchableOpacity>
-            </View>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity
+              onPress={openLink(trainer.telegramLink)}
+              activeOpacity={0.7}
+              style={{ marginRight: 12 }}
+            >
+              <Image style={{ width: 28, height: 28 }} source={telegram} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={openLink(trainer.instagramLink)}
+              activeOpacity={0.7}
+            >
+              <Image style={{ width: 28, height: 28 }} source={instagram} />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
       <ScrollView>
         <View>
-          <Text style={styles.textCart}>{'Специальность'}</Text>
+          <Text style={styles.textCart}>{"Специальность"}</Text>
           <View style={styles.about}>
             <Text style={styles.aboutText}>{trainer.speciality}</Text>
           </View>
-          <Text style={styles.textCart}>{'Образование'}</Text>
+          <Text style={styles.textCart}>{"Образование"}</Text>
           <View style={styles.about}>
             <Text style={styles.aboutText}>{trainer.education}</Text>
           </View>
-          <Text style={styles.textCart}>{'Номер телефона'}</Text>
+          <Text style={styles.textCart}>{"Номер телефона"}</Text>
           <View style={styles.about}>
             <Text style={styles.aboutText}>{trainer.phoneNumber}</Text>
           </View>
-          <Text style={styles.textCart}>{'О себе'}</Text>
+          <Text style={styles.textCart}>{"О себе"}</Text>
         </View>
         <View style={styles.aboutView}>
-          <Text style={styles.aboutText}>
-            {trainer.aboutMe}
-          </Text>
+          <Text style={styles.aboutText}>{trainer.aboutMe}</Text>
         </View>
 
         <View style={{ marginHorizontal: 15, marginBottom: 100 }}>
@@ -98,45 +103,41 @@ const TrainerView = () => {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity style={{ marginVertical: 10 }} activeOpacity={0.7}>
-            <ButtonPrimary
-              text="Планы питания"
-              fill
-              style={{
-                borderRadius: 10,
-                paddingVertical: 18,
-                backgroundColor: COLORS.RED,
-                marginBottom: 10,
-              }}
-              textStyle={{
-                color: COLORS.WHITE,
-                fontWeight: "700",
-                fontSize: 15,
-                lineHeight: 15,
-              }}
-              onPress={() => console.log("onPress")}
-            />
-          </TouchableOpacity>
+          <ButtonPrimary
+            text="Планы питания"
+            fill
+            style={{
+              borderRadius: 10,
+              paddingVertical: 18,
+              backgroundColor: COLORS.RED,
+              marginBottom: 10,
+            }}
+            textStyle={{
+              color: COLORS.WHITE,
+              fontWeight: "700",
+              fontSize: 15,
+              lineHeight: 15,
+            }}
+            onPress={onPlansPress("Планы питания")}
+          />
 
-          <TouchableOpacity activeOpacity={0.7}>
-            <ButtonPrimary
-              text="Планы тренировок"
-              fill
-              style={{
-                borderRadius: 10,
-                paddingVertical: 18,
-                backgroundColor: COLORS.RED,
-                marginBottom: 10,
-              }}
-              textStyle={{
-                color: COLORS.WHITE,
-                fontWeight: "700",
-                fontSize: 15,
-                lineHeight: 15,
-              }}
-              onPress={() => console.log("onPress")}
-            />
-          </TouchableOpacity>
+          <ButtonPrimary
+            onPress={onPlansPress("Планы тренировок")}
+            text="Планы тренировок"
+            fill
+            style={{
+              borderRadius: 10,
+              paddingVertical: 18,
+              backgroundColor: COLORS.RED,
+              marginBottom: 10,
+            }}
+            textStyle={{
+              color: COLORS.WHITE,
+              fontWeight: "700",
+              fontSize: 15,
+              lineHeight: 15,
+            }}
+          />
         </View>
       </ScrollView>
     </View>

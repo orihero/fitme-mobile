@@ -10,6 +10,7 @@ import { ApiService } from "../../../../../services";
 import { Product } from "../../../../../types";
 import { selectProducts } from "../../../../../store/slices/productSlice";
 import { useNavigation } from "@react-navigation/native";
+import { NUTRITION } from "../../../../../navigation/ROUTES";
 
 export const BaseProductsHooks = () => {
   const [language] = useRedux(selectLanguage);
@@ -75,7 +76,7 @@ export const BaseProductsHooks = () => {
   };
 
   const onCreate = () => {
-    // navigation.navigate()
+    navigation.navigate(NUTRITION.CREATE_PRODUCT);
   };
 
   return {
@@ -88,5 +89,6 @@ export const BaseProductsHooks = () => {
     productCategories,
     onSelect,
     onAdd,
+    onCreate,
   };
 };
