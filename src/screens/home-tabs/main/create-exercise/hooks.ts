@@ -88,7 +88,6 @@ export const CreateExerciseHook = () => {
         type: "EXERCISE",
       };
       const res = await ApiService.post("/categories", current);
-      console.log(res.data, category);
     } catch (error) {
       console.log("ERROR", JSON.stringify(error));
     }
@@ -103,9 +102,7 @@ export const CreateExerciseHook = () => {
         category: exercise.category?.value,
       };
       const res = await ApiService.post("/exercises", current);
-      console.log(res.data);
     } catch (error) {
-      console.log(error);
       console.log(JSON.stringify(error.response?.data));
     }
     navigation.navigate(MAIN.EXERCISES);

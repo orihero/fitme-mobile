@@ -7,13 +7,13 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
   },
   footerContainer: {
-    height: "40%",
+    height: "30%",
     justifyContent: "flex-end",
     paddingBottom: 30,
     alignItems: "center",
   },
   headerContainer: {
-    height: "60%",
+    height: "70%",
     justifyContent: "flex-end",
     marginHorizontal: 20,
   },
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     color: COLORS.BLACK,
     fontWeight: "500",
-    fontSize: 20,
+    fontSize: 15,
     marginBottom: 15,
   },
   text: {
@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
   iconContainer: {
     flexDirection: "row",
     alignItems: "center",
-    width: "30%",
-    justifyContent: "space-around",
+    // width: "30%",
+    // justifyContent: "space-around",
   },
 });

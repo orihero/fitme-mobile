@@ -61,7 +61,6 @@ export const AddProductsHooks = () => {
   }, [activeTab, activeCategory]);
 
   const onSearch = () => {
-    console.log("onSearch");
   };
 
   const onSelect = (product: Product) => {

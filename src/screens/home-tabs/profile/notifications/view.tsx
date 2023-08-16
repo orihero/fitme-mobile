@@ -3,8 +3,12 @@ import React from "react";
 import { styles } from "./style";
 import SafeAreaView from "react-native-safe-area-view";
 import { Header } from "../../../../components/common";
+import { NotificationsHooks } from "./hooks";
 
 const Notifications = () => {
+
+  const {} = NotificationsHooks();
+
   return (
     <View style={styles.container}>
       <SafeAreaView />

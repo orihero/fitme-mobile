@@ -127,7 +127,6 @@ export const MyProductsHooks = () => {
         setModalLoading(false);
         setShow(false);
       } catch (e) {
-        console.log("e: ", e);
         setModalLoading(false);
         setShow(false);
       }

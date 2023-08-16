@@ -110,10 +110,6 @@ export const CreateProductHook = () => {
         type: CategoryType.PRODUCT,
       };
       const res = await ApiService.post("/categories", current);
-      console.log("====================================");
-      console.log("CATEOGRY CREATED");
-      console.log("====================================");
-      console.log(res.data, category);
       await fetchCategories();
     } catch (error) {
       console.log("ERROR", JSON.stringify(error));
@@ -130,9 +126,7 @@ export const CreateProductHook = () => {
         creator: user?._id,
       };
       const res = await ApiService.post("/products", current);
-      console.log(res.data, current);
     } catch (error) {
-      console.log(error);
       console.log(JSON.stringify(error.response?.data));
     }
     navigation.navigate(NUTRITION.NUTRITION_LAYOUT);

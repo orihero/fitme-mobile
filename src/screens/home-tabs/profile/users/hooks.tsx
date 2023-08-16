@@ -38,12 +38,18 @@ export const UsersHooks = () => {
     getTrainers();
   }, [active]);
 
+  const filteredUsers = !!search
+    ? users.filter(
+        (e) => e.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
+      )
+    : users;
+
   return {
     search,
     setSearch,
     active,
     setActive,
-    users,
+    users: filteredUsers,
     individual,
   };
 };

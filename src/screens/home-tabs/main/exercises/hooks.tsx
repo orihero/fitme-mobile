@@ -19,6 +19,8 @@ export const ExercisesHooks = () => {
   const [activeCategory, setActiveCategory] = useState(0);
   const [activeSubCategory, setActiveSubCategory] = useState(0);
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [removing, setRemoving] = useState(false);
+  const [show, setShow] = useState<any>();
 
   const navigation = useNavigation<ExercisesScreenNavigationProp>();
   const [exerciseCategories] = useRedux(selectExerciseCategories);
@@ -37,8 +39,17 @@ export const ExercisesHooks = () => {
       );
       setExercises(resExercises.data);
     } catch (e) {
-      console.log("e: ", e);
+      setExercises([]);
     }
+  };
+
+  const onRemove = async (id: string) => {
+    try {
+      setRemoving(true);
+      await ApiService.delete("/exercises/" + id);
+      await getExercises();
+    } catch (error) {}
+    setRemoving(false);
   };
 
   useEffect(() => {
@@ -64,5 +75,9 @@ export const ExercisesHooks = () => {
     exercises,
     onCreate,
     isSuperAdmin,
+    removing,
+    onRemove,
+    show,
+    setShow,
   };
 };

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import PublicStack from "./PublicStack";
@@ -42,7 +43,6 @@ const Root = () => {
   const getUser = async () => {
     try {
       if (token) {
-        console.log("GETTING USER");
 
         const resUser = await ApiService.get<Response<User>>("/users/me");
 
@@ -54,7 +54,6 @@ const Root = () => {
         setIsAuthenticated(false);
       }
     } catch (e: any) {
-      console.log(JSON.stringify(e), "ERRROR");
 
       try {
         const resToken = await customRequests.getNewAccessToken();
@@ -103,7 +102,6 @@ const Root = () => {
       const resDishes = await ApiService.get<Response<Dish[]>>("/dishes");
 
       const resUser = await ApiService.get<Response<User>>("/users/me");
-      console.log({ usr: resUser });
 
       dispatch(setUser(resUser.data));
 

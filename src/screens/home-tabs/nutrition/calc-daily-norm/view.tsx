@@ -33,9 +33,6 @@ const CalcDailyNormView = () => {
 
   const route = useRoute();
   const { onSave } = route.params || {};
-  console.log("====================================");
-  console.log(route);
-  console.log("====================================");
 
   return (
     <View style={styles.container}>

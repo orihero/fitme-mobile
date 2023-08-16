@@ -20,6 +20,10 @@ const ExercisesView = () => {
     exercises,
     onCreate,
     isSuperAdmin,
+    onRemove,
+    removing,
+    setShow,
+    show,
   } = ExercisesHooks();
 
   return (
@@ -63,6 +67,11 @@ const ExercisesView = () => {
                 title={exercise.title}
                 containerStyle={{ marginTop: 10 }}
                 cover={{ uri: exercise.image }}
+                show={show && show[i]}
+                setShow={() => setShow({ [i]: !(show && show[i]) })}
+                dots={isSuperAdmin}
+                dotsLoading={removing}
+                onRemove={() => onRemove(exercise._id)}
               />
             </TouchableOpacity>
           ))}

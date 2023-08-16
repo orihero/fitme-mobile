@@ -92,7 +92,6 @@ export const SchemaNutritionHooks = () => {
       } else {
         obj = { ...initialState };
       }
-
       setSchemaNutrition(obj);
     }
   };
@@ -159,15 +158,9 @@ export const SchemaNutritionHooks = () => {
   }, [activeTab]);
 
   const onDailyNormPress = () => {
-    console.log('====================================');
-    console.log("DALY NORM PRESS");
-    console.log('====================================');
     //@ts-ignore
     navigation.navigate(NUTRITION.CALC_DAILY_NORM, {
       onSave: async (val: string) => {
-        console.log('====================================');
-        console.log({val});
-        console.log('====================================');
         let data = {
           ...schemaNutrition?.data,
           nType: NUTRITION_TYPE[activeTab ? "THIN" : "FAT"],
@@ -186,10 +179,13 @@ export const SchemaNutritionHooks = () => {
             products: schemaNutrition?.products.map((p) => p._id) || [],
             dishes: schemaNutrition?.dishes.map((d) => d._id) || [],
           });
-          console.log('====================================');
-          console.log("SAVING DAILY NORM");
-          console.log('====================================');
-          await effect();
+          setSchemaNutrition({
+            ...schemaNutrition,
+            date,
+            data,
+            products: schemaNutrition?.products.map((p) => p._id) || [],
+            dishes: schemaNutrition?.dishes.map((d) => d._id) || [],
+          });
         } catch (e) {
           console.log("e: ", e);
         }

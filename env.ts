@@ -1,7 +1,7 @@
 // const serverUrl = "http://localhost:4000";
 // const serverUrl = "http://192.168.31.138:4000";
 const serverUrl = "https://fitme-api-yng7n.ondigitalocean.app";
-// const serverUrl = "http://localhost:5000";
+// const serverUrl = "http://localhost:5001/";
 
 
 export const Env = {

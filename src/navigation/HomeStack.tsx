@@ -22,6 +22,10 @@ const HomeStack = () => {
           tabBarShowLabel: false,
           tabBarShowIcon: true,
           tabBarStyle: styles.tabBarStyle,
+          // tabBarActiveBackgroundColor: "red",
+          
+          // tabBarStyle: { backgroundColor: "red" },
+          tabBarBackground: () => <View style={{ backgroundColor: "green" }} />,
         })}
       >
         <Tab.Screen name={ROUTES.TABS.MAIN.TAB} component={MainStack} />
@@ -45,11 +49,10 @@ const styles = StyleSheet.create({
   },
   tabBarStyle: {
     position: "absolute",
-    bottom: 0,
+    // bottom: 4,
     backgroundColor: COLORS.GREY7,
     height: Platform.OS === "ios" ? 80 : 55,
     paddingTop: Platform.OS === "ios" ? 20 : 0,
     paddingHorizontal: 25,
-    
   },
 });

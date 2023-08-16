@@ -71,8 +71,8 @@ export const styles = StyleSheet.create({
   iconContainer: {
     flexDirection: "row",
     alignItems: "center",
-    width: "30%",
-    justifyContent: "space-around",
+    // width: "30%",
+    // justifyContent: "space-around",
     paddingBottom: 40,
   },
 });

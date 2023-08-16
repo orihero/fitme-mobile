@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../../store/slices/appSlice";
 
 export const NotificationsHooks = () => {
-  const [state, setState] = useState("");
+  const user = useSelector(selectUser);
+  console.log("====================================");
+  console.log(user);
+  console.log("====================================");
 
-  return { state, setState };
+  return user;
 };

@@ -6,6 +6,7 @@ import { ApiService } from "../../../services";
 import { SignInResponse, Response } from "../../../types";
 import { showErrToast } from "../../../utils/showErrToast";
 import { PUBLIC } from "../../../navigation/ROUTES";
+import axios from "axios";
 
 export type SignInScreenNavigationProp = NativeStackNavigationProp<
   PublickStackParamList,
@@ -39,7 +40,7 @@ export const SignInHooks = () => {
       // }
 
       setLoading(true);
-
+      // axios.get("http://")
       await ApiService.post<Response<SignInResponse>>("/auth/signin", {
         phone,
       });
@@ -47,7 +48,10 @@ export const SignInHooks = () => {
       setLoading(false);
 
       navigation.navigate(PUBLIC.VERIFY_CODE, { phone, from: "signin" });
-    } catch (e: any) {
+    } catch (e) {
+      console.log('====================================');
+      console.log(e);
+      console.log('====================================');
       setLoading(false);
       if (!!e && e.data && e.data.error && e.data.error.message) {
         showErrToast(e.data.error.message);

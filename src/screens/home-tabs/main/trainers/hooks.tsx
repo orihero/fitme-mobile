@@ -41,7 +41,6 @@ export const TrainersHooks = () => {
       );
       setTrainers(resTrainers.data);
     } catch (e) {
-      console.log("e: ", e);
     }
   };
 
@@ -61,12 +60,18 @@ export const TrainersHooks = () => {
     navigation.navigate(MAIN.CREATE_TRAINER);
   };
 
+  const filteredTrainers = !!search
+    ? trainers.filter(
+        (e) => e.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
+      )
+    : trainers;
+
   return {
     search,
     setSearch,
     active,
     setActive,
-    trainers,
+    trainers: filteredTrainers,
     onPress,
     individual,
     isSuperAdmin,

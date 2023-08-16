@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { styles } from "./style";
 import { COLORS } from "../../../constants/COLORS";
 import { SignUpHooks } from "./hooks";
@@ -19,6 +19,7 @@ const SignUpView = () => {
           containerStyle={{
             backgroundColor: COLORS.GREY4,
             marginBottom: 10,
+            marginTop: 30,
           }}
           inputStyle={{
             backgroundColor: COLORS.GREY4,
@@ -52,6 +53,7 @@ const SignUpView = () => {
             paddingVertical: 18,
             backgroundColor: COLORS.BLACK,
             marginBottom: 10,
+            marginTop: 20,
           }}
           textStyle={{
             color: COLORS.WHITE,
@@ -63,9 +65,9 @@ const SignUpView = () => {
         />
       </View>
       <View style={styles.footerContainer}>
-        {/* <Text style={styles.textFooter}>
+        <Text style={styles.textFooter}>
           {"Вы можете авторизоваться при помощи"}
-        </Text> */}
+        </Text>
         <View style={{ alignItems: "center" }}>
           <View style={styles.iconContainer}>
             {/* <TouchableOpacity activeOpacity={0.7}>
@@ -77,6 +79,14 @@ const SignUpView = () => {
             <TouchableOpacity activeOpacity={0.7}>
               <GoogleIcon />
             </TouchableOpacity> */}
+            <TouchableOpacity activeOpacity={0.7}>
+              <Image
+                style={{ width: 49, height: 50 }}
+                source={{
+                  uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png",
+                }}
+              />
+            </TouchableOpacity>
           </View>
         </View>
       </View>

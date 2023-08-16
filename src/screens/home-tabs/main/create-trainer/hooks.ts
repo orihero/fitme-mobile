@@ -22,9 +22,7 @@ export const CreateTrainerHook = () => {
       };
 
       const res = await ApiService.post("/trainers", current);
-      console.log(res.data);
     } catch (error) {
-      console.log(error);
       console.log(JSON.stringify(error.response?.data));
     }
     navigation.navigate(MAIN.TRAINERS);

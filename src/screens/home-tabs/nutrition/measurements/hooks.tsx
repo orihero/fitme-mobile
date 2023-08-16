@@ -69,7 +69,6 @@ export const MeasurementsHooks = () => {
         setShow({});
         setModalValue("");
       } catch (e) {
-        console.log("e", e);
         setModalLoading(false);
       }
     }
@@ -87,7 +86,6 @@ export const MeasurementsHooks = () => {
         dispatch(setUser(res.data));
         setLoading(false);
       } catch (e) {
-        console.log("e: ", e);
         setLoading(false);
       }
     }
@@ -105,7 +103,6 @@ export const MeasurementsHooks = () => {
         dispatch(setUser(res.data));
         setModalLoading(false);
       } catch (e) {
-        console.log("e: ", e);
         setModalLoading(false);
       }
 
@@ -114,7 +111,6 @@ export const MeasurementsHooks = () => {
   };
 
   const onRemind = () => {
-    console.log("onRemind");
   };
 
   const onSet = (i: number, ii: number) => {
@@ -153,7 +149,6 @@ export const MeasurementsHooks = () => {
         setShow({});
         setModalValue("");
       } catch (e) {
-        console.log("e: ", e);
         setModalLoading(false);
       }
     }
@@ -214,7 +209,6 @@ export const MeasurementsHooks = () => {
               setModalLoading(false);
               setShow({});
             } catch (e) {
-              console.log("e: ", e);
               setModalLoading(false);
             }
           }
