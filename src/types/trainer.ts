@@ -1,4 +1,4 @@
-import { BaseUser, GENDER } from ".";
+import { BaseUser, GENDER, User, WorkoutPlan } from ".";
 
 export type Trainer = BaseUser & {
   trainerGenderType: GENDER;
@@ -12,7 +12,7 @@ export type Trainer = BaseUser & {
   aboutMe: string;
   telegramLink: string;
   instagramLink: string;
-  //   disciples: User[];
-  //   requestedDisciples: User[];
-  //   workoutPlans: WorkoutPlan[];
+  disciples: User[];
+  requestedDisciples: User[];
+  workoutPlans: WorkoutPlan[];
 };

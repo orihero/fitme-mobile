@@ -25,7 +25,7 @@ export type ProfileStackParamList = {
   [PROFILE.MY_TRAINER]: undefined;
   [PROFILE.NOTIFICATIONS]: undefined;
   [PROFILE.SETTINGS]: undefined;
-  [PROFILE.USERS]: undefined;
+  [PROFILE.USERS]: { isTrainer?: boolean };
   [PROFILE.RECOMMENDATION]: undefined;
   [PROFILE.WORKOUT_RESULTS]: {
     schedule: ScheduleWorkout;

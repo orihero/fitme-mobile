@@ -14,7 +14,8 @@ import telegram from "../../../../assets/icons/telegram.png";
 import instagram from "../../../../assets/icons/instagram.png";
 
 const TrainerView = () => {
-  const { trainer, openLink, onPlansPress } = TrainerHooks();
+  const { trainer, openLink, onPlansPress, onApplicationPress } =
+    TrainerHooks();
 
   return (
     <View style={styles.container}>
@@ -99,7 +100,7 @@ const TrainerView = () => {
                 fontSize: 15,
                 lineHeight: 15,
               }}
-              onPress={() => console.log("onPress")}
+              onPress={onApplicationPress}
             />
           </TouchableOpacity>
 

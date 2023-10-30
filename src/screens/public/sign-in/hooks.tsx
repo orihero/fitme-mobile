@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { PublickStackParamList } from "../../../navigation/PublicStack";
 import { ApiService } from "../../../services";
 import { SignInResponse, Response } from "../../../types";
-import { showErrToast } from "../../../utils/showErrToast";
+import { showErrToast } from "../../../utils/showToast";
 import { PUBLIC } from "../../../navigation/ROUTES";
 import axios from "axios";
 

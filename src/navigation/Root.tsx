@@ -12,17 +12,20 @@ import {
   CategoryType,
   Dish,
   Product,
+  ROLES,
   Response,
   Token,
+  Trainer,
   User,
 } from "../types";
 import { setCategoriesByType } from "../store/slices/categorySlice";
-import { setTokens, setUser } from "../store/slices/appSlice";
+import { setTokens, setTrainer, setUser } from "../store/slices/appSlice";
 import { setOauthRequestInterceptor } from "../utils/axios";
 import { clearT } from "../services/AuthService";
 import { customRequests } from "../utils/api";
 import { setProducts } from "../store/slices/productSlice";
 import { setDishes } from "../store/slices/dishSlice";
+import { AxiosResponse } from "axios";
 
 const Root = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,18 +46,21 @@ const Root = () => {
   const getUser = async () => {
     try {
       if (token) {
-
         const resUser = await ApiService.get<Response<User>>("/users/me");
 
         // const { scheduleWorkouts, ...rest } = res.data.data;
-
+        if (resUser.data.role === ROLES.TRAINER) {
+          const res = await ApiService.get<AxiosResponse<Trainer>>(
+            `/trainers/find/${resUser.data?.phoneNumber}`
+          );
+          dispatch(setTrainer(res.data));
+        }
         dispatch(setUser(resUser.data));
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
       }
     } catch (e: any) {
-
       try {
         const resToken = await customRequests.getNewAccessToken();
 

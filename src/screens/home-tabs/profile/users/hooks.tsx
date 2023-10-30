@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { MAIN } from "../../../../navigation/ROUTES";
+import { MAIN, PROFILE } from "../../../../navigation/ROUTES";
 import { ApiService } from "../../../../services";
 import { GENDER, Trainer, Response, User } from "../../../../types";
 import { MainStackParamList } from "../../main";
+import { ProfileStackParamList } from "..";
+import { useSelector } from "react-redux";
+import { selectTrainer } from "../../../../store/slices/appSlice";
 
 export type TrainersScreenNavigationProp = NativeStackNavigationProp<
   MainStackParamList,
@@ -20,10 +23,10 @@ export const UsersHooks = () => {
   const [active, setActive] = useState(0);
   const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState("");
+  const trainer = useSelector(selectTrainer);
 
-  const navigation = useNavigation<TrainersScreenNavigationProp>();
-  const route = useRoute<TrainersScreenRouteProp>();
-  const { individual } = route.params ?? {};
+  const { params } =
+    useRoute<RouteProp<ProfileStackParamList, PROFILE.USERS>>();
 
   const getTrainers = async () => {
     try {
@@ -35,7 +38,11 @@ export const UsersHooks = () => {
   };
 
   useEffect(() => {
-    getTrainers();
+    if (params.isTrainer) {
+      setUsers(trainer?.disciples || []);
+    } else {
+      getTrainers();
+    }
   }, [active]);
 
   const filteredUsers = !!search
@@ -50,6 +57,5 @@ export const UsersHooks = () => {
     active,
     setActive,
     users: filteredUsers,
-    individual,
   };
 };

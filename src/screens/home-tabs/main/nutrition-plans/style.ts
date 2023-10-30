@@ -19,4 +19,12 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 15,
   },
+  createButtonContainer: {
+    position: "absolute",
+    bottom: 80,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
 });

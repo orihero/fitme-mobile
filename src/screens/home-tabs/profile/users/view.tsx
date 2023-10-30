@@ -15,9 +15,12 @@ import { COLORS } from "../../../../constants/COLORS";
 import { UsersHooks } from "./hooks";
 import { styles } from "./style";
 
+import { useRoute, RouteProp } from "@react-navigation/native";
+import { PROFILE } from "../../../../navigation/ROUTES";
+import { ProfileStackParamList } from "..";
+
 const UsersView = () => {
-  const { search, setSearch, active, setActive, users, individual } =
-    UsersHooks();
+  const { search, setSearch, users } = UsersHooks();
 
   return (
     <View style={styles.container}>

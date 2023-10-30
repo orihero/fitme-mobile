@@ -13,6 +13,7 @@ const ProfileHomeView = () => {
     isAdmin,
     user,
     onUsersPress,
+    isTrainer,
   } = ProfileHomeHooks();
 
   return (
@@ -30,7 +31,14 @@ const ProfileHomeView = () => {
         <View style={{ marginBottom: 130 }}>
           <Profile_btn onPress={onMyDataPress} title="Мои данные" />
           <Profile_btn title="Мои покупки" />
-          <Profile_btn title="Мой тренер" />
+          {isTrainer ? (
+            <Profile_btn
+              onPress={() => onUsersPress(true)}
+              title="Мои ученики"
+            />
+          ) : (
+            <Profile_btn title="Мой тренер" />
+          )}
           <Profile_btn onPress={onNotificationPress} title="Уведомления" />
           <Profile_btn onPress={onSettingsPress} title="Настройки приложения" />
           {!!isAdmin && (

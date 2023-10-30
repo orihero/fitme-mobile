@@ -13,10 +13,19 @@ import {
 } from "../../../../components/common";
 import { NutritionPlansHooks } from "./hooks";
 import { NutritionBox } from "../../../../components";
+import { ProfileHomeHooks } from "../../profile/home/hooks";
 
 const NutritionPlansView = () => {
-  const { state, setState, onIndividualPress, subCategory, setSubCategory } =
-    NutritionPlansHooks();
+  const {
+    state,
+    setState,
+    onIndividualPress,
+    subCategory,
+    setSubCategory,
+    onCreatePlan,
+  } = NutritionPlansHooks();
+
+  const { isAdmin } = ProfileHomeHooks();
 
   return (
     <View style={styles.container}>
@@ -46,7 +55,7 @@ const NutritionPlansView = () => {
             backgroundColor: "transparent",
             marginBottom: 10,
           }}
-        scroll={false}
+          scroll={false}
         />
       )}
 
@@ -69,6 +78,11 @@ const NutritionPlansView = () => {
           onPress={onIndividualPress}
         />
       </View>
+      {isAdmin && (
+        <View style={styles.createButtonContainer}>
+          <ButtonPrimary text="Добавить план" onPress={onCreatePlan} />
+        </View>
+      )}
     </View>
   );
 };

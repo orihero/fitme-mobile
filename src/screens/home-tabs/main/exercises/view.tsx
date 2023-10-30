@@ -1,4 +1,10 @@
-import { SafeAreaView, ScrollView, TouchableOpacity, View } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import {
   Box,
   ButtonPrimary,
@@ -38,14 +44,14 @@ const ExercisesView = () => {
         active={activeCategory}
         setActive={setActiveCategory}
         containerStyle={styles.categoryBtnCont}
-        titles={[...exerciseCategories.map((a) => a.name[language])]}
+        titles={[]}
       />
       <ButtonTabs
         active={activeSubCategory}
         setActive={setActiveSubCategory}
         containerStyle={styles.subCategoryBtnCont}
         titles={
-          exerciseCategories
+          !!exerciseCategories && exerciseCategories.length > 0
             ? [
                 ...exerciseCategories[activeCategory]?.children.map(
                   (a) => a.name[language]

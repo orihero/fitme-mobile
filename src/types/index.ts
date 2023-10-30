@@ -42,6 +42,10 @@ export enum LANGUAGES {
   UZ = "uz",
 }
 
+export enum NOTIFICATION_TYPES {
+  REQUSTED_DISCIPLE = "REQUSTED_DISCIPLE",
+}
+
 export enum ROLES {
   SUPERADMIN = "SUPERADMIN",
   ADMIN = "ADMIN",

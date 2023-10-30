@@ -2,30 +2,49 @@ import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { styles } from "./style";
 import SafeAreaView from "react-native-safe-area-view";
-import { Header } from "../../../../components/common";
-import { NotificationsHooks } from "./hooks";
+import { ButtonSecondary, Header } from "../../../../components/common";
+import { IUserNotification, NotificationsHooks } from "./hooks";
+import { COLORS } from "../../../../constants/COLORS";
 
 const Notifications = () => {
-
-  const {} = NotificationsHooks();
-
+  const { notifications, acceptDisciple, removeDisciple } =
+    NotificationsHooks();
+  const renderNotification = (e: IUserNotification) => {
+    //TODO SWITCH notification type
+    return (
+      <View style={styles.box}>
+        <View>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.textRed}>Ползователь</Text>
+            <Text style={styles.text}> “ {e.name} “ хочет стат </Text>
+          </View>
+          <Text style={styles.text}>вашым учеником</Text>
+        </View>
+        <View style={{}}>
+          <ButtonSecondary
+            onPress={() => acceptDisciple(e.data)}
+            text="Принять"
+            containerStyle={{ borderColor: COLORS.GREEN, marginBottom: 20 }}
+            textStyle={{ color: COLORS.GREEN }}
+          />
+          <ButtonSecondary
+            onPress={() => removeDisciple(e.data)}
+            text="Отклонит"
+            containerStyle={{ borderColor: COLORS.RED }}
+            textStyle={{ color: COLORS.RED }}
+          />
+        </View>
+      </View>
+    );
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView />
       <Header title="Уведомления" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ marginBottom: 100 }}>
-          <View style={styles.box}>
-            <View style={{}}>
-              <View style={{ flexDirection: "row" }}>
-                <Text style={styles.textRed}>Тренер</Text>
-                <Text style={styles.text}>“ Рафаэль Ройтман “ принял</Text>
-              </View>
-              <Text style={styles.text}>вашу заявку</Text>
-            </View>
-            <Text style={styles.textData}>10.15.2022</Text>
-          </View>
-          <View style={styles.box}>
+          {notifications.map((e) => renderNotification(e))}
+          {/* <View style={styles.box}>
             <View style={{}}>
               <Text style={styles.text}>Вы купили упражнение “ Плечи “</Text>
               <View style={{ flexDirection: "row" }}>
@@ -109,7 +128,7 @@ const Notifications = () => {
                 Перейти
               </Text>
             </View>
-          </View>
+          </View> */}
         </View>
       </ScrollView>
     </View>

@@ -5,7 +5,7 @@ import { PublickStackParamList } from "../../../navigation/PublicStack";
 import { PUBLIC, ROUTES } from "../../../navigation/ROUTES";
 import { ApiService } from "../../../services";
 import { Response, SignUpResponse } from "../../../types";
-import { showErrToast } from "../../../utils/showErrToast";
+import { showErrToast } from "../../../utils/showToast";
 
 export type SignUpScreenNavigationProp = NativeStackNavigationProp<
   PublickStackParamList,

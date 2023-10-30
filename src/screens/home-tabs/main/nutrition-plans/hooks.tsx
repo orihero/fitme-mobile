@@ -18,5 +18,17 @@ export const NutritionPlansHooks = () => {
   const onIndividualPress = () => {
     navigation.navigate(MAIN.TRAINERS, { individual: true });
   };
-  return { state, setState, onIndividualPress, subCategory, setSubCategory };
+
+  const onCreatePlan = () => {
+    
+  };
+
+  return {
+    state,
+    setState,
+    onIndividualPress,
+    subCategory,
+    setSubCategory,
+    onCreatePlan,
+  };
 };

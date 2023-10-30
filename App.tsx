@@ -4,6 +4,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { enableScreens } from "react-native-screens";
 import store from "./src/store/configureStore";
 import Root from "./src/navigation/Root";
+import React from "react";
 
 enableScreens();
 

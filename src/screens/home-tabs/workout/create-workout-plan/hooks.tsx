@@ -11,7 +11,7 @@ import {
   Workout,
   WorkoutPlan,
 } from "../../../../types";
-import { showErrToast } from "../../../../utils/showErrToast";
+import { showErrToast } from "../../../../utils/showToast";
 import { useRedux } from "../../../../store/hooks";
 import { selectUser, setUser } from "../../../../store/slices/appSlice";
 import { ApiService } from "../../../../services";

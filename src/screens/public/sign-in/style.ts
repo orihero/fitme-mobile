@@ -1,10 +1,13 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { COLORS } from "../../../constants/COLORS";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.WHITE,
+    flexGrow: 1,
+    height: Dimensions.get("screen").height,
+    maxHeight: Dimensions.get("screen").height,
   },
   footerContainer: {
     height: "40%",
@@ -13,7 +16,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerContainer: {
-    height: "60%",
+    height: "50%",
     justifyContent: "flex-end",
     marginHorizontal: 20,
   },
@@ -74,5 +77,6 @@ export const styles = StyleSheet.create({
     // width: "30%",
     // justifyContent: "space-around",
     paddingBottom: 40,
+    backgroundColor: "transparent",
   },
 });

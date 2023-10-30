@@ -45,6 +45,7 @@ const ButtonTabs = ({
   scroll = true,
 }: IProps) => {
   const Wrapper = scroll ? ScrollView : React.Fragment;
+
   return (
     <View style={[styles.container, containerStyle]}>
       <Wrapper

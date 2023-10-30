@@ -5,7 +5,7 @@ import { MAIN, ROUTES, WORKOUT } from "../../../../navigation/ROUTES";
 import { WorkoutStackParamList } from "..";
 import { Workout } from "../../../../types";
 import EventEmitter from "../../../../utils/EventEmitter";
-import { showErrToast } from "../../../../utils/showErrToast";
+import { showErrToast } from "../../../../utils/showToast";
 
 export type AddWorkoutsScreenNavigationProp = NativeStackNavigationProp<
   WorkoutStackParamList,

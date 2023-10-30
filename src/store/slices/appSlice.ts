@@ -1,12 +1,13 @@
 import { ScheduleWorkout } from "./../../types/schedule-workout";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from ".";
-import { LANGUAGES, Token, User } from "../../types";
+import { LANGUAGES, Token, Trainer, User } from "../../types";
 
 export type AppState = {
   language: LANGUAGES;
   token?: Token;
   user?: User;
+  trainer?: Trainer;
 };
 
 const initialState: AppState = {
@@ -23,6 +24,7 @@ const {
     setUser,
     clearUser,
     clearAppState,
+    setTrainer,
   },
   reducer,
 } = createSlice({
@@ -89,6 +91,9 @@ const {
         ...initialState,
       };
     },
+    setTrainer: (state, action: PayloadAction<Trainer>) => {
+      return { ...state, trainer: action.payload };
+    },
   },
 });
 
@@ -101,6 +106,7 @@ export {
   setUser,
   clearUser,
   clearAppState,
+  setTrainer,
 };
 
 export const selectLanguage = ({ app: { language } }: RootState) => language;
@@ -108,6 +114,8 @@ export const selectLanguage = ({ app: { language } }: RootState) => language;
 export const selectToken = ({ app: { token } }: RootState) => token;
 
 export const selectUser = ({ app: { user } }: RootState) => user;
+
+export const selectTrainer = ({ app: { trainer } }: RootState) => trainer;
 
 export const selectScheduleWorkouts = ({ app: { user } }: RootState) =>
   user?.scheduleWorkouts;

@@ -37,9 +37,9 @@ export const ProfileHomeHooks = () => {
     }
   };
 
-  const onUsersPress = ()=>{
-    navigation.navigate(PROFILE.USERS as never);
-  }
+  const onUsersPress = (isTrainer?: boolean) => {
+    navigation.navigate(PROFILE.USERS as never, { isTrainer });
+  };
 
   return {
     state,
@@ -49,7 +49,8 @@ export const ProfileHomeHooks = () => {
     onNotificationPress,
     onLogOut,
     isAdmin: user?.role === ROLES.SUPERADMIN,
+    isTrainer: user?.role === ROLES.TRAINER,
     user,
-    onUsersPress
+    onUsersPress,
   };
 };
