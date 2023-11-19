@@ -21,7 +21,6 @@ import { ProfileStackParamList } from "..";
 
 const UsersView = () => {
   const { search, setSearch, users } = UsersHooks();
-
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -42,7 +41,6 @@ const UsersView = () => {
           backgroundColor: COLORS.GREY3,
           color: COLORS.WHITE,
         }}
-        onSearch={() => console.log("onSearch!!")}
       />
 
       <ScrollView showsVerticalScrollIndicator={false}>

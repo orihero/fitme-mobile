@@ -28,15 +28,15 @@ export const BaseProductsHooks = () => {
   const getProducts = () => {
     if (user) {
       setProducts(
-        allProducts
-          .filter((p) => p.category._id === productCategories[activeTab]._id)
-          // .filter(
-          //   (p) => user.products.findIndex((pp) => pp._id === p._id) === -1
-          // )
+        !!allProducts && allProducts.length > 0
+          ? allProducts.filter(
+              (p) => p.category?._id === productCategories[activeTab]?._id
+            )
+          : []
       );
     }
   };
-  
+
   useEffect(() => {
     getProducts();
   }, [activeTab, user]);

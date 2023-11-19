@@ -76,7 +76,7 @@ const WorkoutExercisesScreen = () => {
               }
               onSelectIn={() => onSelect(e)}
               title={e.title}
-              cover={Assets.images.cover1}
+              cover={{ uri: e.image }}
               containerStyle={{ marginTop: 10 }}
             />
           </TouchableOpacity>

@@ -52,6 +52,9 @@ export const enableApiErrorInterceptor = () => {
       return response;
     },
     (error: AxiosError) => {
+      console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+      console.log(JSON.stringify(error));
+      console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       return new Promise((resolve, reject) => {
         // token expired
         if (error?.response?.status === 401) {

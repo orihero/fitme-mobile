@@ -71,7 +71,7 @@ const AddReceptionView = () => {
       <View style={styles.main}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <ProductList
-            title="Строка"
+            title="Продукт"
             amounts={amounts}
             products={products}
             onShow={onShow}

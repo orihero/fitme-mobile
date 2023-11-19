@@ -1,12 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
-import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+import { AxiosResponse } from "axios";
+import { useEffect, useMemo, useState } from "react";
+import { Image, View } from "react-native";
 import Toast from "react-native-toast-message";
-import PublicStack from "./PublicStack";
-import HomeStack from "./HomeStack";
-import Example from "./Example";
-import { useRedux } from "../store/hooks";
 import { ApiService, AuthService } from "../services";
+import { clearT } from "../services/AuthService";
+import { useRedux } from "../store/hooks";
+import { setTokens, setTrainer, setUser } from "../store/slices/appSlice";
+import { setCategoriesByType } from "../store/slices/categorySlice";
+import { setDishes } from "../store/slices/dishSlice";
+import { setProducts } from "../store/slices/productSlice";
 import {
   Category,
   CategoryType,
@@ -18,16 +21,14 @@ import {
   Trainer,
   User,
 } from "../types";
-import { setCategoriesByType } from "../store/slices/categorySlice";
-import { setTokens, setTrainer, setUser } from "../store/slices/appSlice";
-import { setOauthRequestInterceptor } from "../utils/axios";
-import { clearT } from "../services/AuthService";
 import { customRequests } from "../utils/api";
-import { setProducts } from "../store/slices/productSlice";
-import { setDishes } from "../store/slices/dishSlice";
-import { AxiosResponse } from "axios";
+import { setOauthRequestInterceptor } from "../utils/axios";
+import Example from "./Example";
+import HomeStack from "./HomeStack";
+import PublicStack from "./PublicStack";
 
 const Root = () => {
+  const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const [store, dispatch] = useRedux((s) => s);
@@ -96,6 +97,7 @@ const Root = () => {
   }, [token?.access_token]);
 
   const effect = async () => {
+    setLoading(true);
     try {
       const resCategories = await ApiService.get<Response<Category[]>>(
         "/categories?parents=ss"
@@ -140,6 +142,7 @@ const Root = () => {
     } catch (e: any) {
       console.log("ee: ", JSON.stringify(e, null, 4));
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -156,7 +159,18 @@ const Root = () => {
 
   return (
     <NavigationContainer>
-      {screens}
+      {loading ? (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Image
+            source={require("../assets/images/fitmeLogo.jpg")}
+            style={{ width: 300, height: 300 }}
+          />
+        </View>
+      ) : (
+        screens
+      )}
       <Toast />
     </NavigationContainer>
   );

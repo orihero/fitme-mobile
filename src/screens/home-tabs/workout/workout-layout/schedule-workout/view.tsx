@@ -40,7 +40,7 @@ const ScheduleWorkoutView = () => {
                   <TouchableWithoutFeedback
                     onPress={() => setShow({ [ii]: !show[ii] })}
                   >
-                    <View style={styles.titleColumn}>
+                    <View style={[styles.titleColumn, { marginTop: 10 }]}>
                       <Text style={styles.title}>{`Тренировка ${ii + 1}`}</Text>
                       <Icon
                         source={Assets.icons.arrow}

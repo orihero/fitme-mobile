@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     marginVertical: 20,
     backgroundColor: "transparent",
     justifyContent: "space-between",
-    marginLeft: 35,
+    marginLeft: 90,
   },
   genderBtnCont: {
     marginHorizontal: 10,

@@ -132,6 +132,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderColor: COLORS.GREY13,
     backgroundColor: "transparent",
+    // width: 30,
+    height: 31,
   },
   btnText: {
     fontSize: 20,

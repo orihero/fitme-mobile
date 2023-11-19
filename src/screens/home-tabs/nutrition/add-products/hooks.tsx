@@ -87,7 +87,7 @@ export const AddProductsHooks = () => {
       }
 
       setProducts(
-        arr.filter((p) => p.category._id === categories[activeCategory]._id)
+        arr.filter((p) => p.category?._id === categories[activeCategory]?._id)
       );
     }
   };
@@ -107,8 +107,8 @@ export const AddProductsHooks = () => {
   const onSelect = (product: Product) => {
     let arr = [...selected];
 
-    if (selected.find((s) => s._id === product._id)) {
-      arr = arr.filter((a) => a._id !== product._id);
+    if (selected.find((s) => s?._id === product?._id)) {
+      arr = arr.filter((a) => a?._id !== product?._id);
     } else {
       arr.push(product);
     }
@@ -120,17 +120,17 @@ export const AddProductsHooks = () => {
     if (schemaNutrition) {
       setLoading(true);
 
-      let arr1: string[] = schemaNutrition.products.map((p) => p._id);
-      let arr2: string[] = schemaNutrition.dishes.map((d) => d._id);
+      let arr1: string[] = schemaNutrition.products.map((p) => p?._id);
+      let arr2: string[] = schemaNutrition.dishes.map((d) => d?._id);
       let amountsP: number[] = [...schemaNutrition.amountsP];
       let amountsD: number[] = [...schemaNutrition.amountsD];
 
       selected.map((s) => {
         if (s.category.type === CategoryType.PRODUCT) {
-          arr1.push(s._id);
+          arr1.push(s?._id);
           amountsP.push(PRODUCT_AMOUNT);
         } else {
-          arr2.push(s._id);
+          arr2.push(s?._id);
           amountsD.push(
             // @ts-ignore
             (s.amounts as number[]).reduce((acc, val) => acc + val, 0)

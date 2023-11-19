@@ -75,7 +75,7 @@ const AddProductsView = () => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        {!activeTab && (
+        {/* {!activeTab && (
           <ButtonPrimary
             fill
             onPress={onCreate}
@@ -83,7 +83,7 @@ const AddProductsView = () => {
             text="Сделать новое блюдо"
             textStyle={styles.buttonText}
           />
-        )}
+        )} */}
 
         {products.map((p, pI) => {
           let amount = 0;

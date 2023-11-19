@@ -119,7 +119,7 @@ const CustomModal = ({
             </View>
             <View style={styles.modalCol}>
               <Text style={styles.modalText}>{"гр"}</Text>
-              <View style={styles.modalInputCont2}>
+              <View style={styles.modalInputCont3}>
                 <Text style={styles.modalText}>{value1}</Text>
               </View>
             </View>

@@ -53,6 +53,7 @@ const WorkoutPlansView = () => {
         setActive={setActiveLevel}
         titles={["Новичок", "Опытный", "Продвинутый"]}
         containerStyle={styles.levelBtnCont}
+        scroll={true}
       />
 
       <Text style={styles.text}>{textsMapper[activeLevel]}</Text>

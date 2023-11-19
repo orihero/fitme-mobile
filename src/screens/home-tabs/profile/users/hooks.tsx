@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { RouteProp, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { ProfileStackParamList } from "..";
 import { MAIN, PROFILE } from "../../../../navigation/ROUTES";
 import { ApiService } from "../../../../services";
-import { GENDER, Trainer, Response, User } from "../../../../types";
-import { MainStackParamList } from "../../main";
-import { ProfileStackParamList } from "..";
-import { useSelector } from "react-redux";
 import { selectTrainer } from "../../../../store/slices/appSlice";
+import { Response, User } from "../../../../types";
+import { MainStackParamList } from "../../main";
 
 export type TrainersScreenNavigationProp = NativeStackNavigationProp<
   MainStackParamList,
@@ -25,11 +25,13 @@ export const UsersHooks = () => {
   const [search, setSearch] = useState("");
   const trainer = useSelector(selectTrainer);
 
-  const { params } =
-    useRoute<RouteProp<ProfileStackParamList, PROFILE.USERS>>();
+  const route = useRoute<RouteProp<ProfileStackParamList, PROFILE.USERS>>();
 
   const getTrainers = async () => {
     try {
+      console.log('====================================');
+      console.log("GETTING USERS");
+      console.log('====================================');
       const resUsers = await ApiService.get<Response<User[]>>(`/users`);
       setUsers(resUsers.data);
     } catch (e) {
@@ -38,12 +40,12 @@ export const UsersHooks = () => {
   };
 
   useEffect(() => {
-    if (params.isTrainer) {
-      setUsers(trainer?.disciples || []);
-    } else {
+    // if (typeof route.params.isTrainer !== "boolean") {
+    //   setUsers(trainer?.disciples || []);
+    // } else {
       getTrainers();
-    }
-  }, [active]);
+    // }
+  }, []);
 
   const filteredUsers = !!search
     ? users.filter(

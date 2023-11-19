@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, ScrollView } from "react-native";
 import { styles } from "./style";
 import { Header } from "../../../../components/common";
 import { ExerciseHooks } from "./hooks";
@@ -7,13 +7,17 @@ import Youtube from "react-native-youtube-iframe";
 
 function youtube_parser(url: string) {
   var regExp =
-    /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
   var match = url.match(regExp);
-  return match && match[7].length == 11 ? match[7] : "9fAuotkeVsk";
+  return match[1];
 }
 
 const ExerciseView = () => {
   const { exercise } = ExerciseHooks();
+
+  console.log("====================================");
+  console.log(youtube_parser(exercise.video));
+  console.log("====================================");
 
   return (
     <View style={styles.container}>
@@ -21,12 +25,17 @@ const ExerciseView = () => {
       <View style={{ marginHorizontal: 20, marginBottom: 20 }}>
         <Header title={exercise.title} />
       </View>
-      <View>
-        {/* <View style={styles.videoContainer} /> */}
-        <Youtube height={300} videoId={youtube_parser(exercise.video)} />
-        <Text style={styles.text}>{exercise.description}</Text>
-        <Text style={styles.text}>{exercise.metadescription}</Text>
-      </View>
+      <ScrollView contentContainerStyle={{ paddingBottom: 200 }}>
+        <View>
+          <Youtube
+            key={exercise.video}
+            height={300}
+            videoId={youtube_parser(exercise.video)}
+          />
+          <Text style={styles.text}>{exercise.description}</Text>
+          <Text style={styles.text}>{exercise.metadescription}</Text>
+        </View>
+      </ScrollView>
     </View>
   );
 };

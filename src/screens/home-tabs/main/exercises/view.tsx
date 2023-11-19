@@ -44,7 +44,7 @@ const ExercisesView = () => {
         active={activeCategory}
         setActive={setActiveCategory}
         containerStyle={styles.categoryBtnCont}
-        titles={[]}
+        titles={[...exerciseCategories.map((a) => a.name[language])]}
       />
       <ButtonTabs
         active={activeSubCategory}

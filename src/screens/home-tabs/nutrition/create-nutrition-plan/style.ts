@@ -214,6 +214,14 @@ export const styles = StyleSheet.create({
   modalInputCont2: {
     height: 40,
     width: "100%",
+    // padding: 10,
+    // marginTop: 12,
+    borderRadius: 10,
+    backgroundColor: COLORS.GREY17,
+  },
+  modalInputCont3: {
+    height: 40,
+    width: "100%",
     padding: 10,
     marginTop: 12,
     borderRadius: 10,
