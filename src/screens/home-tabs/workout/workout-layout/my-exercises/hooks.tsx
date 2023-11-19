@@ -55,15 +55,15 @@ export const MyExercisesHooks = () => {
         );
         let arr: Exercise[] = [];
 
-        resExercises.data.map((e) => {
-          const found = favoriteExercises?.find((a) => a._id === e._id);
+        // resExercises.data.map((e) => {
+        //   const found = favoriteExercises?.find((a) => a._id === e._id);
 
-          if (!found) {
-            arr.push(e);
-          }
-        });
+        //   if (!found) {
+        //     arr.push(e);
+        //   }
+        // });
 
-        setExercises(arr);
+        setExercises(resExercises.data);
       } catch (e) {
         console.log("e: ", e);
       }
@@ -146,7 +146,7 @@ export const MyExercisesHooks = () => {
 
       // @ts-ignore
       dispatch(setUser({ ...obj }));
-      setExercises([...arr]);
+      setExercises([...exercises]);
 
       setLoadingSelect(false);
     } catch (e) {

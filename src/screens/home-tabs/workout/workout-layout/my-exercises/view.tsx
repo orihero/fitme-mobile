@@ -55,10 +55,10 @@ const MyExercisesView = () => {
         titles={
           !!exerciseCategories && exerciseCategories.length > 0
             ? [
-                ...exerciseCategories[activeCategory].children.map(
-                  (a) => a.name[language]
-                ),
-              ]
+              ...exerciseCategories[activeCategory].children.map(
+                (a) => a.name[language]
+              ),
+            ]
             : []
         }
         containerStyle={styles.subCategoryBtnCont}
@@ -83,7 +83,7 @@ const MyExercisesView = () => {
               select={select.find((a) => a === e._id)}
               onSelect={() => onSelect(e._id)}
               title={e.title}
-              cover={Assets.images.cover1}
+              cover={{ uri: e.image }}
               containerStyle={{ marginTop: 10 }}
             />
           </TouchableOpacity>

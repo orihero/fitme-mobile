@@ -78,7 +78,7 @@ const SchemaNutritionView = () => {
               containerStyle={styles.titleBtn}
               onPress={onDailyNormPress}
             />
-            <TouchableOpacity style={styles.col3} onPress={onDailyNormPress}>
+            <TouchableOpacity style={styles.col3} onPress={() => onShow("a")}>
               {!!dailyNorm ? (
                 <Text style={styles.text1}>{dailyNorm}</Text>
               ) : (
@@ -88,9 +88,8 @@ const SchemaNutritionView = () => {
           </View>
           <View style={styles.box}>
             <View style={styles.titleBox}>
-              <Text style={styles.title}>{`Кол-во ${
-                activeTab ? "профицита" : "дефицита"
-              }`}</Text>
+              <Text style={styles.title}>{`Кол-во ${activeTab ? "профицита" : "дефицита"
+                }`}</Text>
             </View>
             <TouchableOpacity style={styles.col2} onPress={() => onShow("b")}>
               {!!amount ? (
@@ -105,16 +104,15 @@ const SchemaNutritionView = () => {
               <Text style={styles.title}>{"В %"}</Text>
             </View>
             <View style={styles.col1}>
-              <Text style={styles.text1}>{amountPercent || ""}</Text>
+              <Text style={styles.text1}>{amountPercent + "%" || ""}</Text>
             </View>
           </View>
         </View>
 
         <View style={[styles.row, { marginTop: 15 }]}>
           <View style={styles.box}>
-            <Text style={styles.title}>{`${
-              activeTab ? "Профицитная" : "Дефицитная"
-            } норма Ккал`}</Text>
+            <Text style={styles.title}>{`${activeTab ? "Профицитная" : "Дефицитная"
+              } норма Ккал`}</Text>
             <View style={styles.col3}>
               <Text style={styles.text1}>{amountNorm || ""}</Text>
             </View>
@@ -123,7 +121,7 @@ const SchemaNutritionView = () => {
             <Text style={styles.title}>{"Б"}</Text>
             <TouchableOpacity style={styles.col1} onPress={() => onShow("c")}>
               <Text style={styles.text1}>
-                {!!proteinPercent ? proteinPercent : ""}
+                {!!proteinPercent ? proteinPercent + "%" : ""}
               </Text>
               <View style={styles.colLine} />
               <Text style={styles.text1}>
@@ -134,7 +132,7 @@ const SchemaNutritionView = () => {
           <View style={styles.box}>
             <Text style={styles.title}>{"Ж"}</Text>
             <TouchableOpacity style={styles.col1} onPress={() => onShow("d")}>
-              <Text style={styles.text1}>{!!oilPercent ? oilPercent : ""}</Text>
+              <Text style={styles.text1}>{!!oilPercent ? oilPercent + "%" : ""}</Text>
               <View style={styles.colLine} />
               <Text style={styles.text1}>{!!oilPercent ? amountOil : ""}</Text>
             </TouchableOpacity>
@@ -143,7 +141,7 @@ const SchemaNutritionView = () => {
             <Text style={styles.title}>{"У"}</Text>
             <View style={styles.col1}>
               <Text style={styles.text1}>
-                {!!proteinPercent && !!oilPercent ? amountCarb : ""}
+                {!!proteinPercent && !!oilPercent ? amountCarb + "%" : ""}
               </Text>
             </View>
           </View>
@@ -156,9 +154,8 @@ const SchemaNutritionView = () => {
             onPress={() => onShow("e")}
             containerStyle={styles.changeBtn}
           />
-          <Text style={styles.text2}>{`Корректировка ${
-            activeTab ? "профицитной" : "дефицитной"
-          } нормы`}</Text>
+          <Text style={styles.text2}>{`Корректировка ${activeTab ? "профицитной" : "дефицитной"
+            } нормы`}</Text>
         </View>
 
         <View style={[styles.row, { marginTop: 15 }]}>

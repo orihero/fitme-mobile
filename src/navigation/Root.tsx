@@ -87,7 +87,9 @@ const Root = () => {
 
         dispatch(setUser(resUser.data));
         setIsAuthenticated(true);
-      } catch (ee: any) {}
+      } catch (ee: any) { 
+        
+      }
     }
   };
 
@@ -161,7 +163,7 @@ const Root = () => {
     <NavigationContainer>
       {loading ? (
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: 'white' }}
         >
           <Image
             source={require("../assets/images/fitmeLogo.jpg")}

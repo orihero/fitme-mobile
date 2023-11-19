@@ -118,7 +118,7 @@ const ConsumeCalendarView = () => {
 
         <View style={styles.mh20}>
           <ProductList
-            title={"Строка"}
+            title={"Добавить продукт"}
             loading={loading}
             amounts={amounts}
             products={products}

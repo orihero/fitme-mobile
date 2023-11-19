@@ -117,7 +117,7 @@ const CustomModal = ({
               <View style={styles.ml20}>
                 <Text style={styles.modalText2}>
                   {`${
-                    activeTab ? "Уменьшение" : "Увеличение"
+                    !activeTab ? "Уменьшение" : "Увеличение"
                   } количества  углеводов`}
                 </Text>
               </View>

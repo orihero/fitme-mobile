@@ -81,7 +81,7 @@ const CreateDishView = () => {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <ProductList
-          title="Строка"
+          title="Добавить продукт"
           amounts={amounts}
           products={products}
           style={{ marginTop: 25 }}

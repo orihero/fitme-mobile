@@ -58,6 +58,7 @@ export const enableApiErrorInterceptor = () => {
       return new Promise((resolve, reject) => {
         // token expired
         if (error?.response?.status === 401) {
+          reject(error)
           // AuthService.refreshOauthToken((authHeader: string) => {
           //   replayRequest(
           //     {

@@ -185,7 +185,7 @@ const MyNutritionView = () => {
 
         <View style={styles.mh20}>
           <ProductList
-            title={"Строка"}
+            title={"Добавить продукт"}
             amounts={amounts}
             setAmounts={setAmounts}
             products={products}

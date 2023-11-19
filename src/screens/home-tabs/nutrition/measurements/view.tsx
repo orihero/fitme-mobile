@@ -56,12 +56,12 @@ const MeasurementsView = () => {
               textStyle={styles.redText}
               text="Напомнить о следующем замере"
             />
-            <ButtonPrimary
+            {(measurements ?? []).length > 1 && <ButtonPrimary
               text="Удалить строку"
               style={styles.noneBtn}
               textStyle={styles.text}
               onPress={() => setShow({ d: true })}
-            />
+            />}
           </View>
         )}
 
