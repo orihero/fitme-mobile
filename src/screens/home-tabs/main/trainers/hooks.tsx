@@ -12,6 +12,7 @@ import { ApiService } from "../../../../services";
 import { GENDER, Trainer, Response, ROLES } from "../../../../types";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../store/slices/appSlice";
+import EventEmitter from "../../../../utils/EventEmitter";
 
 export type TrainersScreenNavigationProp = NativeStackNavigationProp<
   MainStackParamList,
@@ -40,8 +41,7 @@ export const TrainersHooks = () => {
         `/trainers?gender=${active ? GENDER.FEMALE : GENDER.MALE}`
       );
       setTrainers(resTrainers.data);
-    } catch (e) {
-    }
+    } catch (e) {}
   };
 
   // useFocusEffect(() => {
@@ -51,6 +51,11 @@ export const TrainersHooks = () => {
   useEffect(() => {
     getTrainers();
   }, [active]);
+
+  useEffect(() => {
+    EventEmitter.addListener("refreshTrainers", getTrainers);
+    return () => EventEmitter.removeListener("refreshTrainers", getTrainers);
+  }, []);
 
   const onPress = (index: number) => {
     navigation.navigate(MAIN.TRAINER, { trainer: trainers[index] });

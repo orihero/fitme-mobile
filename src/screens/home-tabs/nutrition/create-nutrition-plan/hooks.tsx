@@ -3,7 +3,13 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { NutritionStackParamList } from "..";
 import { NUTRITION } from "../../../../navigation/ROUTES";
-import { NutritionPlan, Reception, Response } from "../../../../types";
+import {
+  NUTRITION_TYPE,
+  NutritionPlan,
+  ROLES,
+  Reception,
+  Response,
+} from "../../../../types";
 import EventEmitter from "../../../../utils/EventEmitter";
 import { ApiService } from "../../../../services";
 import { useRedux } from "../../../../store/hooks";
@@ -26,6 +32,7 @@ export const CreateNutritionHooks = () => {
   const { type } = route.params ?? {};
 
   const [user, dispatch] = useRedux(selectUser);
+  const isSuperAdmin = user?.role === ROLES.SUPERADMIN;
 
   const [creator, setCreator] = useState("");
   const [title, setTitle] = useState("");
@@ -36,6 +43,12 @@ export const CreateNutritionHooks = () => {
   const [groupReceptions, setGroupReceptions] = useState<Reception[][]>([[]]);
   const [show, setShow] = useState<any>({});
   const [loading, setLoading] = useState(false);
+  const [toggle, setToggle] = useState(type === NUTRITION_TYPE.FAT);
+  const [price, setPrice] = useState("");
+
+  useEffect(() => {
+    setCreator(user?._id || "");
+  }, []);
 
   let protein = 0;
   let oil = 0;
@@ -125,6 +138,7 @@ export const CreateNutritionHooks = () => {
       setLoading(true);
       try {
         const obj = {
+          price: +price,
           creatorName: creator,
           title,
           description,
@@ -194,5 +208,11 @@ export const CreateNutritionHooks = () => {
     onInc,
     onAddReceptions,
     onSave,
+    toggle,
+    setToggle,
+    isSuperAdmin,
+    price,
+    setPrice,
+    type,
   };
 };

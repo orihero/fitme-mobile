@@ -234,4 +234,49 @@ export const styles = StyleSheet.create({
   modalCenter: {
     alignItems: "center",
   },
+
+  animated: {
+    flexDirection: "row",
+    backgroundColor: COLORS.GREY2,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    borderRadius: 10,
+  },
+  animatedOne: {
+    backgroundColor: COLORS.GREY2,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    marginTop: 5,
+  },
+  textOne: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: COLORS.WHITE,
+  },
+  btnLanguage: {
+    marginVertical: 10,
+  },
+  activeText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: COLORS.WHITE,
+  },
+  activeBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 30,
+  },
+  inputTopText: {
+    marginTop: 10,
+    marginBottom: 10,
+    fontSize: 13,
+    fontWeight: "600",
+    color: COLORS.WHITE,
+  },
+  inputInner: {
+    backgroundColor: COLORS.GREY3,
+    color: COLORS.WHITE,
+  },
 });

@@ -10,6 +10,7 @@ import {
 import Controls from "./common/Controls";
 import { COLORS } from "../constants/COLORS";
 import { Product } from "../types";
+import { ButtonSecondary } from "./common";
 
 interface IProps {
   title: string;
@@ -65,7 +66,7 @@ const ProductList = ({
               {typeof loading === "number" && loading === index ? (
                 <ActivityIndicator size={"small"} />
               ) : (
-                <Text style={styles.text2}>{"Очистить"}</Text>
+                <Text style={styles.text2}>{"Удалить"}</Text>
               )}
             </TouchableOpacity>
           </View>
@@ -77,8 +78,21 @@ const ProductList = ({
           </TouchableOpacity>
         </View>
       ))}
-
-      {!isDisabled && (
+      <View
+        style={{
+          marginTop: 20,
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <ButtonSecondary
+          textStyle={{ fontSize: 16 }}
+          text={title}
+          onPress={navigateAddProducts}
+          containerStyle={{}}
+        />
+      </View>
+      {/* {!isDisabled && (
         <Controls
           text={title}
           onDecrement={onRemove}
@@ -86,7 +100,7 @@ const ProductList = ({
           loading={typeof loading === "boolean" && loading}
           textStyle={{ marginTop: 3 }}
         />
-      )}
+      )} */}
     </View>
   );
 };

@@ -1,8 +1,13 @@
 import React from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import { ButtonPrimary, ButtonTabs } from "../../../../../components/common";
+import {
+  ButtonPrimary,
+  ButtonTabs,
+  InputPrimary,
+} from "../../../../../components/common";
 import { BaseProductsHooks } from "./hooks";
 import { styles } from "./style";
+import { COLORS } from "../../../../../constants/COLORS";
 
 const BaseProductsView = () => {
   const {
@@ -16,10 +21,30 @@ const BaseProductsView = () => {
     onSelect,
     onAdd,
     onCreate,
+    onDeletePress,
+    isSuperAdmin,
+    search,
+    setSearch,
   } = BaseProductsHooks();
 
   return (
     <View style={styles.container}>
+      <InputPrimary
+        value={search}
+        onChange={(value) => setSearch(value)}
+        placeholder={"Поиск"}
+        placeholderColor={COLORS.WHITE}
+        containerStyle={{
+          backgroundColor: COLORS.GREY3,
+          marginTop: 10,
+          borderRadius: 10,
+        }}
+        inputStyle={{
+          backgroundColor: COLORS.GREY3,
+          color: COLORS.WHITE,
+        }}
+        onSearch={() => console.log("onSearch!!")}
+      />
       <View style={styles.scrollCont}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <ButtonTabs
@@ -34,7 +59,7 @@ const BaseProductsView = () => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        {products.map((a, i) => (
+        {products?.map((a, i) => (
           <View style={styles.box} key={i}>
             <View style={styles.header}>
               <View>
@@ -67,6 +92,12 @@ const BaseProductsView = () => {
               </View>
               <Text style={styles.text5}>{`${a.calories} каллорий`}</Text>
             </View>
+            <TouchableOpacity
+              onPress={() => onDeletePress(a)}
+              style={styles.row}
+            >
+              <Text style={styles.text5}>Удалить</Text>
+            </TouchableOpacity>
           </View>
         ))}
 
@@ -82,9 +113,11 @@ const BaseProductsView = () => {
 
         <View style={{ marginBottom: 100 }} />
       </ScrollView>
-      <View style={styles.createButtonContainer}>
-        <ButtonPrimary text="Добавить продукт" onPress={onCreate} />
-      </View>
+      {isSuperAdmin && (
+        <View style={styles.createButtonContainer}>
+          <ButtonPrimary text="Добавить продукт" onPress={onCreate} />
+        </View>
+      )}
     </View>
   );
 };

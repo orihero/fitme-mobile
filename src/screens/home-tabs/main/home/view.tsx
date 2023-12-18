@@ -54,19 +54,19 @@ const data = [
   },
   {
     title: "Программы тренировок",
-    text: "Для Мужчин и Женщин Для Новичков и Продвинутых",
+    text: "Для Мужчин и Женщин \nДля Новичков и Продвинутых",
     cover: Assets.images.cover2,
     to: ROUTES.TABS.MAIN.WORKOUT_PLANS,
   },
   {
     title: "Планы питания",
-    text: "Для жиросжигания и набора мышечной массы",
+    text: "Для жиросжигания \nи набора мышечной массы",
     cover: Assets.images.cover3,
     to: ROUTES.TABS.MAIN.NUTRITION_PLANS,
   },
   {
     title: "Тренеры",
-    text: "Выберите себе наставника, который поможет вам добиться ваших целей",
+    text: "Выберите себе наставника",
     cover: Assets.images.cover4,
     to: ROUTES.TABS.MAIN.TRAINERS,
   },

@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  LayoutAnimation,
 } from "react-native";
 import {
   ButtonPrimary,
@@ -15,6 +16,7 @@ import {
 import Modal from "./modal";
 import { CreateNutritionHooks } from "./hooks";
 import { styles } from "./style";
+import Active_Button from "../../../../components/common/Active_Buutton";
 
 const CreateNutritionView = () => {
   const {
@@ -44,6 +46,12 @@ const CreateNutritionView = () => {
     onInc,
     onAddReceptions,
     onSave,
+    isSuperAdmin,
+    setToggle,
+    toggle,
+    price,
+    setPrice,
+    type
   } = CreateNutritionHooks();
 
   return (
@@ -53,7 +61,7 @@ const CreateNutritionView = () => {
       <Header title={"Создание своего плана"} />
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.mt10}>
+        {/* <View style={styles.mt10}>
           <Text style={styles.inputTitle}>{"Имя составителя"}</Text>
           <InputPrimary
             value={creator}
@@ -62,7 +70,7 @@ const CreateNutritionView = () => {
             inputStyle={styles.input}
             containerStyle={styles.inputCont}
           />
-        </View>
+        </View> */}
         <View style={styles.mt10}>
           <Text style={styles.inputTitle}>{"Название плана питания"}</Text>
           <InputPrimary
@@ -171,6 +179,25 @@ const CreateNutritionView = () => {
             containerStyle={styles.descInputCont}
           />
         </View>
+        {isSuperAdmin && (
+          <>
+            <Text style={styles.inputTopText}>
+              {"Стоимость программы (В суммах)"}
+            </Text>
+            <InputPrimary
+              value={price}
+              onChange={(t) => setPrice(t)}
+              placeholder=""
+              containerStyle={styles.input}
+              inputStyle={styles.inputInner}
+            />
+            <View style={styles.activeBox}>
+              <Text style={styles.activeText}>Массанабор</Text>
+              <Active_Button toggle={toggle} setToggle={setToggle} />
+              <Text style={styles.activeText}>Жирожигание</Text>
+            </View>
+          </>
+        )}
 
         <ButtonPrimary
           fill

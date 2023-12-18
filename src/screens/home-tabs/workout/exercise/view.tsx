@@ -15,7 +15,7 @@ const WorkoutExerciseView = () => {
       <View>
         <View style={styles.videoContainer} />
         <Text style={styles.text}>{exercise.description}</Text>
-        <Text style={styles.text}>{exercise.metadescription}</Text>
+        {/* <Text style={styles.text}>{exercise.metadescription}</Text> */}
       </View>
     </View>
   );

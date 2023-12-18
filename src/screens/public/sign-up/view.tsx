@@ -5,7 +5,8 @@ import { SignUpHooks } from "./hooks";
 import { ButtonPrimary, InputPrimary } from "../../../components/common";
 
 const SignUpView = () => {
-  const { loading, name, setName, phone, setPhone, onPress } = SignUpHooks();
+  const { loading, name, setName, phone, setPhone, onPress, onLoginPress } =
+    SignUpHooks();
 
   return (
     <View style={styles.container}>
@@ -65,30 +66,26 @@ const SignUpView = () => {
         />
       </View>
       <View style={styles.footerContainer}>
-        <Text style={styles.textFooter}>
-          {"Вы можете авторизоваться при помощи"}
-        </Text>
-        <View style={{ alignItems: "center" }}>
-          <View style={styles.iconContainer}>
-            {/* <TouchableOpacity activeOpacity={0.7}>
-              <AppleIcon />
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.7}>
-              <FacebookIcon />
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.7}>
-              <GoogleIcon />
-            </TouchableOpacity> */}
-            <TouchableOpacity activeOpacity={0.7}>
-              <Image
-                style={{ width: 49, height: 50 }}
-                source={{
-                  uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png",
-                }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+        <Text style={styles.textFooter}>{"Если у вас уже есть аккаунт:"}</Text>
+        <ButtonPrimary
+          text="Войти"
+          fill
+          loading={loading}
+          loadingColor={COLORS.WHITE}
+          style={{
+            borderRadius: 4,
+            paddingVertical: 18,
+            backgroundColor: COLORS.RED,
+            marginBottom: 10,
+          }}
+          textStyle={{
+            color: COLORS.WHITE,
+            fontWeight: "700",
+            fontSize: 15,
+            lineHeight: 15,
+          }}
+          onPress={onLoginPress}
+        />
       </View>
     </View>
   );

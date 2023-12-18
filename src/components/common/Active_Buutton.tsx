@@ -16,21 +16,20 @@ if (Platform.OS === "android") {
 }
 const activeColor = COLORS.RED;
 const inActiveColor = COLORS.RED;
-export default function Active_Button() {
-  const [toggleActive, setToggle] = useState(false);
+export default function Active_Button({ toggle, setToggle }) {
   return (
     <TouchableOpacity
       style={[styles.toggleContainer]}
       onPress={() => {
         LayoutAnimation.easeInEaseOut();
-        setToggle(!toggleActive);
+        setToggle(!toggle);
       }}
       activeOpacity={1}
     >
       <View
         style={[
           styles.toggleBtn,
-          toggleActive
+          toggle
             ? { backgroundColor: activeColor, alignSelf: "flex-end" }
             : { backgroundColor: inActiveColor },
         ]}

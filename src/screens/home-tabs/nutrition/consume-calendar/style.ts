@@ -68,6 +68,8 @@ export const styles = StyleSheet.create({
   },
   mh20: {
     marginHorizontal: 20,
+    // flexDirection: "row",
+    // justifyContent: "center",
   },
   bgGrey: {
     backgroundColor: COLORS.GREY17,

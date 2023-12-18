@@ -1,4 +1,11 @@
-import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  LayoutAnimation,
+} from "react-native";
 import { styles } from "./style";
 import {
   ButtonPrimary,
@@ -8,6 +15,7 @@ import {
 } from "../../../../components/common";
 import { CreateWorkoutPlanHooks } from "./hooks";
 import { COLORS } from "../../../../constants/COLORS";
+import Active_Button from "../../../../components/common/Active_Buutton";
 
 const CreateWorkoutPlanView = () => {
   const {
@@ -26,6 +34,15 @@ const CreateWorkoutPlanView = () => {
     onSave,
     name,
     setName,
+    isSuperAdmin,
+    setShouldShow,
+    shouldShow,
+    drop,
+    setDrop,
+    setToggle,
+    toggle,
+    price,
+    setPrice,
   } = CreateWorkoutPlanHooks();
 
   return (
@@ -86,7 +103,7 @@ const CreateWorkoutPlanView = () => {
 
           {new Array(week).fill(1).map((w, i) => (
             <View key={i} style={styles.box}>
-              <Text style={styles.boxText}>{`Неделя ${i + 1}-${
+              <Text style={styles.boxText}>{`Неделя ${i * 4 + 1}-${
                 (i + 1) * 4
               }`}</Text>
             </View>
@@ -108,6 +125,65 @@ const CreateWorkoutPlanView = () => {
             inputStyle={styles.inputInner}
             containerStyle={styles.inputMultiline}
           />
+          {isSuperAdmin && (
+            <>
+              <Text style={styles.inputTopText}>
+                {"Стоимость программы (В суммах)"}
+              </Text>
+              <InputPrimary
+                value={price}
+                onChange={(t) => setPrice(t)}
+                placeholder=""
+                containerStyle={styles.input}
+                inputStyle={styles.inputInner}
+              />
+              <>
+                <Text style={styles.inputTopText}>Уровень</Text>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={styles.animated}
+                  onPress={() => {
+                    LayoutAnimation.configureNext(
+                      LayoutAnimation.Presets.easeInEaseOut
+                    );
+                    setShouldShow(!shouldShow);
+                  }}
+                >
+                  <Text style={styles.textOne}>{drop}</Text>
+                  {/* {!shouldShow ? <ArrowDown /> : <ArrowUp />} */}
+                </TouchableOpacity>
+                <View style={{}}>
+                  {!shouldShow ? (
+                    <View style={styles.animatedOne}>
+                      {(
+                        ["Новичок", "Опытный", "Продвинутый"] as Array<
+                          "Новичок" | "Опытный" | "Продвинутый"
+                        >
+                      ).map((e) => {
+                        return (
+                          <TouchableOpacity
+                            key={e}
+                            onPress={() => {
+                              setShouldShow(true);
+                              setDrop(e);
+                            }}
+                            style={styles.btnLanguage}
+                          >
+                            <Text style={styles.textOne}>{e}</Text>
+                          </TouchableOpacity>
+                        );
+                      })}
+                    </View>
+                  ) : null}
+                </View>
+              </>
+              <View style={styles.activeBox}>
+                <Text style={styles.activeText}>Для женщин</Text>
+                <Active_Button toggle={toggle} setToggle={setToggle} />
+                <Text style={styles.activeText}>Для мужчин</Text>
+              </View>
+            </>
+          )}
           <ButtonPrimary
             text="Сохранить в “ Мои Программы “"
             fill

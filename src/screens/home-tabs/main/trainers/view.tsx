@@ -88,6 +88,7 @@ const TrainersView = () => {
                 age={trainer.age}
                 city={trainer.city}
                 experience={trainer.experience}
+                trainer={trainer}
               />
             </TouchableOpacity>
           ))}

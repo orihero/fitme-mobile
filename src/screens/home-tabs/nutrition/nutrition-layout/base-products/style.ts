@@ -98,4 +98,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
+  row: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
 });

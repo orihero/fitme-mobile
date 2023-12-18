@@ -7,6 +7,7 @@ import { WORKOUT } from "../../../../navigation/ROUTES";
 import {
   GENDER,
   LEVEL,
+  ROLES,
   Response,
   Workout,
   WorkoutPlan,
@@ -21,17 +22,28 @@ export type CreateWorkoutPlanScreenNavigationProp = NativeStackNavigationProp<
   WORKOUT.CREATE_WORKOUT_PLAN
 >;
 
+let levelsMapper = {
+  Новичок: LEVEL.NEWBIE,
+  Опытный: LEVEL.EXPERIENCED,
+  Продвинутый: LEVEL.ADVANCED,
+};
+
 export const CreateWorkoutPlanHooks = () => {
   const navigation = useNavigation<CreateWorkoutPlanScreenNavigationProp>();
 
   const [user, dispatch] = useRedux(selectUser);
+  const isSuperAdmin = user?.role === ROLES.SUPERADMIN;
 
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [week, setWeek] = useState(1);
   const [groupWorkouts, setGroupWorkouts] = useState<Workout[][]>([[]]);
+  const [shouldShow, setShouldShow] = useState(true);
+  const [toggle, setToggle] = useState(false);
+  const [drop, setDrop] = useState<keyof typeof levelsMapper>("Опытный");
 
   const setToGroupWorkouts = ({ arr, i }: { arr: Workout[]; i: number }) => {
     let arr1 = [...groupWorkouts];
@@ -122,9 +134,9 @@ export const CreateWorkoutPlanHooks = () => {
       let obj = {
         title,
         description,
-        price: 0,
+        price: +price,
         gender: GENDER.MALE,
-        level: LEVEL.EXPERIENCED,
+        level: levelsMapper[drop],
         week: week * 4,
         creator: user?._id,
         workouts,
@@ -166,5 +178,14 @@ export const CreateWorkoutPlanHooks = () => {
     onSave,
     name,
     setName,
+    isSuperAdmin,
+    shouldShow,
+    setShouldShow,
+    drop,
+    setDrop,
+    toggle,
+    setToggle,
+    price,
+    setPrice,
   };
 };

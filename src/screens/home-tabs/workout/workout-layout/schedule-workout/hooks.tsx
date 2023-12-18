@@ -24,7 +24,7 @@ export const ScheduleWorkoutHooks = () => {
 
   const effect = async () => {
     if (user) {
-      setData(user.scheduleWorkouts.find((s) => !s.isFinished) ?? null);
+      setData(user.scheduleWorkouts.find((s) => s.current) ?? null);
     }
   };
 

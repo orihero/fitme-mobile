@@ -44,7 +44,7 @@ export const MyProductsHooks = () => {
       } else {
         setProducts([
           ...user.products.filter(
-            (p) => p.category._id === productCategories[activeTab]._id
+            (p) => p.category?._id === productCategories[activeTab]?._id
           ),
         ]);
       }

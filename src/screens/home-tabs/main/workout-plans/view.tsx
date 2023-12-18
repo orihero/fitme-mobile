@@ -71,7 +71,7 @@ const WorkoutPlansView = () => {
                 title={workoutPlan.title}
                 text={workoutPlan.creator.name}
                 containerStyle={{ marginTop: 15 }}
-                right={workoutPlan.price ? `${workoutPlan.price}` : "Бесплатно"}
+                right={workoutPlan.price ? `${workoutPlan.price} UZS` : "Бесплатно"}
               />
             </TouchableOpacity>
           ))}

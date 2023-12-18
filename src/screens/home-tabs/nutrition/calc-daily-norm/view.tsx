@@ -15,7 +15,9 @@ import { CalcDailyNormHooks } from "./hooks";
 import { styles } from "./style";
 
 import { useRoute } from "@react-navigation/native";
-
+import { useNavigation } from "@react-navigation/native";
+import { MAIN, NUTRITION, ROUTES } from "../../../../navigation/ROUTES";
+import { COLORS } from "../../../../constants/COLORS";
 const text =
   "Расчёт вашей суточной нормы калорий, т.е. тех калорий, которые нужны для поддержания того веса, который вы имеете на данный момент. Из этих калорий будет вычитаться то количество калорий (количество дефицита), которое вы укажите далее";
 
@@ -32,6 +34,7 @@ const CalcDailyNormView = () => {
   } = CalcDailyNormHooks();
 
   const route = useRoute();
+  const navigation = useNavigation();
   const { onSave } = route.params || {};
 
   return (
@@ -40,9 +43,11 @@ const CalcDailyNormView = () => {
 
       <Header
         onBackPress={
-          !!onSave
+          !!onSave && !!weight && !!selected
             ? () => onSave(Number(weight) * items[selected].value)
-            : () => {}
+            : () => {
+                navigation.navigate(ROUTES.TABS.PROFILE.HOME);
+              }
         }
         right
       />
@@ -58,7 +63,7 @@ const CalcDailyNormView = () => {
             <Text style={styles.title1}>{"Вес натoщак"}</Text>
 
             <InputPrimary
-              value={weight}
+              value={!!weight && `${weight} кг`}
               disablePlaceholder
               inputStyle={styles.input}
               containerStyle={styles.inputCont}
@@ -101,8 +106,14 @@ const CalcDailyNormView = () => {
       </ScrollView>
       <View style={{ paddingBottom: 60 }}>
         <Text style={styles.title3}>{"Ваша суточная норма калорий"}</Text>
-        <View style={styles.result}>
-          <Text style={styles.title1}>
+        <View
+          style={[
+            styles.result,
+            selected !== undefined &&
+              Number(weight) && { backgroundColor: COLORS.RED2 },
+          ]}
+        >
+          <Text style={[styles.title1, { fontSize: 16 }]}>
             {selected !== undefined && Number(weight) * items[selected].value}{" "}
             Ккал
           </Text>

@@ -8,7 +8,7 @@ export const WelcomeHooks = () => {
 
   const navigation = useNavigation();
   const onAuthorizationPress = () => {
-    navigation.navigate(ROUTES.PUBLIC.SIGN_IN as never);
+    navigation.navigate(ROUTES.PUBLIC.SIGN_UP as never);
   };
   const onPress = () => {
     if (showedContent === 3) {

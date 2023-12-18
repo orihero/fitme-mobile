@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   footerContainer: {
     height: "40%",
     justifyContent: "flex-end",
-    paddingBottom: 30,
+    paddingBottom: 100,
     alignItems: "center",
   },
   headerContainer: {
@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "300",
     color: COLORS.GREY,
-    marginVertical: 20,
+    marginBottom: 20,
   },
 
   textOne: {
@@ -76,7 +76,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     // width: "30%",
     // justifyContent: "space-around",
-    paddingBottom: 40,
+    paddingBottom: 0,
     backgroundColor: "transparent",
   },
 });

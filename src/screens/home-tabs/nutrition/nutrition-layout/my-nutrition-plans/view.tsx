@@ -5,7 +5,7 @@ import { MyNutritionPlansHooks } from "./hooks";
 import { styles } from "./style";
 
 const MyNutritionPlansView = () => {
-  const { activeTab, setActiveTab, plans, onPlanPress, onPress } =
+  const { activeTab, setActiveTab, plans, onPlanPress, onPress, isSuperAdmin } =
     MyNutritionPlansHooks();
 
   return (
@@ -55,19 +55,24 @@ const MyNutritionPlansView = () => {
                       )}гр`}</Text>
                     </View>
                   </View>
+                  <Text style={[styles.title, { textAlign: "right" }]}>
+                    {nP.price} UZS
+                  </Text>
                 </View>
               </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
 
-        <ButtonPrimary
-          fill
-          onPress={onPress}
-          style={styles.btn}
-          textStyle={styles.btnText}
-          text="Сделать свой план"
-        />
+        {isSuperAdmin && (
+          <ButtonPrimary
+            fill
+            onPress={onPress}
+            style={styles.btn}
+            textStyle={styles.btnText}
+            text="Сделать свой план"
+          />
+        )}
       </View>
     </View>
   );

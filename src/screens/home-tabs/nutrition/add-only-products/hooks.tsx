@@ -51,7 +51,7 @@ export const AddProductsHooks = () => {
 
     setProducts(
       arr.filter(
-        (p) => p.category._id === productCategories[activeCategory]._id
+        (p) => p.category?._id === productCategories[activeCategory]?._id
       )
     );
   };

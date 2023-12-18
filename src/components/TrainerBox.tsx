@@ -4,8 +4,16 @@ import {
   StyleSheet,
   Image,
   ImageSourcePropType,
+  TouchableOpacity,
+  Alert,
 } from "react-native";
 import { COLORS } from "../constants/COLORS";
+import { useSelector } from "react-redux";
+import { selectUser, setTrainer } from "../store/slices/appSlice";
+import { ROLES } from "../types";
+import { ApiService } from "../services";
+import { useRedux } from "../store/hooks";
+import EventEmitter from "../utils/EventEmitter";
 
 interface IProps {
   avatar?: ImageSourcePropType;
@@ -15,6 +23,7 @@ interface IProps {
   city?: string;
   experience?: number;
   id?: string;
+  trainer?: any;
 }
 
 const TrainerBox = ({
@@ -24,8 +33,33 @@ const TrainerBox = ({
   age,
   city,
   experience,
-  id
+  id,
+  trainer,
 }: IProps) => {
+  let [user, dispatch] = useRedux(selectUser);
+  let isSuperAdmin = user?.role === ROLES.SUPERADMIN;
+
+  const onDeleteConfirm = async (id: string) => {
+    try {
+      await ApiService.delete("/trainers/" + id);
+      EventEmitter.notify("refreshTrainers");
+      Alert.alert("Внимание !", "Удалено");
+    } catch (error) {
+      Alert.alert("Ошибка !", "Не удалос удалить!");
+    }
+  };
+
+  const onDeletePress = (el) => {
+    Alert.alert("Внимание !", "Вы уверены, что хотите удалить этот тренер?", [
+      {
+        text: "Удалить",
+        style: "destructive",
+        onPress: () => onDeleteConfirm(el),
+      },
+      { text: "Отменить" },
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
@@ -46,7 +80,18 @@ const TrainerBox = ({
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.speciality}>{speciality}</Text>
           {!!id && <Text style={styles.speciality}>ID: {id}</Text>}
-          {age && <Text style={styles.age}>{`${age} лет`}</Text>}
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            {age && <Text style={styles.age}>{`${age} лет`}</Text>}
+            {isSuperAdmin && (
+              <TouchableOpacity onPress={() => onDeletePress(trainer._id)}>
+                <Text style={[styles.experience, { color: COLORS.RED }]}>
+                  Удалить
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
         <View style={styles.bottom}>
           <Text style={styles.city}>{city}</Text>

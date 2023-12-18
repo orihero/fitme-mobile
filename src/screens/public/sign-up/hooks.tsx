@@ -42,10 +42,13 @@ export const SignUpHooks = () => {
 
       setLoading(true);
 
-      const res = await ApiService.post<Response<SignUpResponse>>("/auth/signup", {
-        name,
-        phone,
-      });
+      const res = await ApiService.post<Response<SignUpResponse>>(
+        "/auth/signup",
+        {
+          name,
+          phone,
+        }
+      );
       console.log(JSON.stringify(res.data));
 
       setLoading(false);
@@ -61,5 +64,9 @@ export const SignUpHooks = () => {
     }
   };
 
-  return { loading, name, setName, phone, setPhone, onPress };
+  const onLoginPress = () => {
+    navigation.navigate(ROUTES.PUBLIC.SIGN_IN);
+  };
+
+  return { loading, name, setName, phone, setPhone, onPress, onLoginPress };
 };

@@ -33,14 +33,13 @@ const TrainerView = () => {
             <Text style={styles.textOld}>{`${trainer.city} лет`}</Text>
           </View>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <View style={{ flexDirection: "row" }}>
+        <View style={{ justifyContent: "center" }}>
+          <Text style={[styles.textOld, { marginBottom: 10 }]}>
+            Связаться с тренером:
+          </Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-around" }}
+          >
             <TouchableOpacity
               onPress={openLink(trainer.telegramLink)}
               activeOpacity={0.7}

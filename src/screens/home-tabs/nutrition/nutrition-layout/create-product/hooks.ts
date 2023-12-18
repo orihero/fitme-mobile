@@ -17,6 +17,12 @@ import {
 import { ApiService } from "../../../../../services";
 import { NUTRITION } from "../../../../../navigation/ROUTES";
 import { selectUser } from "../../../../../store/slices/appSlice";
+import {
+  addProduct,
+  selectProducts,
+  setProducts,
+} from "../../../../../store/slices/productSlice";
+import { useRedux } from "../../../../../store/hooks";
 
 type CustomCategory = Partial<
   Omit<Product, "category"> & {
@@ -32,7 +38,6 @@ export const CreateProductHook = () => {
   const categories = useSelector(selectProductCategories);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
   const user = useSelector(selectUser);
 
   const fetchCategories = async () => {
@@ -125,7 +130,9 @@ export const CreateProductHook = () => {
         category: product.category?.value,
         creator: user?._id,
       };
-      const res = await ApiService.post("/products", current);
+      await ApiService.post("/products", current);
+      const res = await ApiService.get("/products");
+      dispatch(addProduct(res.data));
     } catch (error) {
       console.log(JSON.stringify(error.response?.data));
     }

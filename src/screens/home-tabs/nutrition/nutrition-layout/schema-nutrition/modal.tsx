@@ -100,7 +100,7 @@ const CustomModal = ({
                 </Text>
               </View>
             </View>
-            <Text style={styles.modalText3}>{"или"}</Text>
+            {/* <Text style={styles.modalText3}>{"или"}</Text>
             <View style={styles.modalInputRow}>
               <View style={styles.modalInputBox}>
                 <InputPrimary
@@ -121,7 +121,7 @@ const CustomModal = ({
                   } количества  углеводов`}
                 </Text>
               </View>
-            </View>
+            </View> */}
           </>
         ) : (
           <View style={styles.modalInputRow}>

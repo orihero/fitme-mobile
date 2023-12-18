@@ -34,9 +34,9 @@ export const WorkoutPlansHooks = () => {
       const resWorkoutPlans = await ApiService.get<Response<WorkoutPlan[]>>(
         `/workout-plans?gender=${Object.values(GENDER)[activeGender]}&level=${
           Object.values(LEVEL)[activeLevel]
-        }`
+        }&isPublic=true`
       );
-      setWorkoutPlans(getNewData(resWorkoutPlans.data, userWorkoutPlans));
+      setWorkoutPlans(getNewData(resWorkoutPlans.data));
     } catch (e) {
       console.log("e: ", e);
     }
@@ -51,8 +51,8 @@ export const WorkoutPlansHooks = () => {
 
   useEffect(() => {
     getWorkoutPlans();
-    setActiveLevel(0);
-  }, [activeGender]);
+    // setActiveLevel(0);
+  }, [activeGender, activeLevel]);
 
   const onPress = (index: number) => {
     navigation.navigate(MAIN.WORKOUT_PLAN, {

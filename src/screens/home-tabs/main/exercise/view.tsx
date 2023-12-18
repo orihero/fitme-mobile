@@ -15,10 +15,6 @@ function youtube_parser(url: string) {
 const ExerciseView = () => {
   const { exercise } = ExerciseHooks();
 
-  console.log("====================================");
-  console.log(youtube_parser(exercise.video));
-  console.log("====================================");
-
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -33,7 +29,7 @@ const ExerciseView = () => {
             videoId={youtube_parser(exercise.video)}
           />
           <Text style={styles.text}>{exercise.description}</Text>
-          <Text style={styles.text}>{exercise.metadescription}</Text>
+          {/* <Text style={styles.text}>{exercise.metadescription}</Text> */}
         </View>
       </ScrollView>
     </View>

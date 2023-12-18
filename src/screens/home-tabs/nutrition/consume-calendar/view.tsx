@@ -1,6 +1,10 @@
 import { View, Text, SafeAreaView, ScrollView } from "react-native";
 import { CustomCalendar, ProductList } from "../../../../components";
-import { Header } from "../../../../components/common";
+import {
+  ButtonPrimary,
+  ButtonSecondary,
+  Header,
+} from "../../../../components/common";
 import Modal from "./modal";
 import { ConsumeCalendarHooks } from "./hooks";
 import { styles } from "./style";

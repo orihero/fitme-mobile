@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   text: {
     color: COLORS.GREY4,
     marginVertical: 10,
-    textAlign: "center",
+    textAlign: "left",
     marginHorizontal: 25,
   },
 });

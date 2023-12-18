@@ -78,6 +78,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.GREY3,
     borderRadius: 10,
     height: 130,
+    marginBottom: 30,
   },
   saveBtn: {
     marginTop: 40,
@@ -91,5 +92,38 @@ export const styles = StyleSheet.create({
     lineHeight: 15,
     fontWeight: "700",
     color: COLORS.WHITE,
+  },
+  animated: {
+    flexDirection: "row",
+    backgroundColor: COLORS.GREY2,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    borderRadius: 10,
+  },
+  animatedOne: {
+    backgroundColor: COLORS.GREY2,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    marginTop: 5,
+  },
+  textOne: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: COLORS.WHITE,
+  },
+  btnLanguage: {
+    marginVertical: 10,
+  },
+  activeText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: COLORS.WHITE,
+  },
+  activeBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 30,
   },
 });

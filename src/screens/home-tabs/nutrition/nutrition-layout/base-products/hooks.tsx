@@ -6,11 +6,13 @@ import {
   setUser,
 } from "../../../../../store/slices/appSlice";
 import { selectProductCategories } from "../../../../../store/slices/categorySlice";
+import { setProducts as setProductsAction } from "../../../../../store/slices/productSlice";
 import { ApiService } from "../../../../../services";
-import { Product } from "../../../../../types";
+import { Product, ROLES } from "../../../../../types";
 import { selectProducts } from "../../../../../store/slices/productSlice";
 import { useNavigation } from "@react-navigation/native";
 import { NUTRITION } from "../../../../../navigation/ROUTES";
+import { Alert } from "react-native";
 
 export const BaseProductsHooks = () => {
   const [language] = useRedux(selectLanguage);
@@ -22,16 +24,21 @@ export const BaseProductsHooks = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [selected, setSelected] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
 
   const navigation = useNavigation();
 
   const getProducts = () => {
+    console.log("UPDATING THE PRODUCTS");
+
     if (user) {
       setProducts(
         !!allProducts && allProducts.length > 0
-          ? allProducts.filter(
-              (p) => p.category?._id === productCategories[activeTab]?._id
-            )
+          ? allProducts
+              .filter((e) => e.name.ru.indexOf(search) !== -1)
+              .filter(
+                (p) => p.category?._id === productCategories[activeTab]?._id
+              )
           : []
       );
     }
@@ -79,6 +86,32 @@ export const BaseProductsHooks = () => {
     navigation.navigate(NUTRITION.CREATE_PRODUCT);
   };
 
+  const onDeleteConfirm = async (id) => {
+    try {
+      console.log("====================================");
+      console.log({ id });
+      console.log("====================================");
+      await ApiService.delete("/products/" + id);
+      let res = await ApiService.get("/products");
+      dispatch(setProductsAction(res.data));
+      getProducts();
+      Alert.alert("Внимание !", "Удалено");
+    } catch (error) {
+      Alert.alert("Ошибка !", "Не удалос удалить!");
+    }
+  };
+
+  const onDeletePress = (el) => {
+    Alert.alert("Внимание !", "Вы уверены, что хотите удалить этот продукт?", [
+      {
+        text: "Удалить",
+        style: "destructive",
+        onPress: () => onDeleteConfirm(el._id),
+      },
+      { text: "Отменить" },
+    ]);
+  };
+
   return {
     activeTab,
     setActiveTab,
@@ -90,5 +123,9 @@ export const BaseProductsHooks = () => {
     onSelect,
     onAdd,
     onCreate,
+    onDeletePress,
+    isSuperAdmin: user?.role === ROLES.SUPERADMIN,
+    search,
+    setSearch,
   };
 };

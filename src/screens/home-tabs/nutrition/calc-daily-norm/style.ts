@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
   input: {
     color: COLORS.WHITE,
     backgroundColor: "transparent",
+    textAlign: "center",
   },
   right: {
     marginLeft: 30,
@@ -59,11 +60,12 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.GREY8,
   },
   result: {
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 10,
     paddingVertical: 15,
     alignItems: "center",
     backgroundColor: COLORS.GREY2,
+    marginHorizontal: 40,
   },
   ml15: {
     marginLeft: 15,
