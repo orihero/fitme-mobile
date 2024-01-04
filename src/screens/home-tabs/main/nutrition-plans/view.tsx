@@ -90,9 +90,16 @@ import { useState } from "react";
 // };
 
 const NutritionPlansView = () => {
-  const { activeTab, setActiveTab, plans, onPlanPress, onPress } =
-    MyNutritionPlansHooks();
-  const [subCategory, setSubCategory] = useState(1);
+  const {
+    activeTab,
+    setActiveTab,
+    plans,
+    onPlanPress,
+    onPress,
+    setSubCategory,
+    subCategory,
+    isSuperAdmin,
+  } = MyNutritionPlansHooks();
 
   return (
     <View style={styles.container}>
@@ -111,7 +118,7 @@ const NutritionPlansView = () => {
         <ButtonTabs
           active={subCategory}
           setActive={setSubCategory}
-          titles={["2 приема пищи", "3 приема пищи"]}
+          titles={["2 приема пищи", "3 и больше приема пищи"]}
           secondary
           containerStyle={{
             justifyContent: "center",
@@ -163,14 +170,15 @@ const NutritionPlansView = () => {
             ))}
           </ScrollView>
         </View>
-
-        <ButtonPrimary
-          fill
-          onPress={onPress}
-          style={styles.btn}
-          textStyle={styles.btnText}
-          text="Сделать свой план"
-        />
+        {isSuperAdmin && (
+          <ButtonPrimary
+            fill
+            onPress={onPress}
+            style={styles.btn}
+            textStyle={styles.btnText}
+            text="Сделать свой план"
+          />
+        )}
       </View>
     </View>
   );

@@ -4,21 +4,32 @@ import { ProfileStackParamList } from "../..";
 import { PROFILE } from "../../../../../navigation/ROUTES";
 import { ApiService } from "../../../../../services";
 import { useRedux } from "../../../../../store/hooks";
-import { selectUser, setUser } from "../../../../../store/slices/appSlice";
+import {
+  selectTrainer,
+  selectUser,
+  setUser,
+} from "../../../../../store/slices/appSlice";
 import { Response, ScheduleWorkout, User } from "../../../../../types";
+import { useSelector } from "react-redux";
 
 export type MyWorkoutScreenNavigationProp = NavigationProp<
   ProfileStackParamList,
   PROFILE.MY_DATA
 >;
 
-export const MyWorkoutHooks = () => {
+export const MyWorkoutHooks = (apprenticeId = "") => {
   const [show, setShow] = useState<any>({});
   const [data, setData] = useState<ScheduleWorkout | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [modalLoading, setModalLoading] = useState(false);
-
-  const [user, dispatch] = useRedux(selectUser);
+  const trainer = useSelector(selectTrainer);
+  let [user, dispatch] = useRedux(selectUser);
+  if (!!apprenticeId) {
+    console.log({ apprenticeId });
+    user = trainer?.disciples.find((e) => e._id === apprenticeId);
+    console.log({ USER: user?.name });
+    console.log(user?.scheduleWorkouts);
+  }
 
   const navigation = useNavigation<MyWorkoutScreenNavigationProp>();
 
@@ -64,6 +75,8 @@ export const MyWorkoutHooks = () => {
       });
     }
   };
+
+  console.log({ data });
 
   return {
     data,

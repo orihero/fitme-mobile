@@ -11,7 +11,7 @@ import { Assets } from "../../../../../utils/requireAssets";
 import { MyWorkoutHooks } from "./hooks";
 import { styles } from "./style";
 
-const MyWorkoutView = () => {
+const MyWorkoutView = ({ apprenticeId = "" }) => {
   const {
     data,
     show,
@@ -22,7 +22,7 @@ const MyWorkoutView = () => {
     onPress,
     onHide,
     onFinish,
-  } = MyWorkoutHooks();
+  } = MyWorkoutHooks(apprenticeId);
 
   return (
     <View style={styles.container}>
@@ -75,14 +75,14 @@ const MyWorkoutView = () => {
                       <>
                         {ww.map((w, i) => (
                           <View
-                            key={`${ii}/${w.exercise._id}`}
+                            key={`${ii}/${w.exercise?._id}`}
                             style={[
                               styles.column,
                               styles.itemsStart,
                               !i && { borderTopWidth: 0 },
                             ]}
                           >
-                            <Text style={styles.text2}>{w.exercise.title}</Text>
+                            <Text style={styles.text2}>{w.exercise?.title}</Text>
                           </View>
                         ))}
                       </>
@@ -99,13 +99,13 @@ const MyWorkoutView = () => {
                       <>
                         {ww.map((w: Workout, i) => (
                           <View
-                            key={`${ii}/${i}/${w.exercise._id}`}
+                            key={`${ii}/${i}/${w.exercise?._id}`}
                             style={[styles.column, !i && { borderTopWidth: 0 }]}
                           >
                             <Text
                               style={[styles.text2, { color: COLORS.GREY11 }]}
                             >
-                              {`${w.approach}x${w.repetitions}`}
+                              {`${w.approach}x${w?.repetitions}`}
                             </Text>
                           </View>
                         ))}
@@ -145,7 +145,7 @@ const MyWorkoutView = () => {
                                     !iii && { borderTopWidth: 0 },
                                   ]}
                                   key={`${ii}/${data.activeWeek + i}/${iii}/${
-                                    w.exercise._id
+                                    w.exercise?._id
                                   }}`}
                                 >
                                   <Text
@@ -174,8 +174,8 @@ const MyWorkoutView = () => {
             ))}
 
           <View style={styles.btnRow}>
-            <ScrollView horizontal>
-              {new Array(Math.round(data.plan.week / 4)).fill(1).map((a, i) => (
+            {/* <ScrollView horizontal>
+              {new Array(Math.round(data.plan?.week / 4)).fill(1).map((a, i) => (
                 <ButtonPrimary
                   key={`btn-${i}`}
                   textStyle={
@@ -187,7 +187,7 @@ const MyWorkoutView = () => {
                   style={!!!i ? styles.btn1 : { ...styles.btn1, ...styles.ml8 }}
                 />
               ))}
-            </ScrollView>
+            </ScrollView> */}
           </View>
 
           <ButtonPrimary

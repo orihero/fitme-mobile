@@ -1,26 +1,12 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { SafeAreaView, ScrollView, TouchableOpacity, View } from "react-native";
 import { TrainerBox } from "../../../../components";
-import {
-  ButtonTabs,
-  Header,
-  InputPrimary,
-} from "../../../../components/common";
+import { Header, InputPrimary } from "../../../../components/common";
 import { COLORS } from "../../../../constants/COLORS";
 import { UsersHooks } from "./hooks";
 import { styles } from "./style";
 
-import { useRoute, RouteProp } from "@react-navigation/native";
-import { PROFILE } from "../../../../navigation/ROUTES";
-import { ProfileStackParamList } from "..";
-
 const UsersView = () => {
-  const { search, setSearch, users } = UsersHooks();
+  const { search, setSearch, users, onUserPress } = UsersHooks();
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -50,6 +36,7 @@ const UsersView = () => {
               key={user._id}
               activeOpacity={0.7}
               style={{ marginBottom: 10 }}
+              onPress={() => onUserPress(user)}
             >
               <TrainerBox
                 id={user._id}

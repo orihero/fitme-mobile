@@ -13,7 +13,7 @@ import {
 import { COLORS } from "../../constants/COLORS";
 
 interface IProps {
-  cover: ImageSourcePropType;
+  cover: ImageSourcePropType | string;
   containerStyle?: StyleProp<ViewStyle>;
   title?: string;
   titleStyle?: StyleProp<TextStyle>;
@@ -57,7 +57,11 @@ const Box = ({
 }: IProps) => {
   return (
     <View style={[styles.container, containerStyle]}>
-      <ImageBackground source={cover} style={styles.image} resizeMode="cover">
+      <ImageBackground
+        source={typeof cover === "string" ? { uri: cover } : cover}
+        style={styles.image}
+        resizeMode="cover"
+      >
         <View style={styles.row}>
           <View style={{ alignSelf: "flex-start" }}>
             {title && <Text style={[styles.title, titleStyle]}>{title}</Text>}

@@ -18,12 +18,14 @@ import {
   ScheduleWorkout,
   SchemaNutrition,
 } from "../../../types";
+import AdsScreen from "./ads/view";
 
 export type ProfileStackParamList = {
   [PROFILE.HOME]: undefined;
   [PROFILE.MY_DATA]: undefined;
   [PROFILE.MY_TRAINER]: undefined;
   [PROFILE.NOTIFICATIONS]: undefined;
+  [PROFILE.ADS]: undefined;
   [PROFILE.SETTINGS]: undefined;
   [PROFILE.USERS]: { isTrainer?: boolean };
   [PROFILE.RECOMMENDATION]: undefined;
@@ -94,6 +96,11 @@ const ProfileStack = () => {
       <Stack.Screen
         name={PROFILE.USERS}
         component={Users}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={PROFILE.ADS}
+        component={AdsScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

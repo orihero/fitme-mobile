@@ -18,10 +18,14 @@ const Header = ({
 }) => {
   const navigation = useNavigation();
 
-  const onPress = async() => {
-    onBackPress && await onBackPress();
-    if (navigation.canGoBack()) {
-      navigation.goBack();
+  const onPress = async () => {
+    try {
+      onBackPress && (await onBackPress());
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

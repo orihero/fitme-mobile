@@ -1,4 +1,4 @@
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -25,13 +25,15 @@ export const UsersHooks = () => {
   const [search, setSearch] = useState("");
   const trainer = useSelector(selectTrainer);
 
+  const navigation = useNavigation();
+
   const route = useRoute<RouteProp<ProfileStackParamList, PROFILE.USERS>>();
 
-  const getTrainers = async () => {
+  const getUsers = async () => {
     try {
-      console.log('====================================');
+      console.log("====================================");
       console.log("GETTING USERS");
-      console.log('====================================');
+      console.log("====================================");
       const resUsers = await ApiService.get<Response<User[]>>(`/users`);
       setUsers(resUsers.data);
     } catch (e) {
@@ -40,12 +42,19 @@ export const UsersHooks = () => {
   };
 
   useEffect(() => {
-    // if (typeof route.params.isTrainer !== "boolean") {
-    //   setUsers(trainer?.disciples || []);
-    // } else {
-      getTrainers();
-    // }
+    console.log({ tr: route.params.isTrainer });
+
+    if (route.params.isTrainer) {
+      setUsers(trainer?.disciples || []);
+    } else {
+      getUsers();
+    }
   }, []);
+
+  const onUserPress = (user: User) => {
+    //@ts-ignore
+    navigation.navigate(PROFILE.MY_DATA, { apprenticeId: user._id });
+  };
 
   const filteredUsers = !!search
     ? users.filter(
@@ -59,5 +68,6 @@ export const UsersHooks = () => {
     active,
     setActive,
     users: filteredUsers,
+    onUserPress,
   };
 };

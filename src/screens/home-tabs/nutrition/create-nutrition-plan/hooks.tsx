@@ -43,6 +43,7 @@ export const CreateNutritionHooks = () => {
   const [groupReceptions, setGroupReceptions] = useState<Reception[][]>([[]]);
   const [show, setShow] = useState<any>({});
   const [loading, setLoading] = useState(false);
+  const [publicly, setPublic] = useState(false);
   const [toggle, setToggle] = useState(type === NUTRITION_TYPE.FAT);
   const [price, setPrice] = useState("");
 
@@ -154,6 +155,7 @@ export const CreateNutritionHooks = () => {
               dishes: r.dishes.map((d) => d._id),
             }))
           ),
+          isPublic: publicly,
         };
 
         const res1 = await ApiService.post<Response<NutritionPlan>>(
@@ -214,5 +216,7 @@ export const CreateNutritionHooks = () => {
     price,
     setPrice,
     type,
+    publicly,
+    setPublic,
   };
 };

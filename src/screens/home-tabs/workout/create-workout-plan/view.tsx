@@ -34,7 +34,7 @@ const CreateWorkoutPlanView = () => {
     onSave,
     name,
     setName,
-    isSuperAdmin,
+    isSuperAdminOrTrainer,
     setShouldShow,
     shouldShow,
     drop,
@@ -43,6 +43,8 @@ const CreateWorkoutPlanView = () => {
     toggle,
     price,
     setPrice,
+    setPublic,
+    publicly,
   } = CreateWorkoutPlanHooks();
 
   return (
@@ -125,7 +127,7 @@ const CreateWorkoutPlanView = () => {
             inputStyle={styles.inputInner}
             containerStyle={styles.inputMultiline}
           />
-          {isSuperAdmin && (
+          {isSuperAdminOrTrainer && (
             <>
               <Text style={styles.inputTopText}>
                 {"Стоимость программы (В суммах)"}
@@ -181,6 +183,11 @@ const CreateWorkoutPlanView = () => {
                 <Text style={styles.activeText}>Для женщин</Text>
                 <Active_Button toggle={toggle} setToggle={setToggle} />
                 <Text style={styles.activeText}>Для мужчин</Text>
+              </View>
+              <View style={styles.activeBox}>
+                <Text style={styles.activeText}>Публично открытый</Text>
+                <Active_Button toggle={publicly} setToggle={setPublic} />
+                <Text style={styles.activeText}>Видно только мне</Text>
               </View>
             </>
           )}

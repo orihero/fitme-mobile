@@ -11,6 +11,7 @@ import { ApiService } from "../../../../../services";
 import { useRedux } from "../../../../../store/hooks";
 import {
   selectSchemaNutritions,
+  selectTrainer,
   selectUser,
   setUser,
 } from "../../../../../store/slices/appSlice";
@@ -26,6 +27,7 @@ import { convertDishToProduct } from "../../../../../utils/convertDishToProduct"
 import { getCalendarDays } from "../../../../../utils/getCalendarDays";
 import { getIndexSN } from "../../../../../utils/getIndexSN";
 import { getSumValues } from "../../../../../utils/getSumValues";
+import { useSelector } from "react-redux";
 
 const cd = new Date(Date.now());
 
@@ -51,10 +53,14 @@ export type MyNutritionScreenNavigationProp = NativeStackNavigationProp<
   PROFILE.MY_DATA
 >;
 
-export const MyNutritionHooks = () => {
+export const MyNutritionHooks = (apprenticeId = "") => {
   const navigation = useNavigation<MyNutritionScreenNavigationProp>();
 
-  const [user, dispatch] = useRedux(selectUser);
+  let [user, dispatch] = useRedux(selectUser);
+  const trainer = useSelector(selectTrainer);
+  if (!!apprenticeId) {
+    user = trainer?.disciples.find((e) => e._id === apprenticeId);
+  }
   const [schemaNutritions] = useRedux(selectSchemaNutritions);
 
   const [schemaNutrition, setSchemaNutrition] =

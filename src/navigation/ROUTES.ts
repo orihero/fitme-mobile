@@ -70,6 +70,7 @@ export enum PROFILE {
   SETTINGS = "SETTINGS",
   EXERCISE = "PROFILE_EXERCISE",
   USERS = "USERS",
+  ADS = "ADS",
 }
 
 export const ROUTES = {

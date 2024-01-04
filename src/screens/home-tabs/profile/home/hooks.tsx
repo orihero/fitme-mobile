@@ -6,7 +6,6 @@ import { clearT } from "../../../../services/AuthService";
 import { useRedux } from "../../../../store/hooks";
 import { selectUser } from "../../../../store/slices/appSlice";
 import { ROLES } from "../../../../types";
-// import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export const ProfileHomeHooks = () => {
   const navigation = useNavigation();
@@ -38,7 +37,12 @@ export const ProfileHomeHooks = () => {
   };
 
   const onUsersPress = (isTrainer?: boolean) => {
+    //@ts-ignore
     navigation.navigate(PROFILE.USERS as never, { isTrainer });
+  };
+
+  const onAdPress = () => {
+    navigation.navigate(PROFILE.ADS as never);
   };
 
   return {
@@ -52,5 +56,6 @@ export const ProfileHomeHooks = () => {
     isTrainer: user?.role === ROLES.TRAINER,
     user,
     onUsersPress,
+    onAdPress,
   };
 };

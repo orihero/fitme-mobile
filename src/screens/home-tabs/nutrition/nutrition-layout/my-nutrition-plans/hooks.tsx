@@ -25,6 +25,7 @@ export const MyNutritionPlansHooks = () => {
 
   const [activeTab, setActiveTab] = useState(0);
   const [plans, setPlans] = useState<NutritionPlan[]>([]);
+  const [subCategory, setSubCategory] = useState(1);
   const isSuperAdmin = user?.role === ROLES.SUPERADMIN;
 
   const effect = async () => {
@@ -32,9 +33,15 @@ export const MyNutritionPlansHooks = () => {
       `/nutrition-plans?isPublic=true`
     );
     setPlans(
-      resWorkoutPlans.data.filter(
-        (nP) => nP.type === NUTRITION_TYPE[activeTab ? "THIN" : "FAT"]
-      )
+      resWorkoutPlans.data.filter((nP) => {
+        let consumption =
+          subCategory == 1
+            ? nP.nutritions.length >= 3
+            : nP.nutritions.length <= 2;
+        return (
+          nP.type === NUTRITION_TYPE[activeTab ? "THIN" : "FAT"] && consumption
+        );
+      })
     );
     // if (user) {
     //   setPlans(
@@ -47,7 +54,7 @@ export const MyNutritionPlansHooks = () => {
 
   useEffect(() => {
     effect();
-  }, [activeTab]);
+  }, [activeTab, subCategory]);
 
   const onPlanPress = (index: number) => {
     navigation.navigate(NUTRITION.NUTRITION_PLAN, {
@@ -61,5 +68,14 @@ export const MyNutritionPlansHooks = () => {
     });
   };
 
-  return { activeTab, setActiveTab, plans, onPlanPress, onPress, isSuperAdmin };
+  return {
+    activeTab,
+    setActiveTab,
+    plans,
+    onPlanPress,
+    onPress,
+    isSuperAdmin,
+    subCategory,
+    setSubCategory,
+  };
 };

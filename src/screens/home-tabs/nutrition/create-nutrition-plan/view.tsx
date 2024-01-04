@@ -51,7 +51,8 @@ const CreateNutritionView = () => {
     toggle,
     price,
     setPrice,
-    type
+    type,
+    publicly,setPublic
   } = CreateNutritionHooks();
 
   return (
@@ -196,6 +197,11 @@ const CreateNutritionView = () => {
               <Active_Button toggle={toggle} setToggle={setToggle} />
               <Text style={styles.activeText}>Жирожигание</Text>
             </View>
+            <View style={styles.activeBox}>
+                <Text style={styles.activeText}>Публично открытый</Text>
+                <Active_Button toggle={publicly} setToggle={setPublic} />
+                <Text style={styles.activeText}>Видно только мне</Text>
+              </View>
           </>
         )}
 

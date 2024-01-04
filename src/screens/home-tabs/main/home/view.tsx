@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   StatusBar,
+  Dimensions,
 } from "react-native";
 import { styles } from "./style";
 import { Box } from "../../../../components/common";
@@ -11,9 +12,14 @@ import { Assets } from "../../../../utils/requireAssets";
 import { MainHomeHooks } from "./hooks";
 import { ROUTES } from "../../../../navigation/ROUTES";
 import { COLORS } from "../../../../constants/COLORS";
+import Carousel from "react-native-snap-carousel";
+import AdItem from "../../profile/ads/ad-item";
+
+const sliderWidth = Dimensions.get("window").width;
+const itemWidth = sliderWidth - 30;
 
 const MainHomeView = () => {
-  const { onPress } = MainHomeHooks();
+  const { onPress, ads, fetchAds } = MainHomeHooks();
 
   return (
     <View style={styles.container}>
@@ -23,6 +29,14 @@ const MainHomeView = () => {
       <SafeAreaView />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ marginBottom: 110, marginHorizontal: 15 }}>
+          <Carousel
+            data={ads}
+            renderItem={({ ...rest }) => (
+              <AdItem {...rest} fetchAds={fetchAds} />
+            )}
+            sliderWidth={sliderWidth}
+            itemWidth={itemWidth}
+          />
           {data.map((e, i) => (
             <TouchableOpacity
               key={i}

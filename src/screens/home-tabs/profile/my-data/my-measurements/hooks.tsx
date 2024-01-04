@@ -7,18 +7,29 @@ import { ApiService } from "../../../../../services";
 import { useRedux } from "../../../../../store/hooks";
 import {
   selectMeasurements,
+  selectTrainer,
   selectUser,
   setUser,
 } from "../../../../../store/slices/appSlice";
 import { Response, User } from "../../../../../types";
 import { getCalendarDays } from "../../../../../utils/getCalendarDays";
+import ReactNativeCalendarEvents from "react-native-calendar-events";
+import { useSelector } from "react-redux";
 
 const cd = new Date(Date.now());
 
-export const MeasurementsHooks = () => {
-  const [user, dispatch] = useRedux(selectUser);
-  const [measurements] = useRedux(selectMeasurements);
+export const MeasurementsHooks = (apprenticeId = "") => {
+  let [user, dispatch] = useRedux(selectUser);
+  const trainer = useSelector(selectTrainer);
+  if (!!apprenticeId) {
+    user = trainer?.disciples.find((e) => e._id === apprenticeId);
+  }
+  console.log({ usr: user?.name });
 
+  let [measurements] = useRedux(selectMeasurements);
+  if (!!apprenticeId) {
+    measurements = user?.myMeasurements;
+  }
   const [show, setShow] = useState<any>({});
   const [modalValue, setModalValue] = useState("");
   const [modalLoading, setModalLoading] = useState(false);
@@ -27,6 +38,9 @@ export const MeasurementsHooks = () => {
   const [activeMonth, setActiveMonth] = useState(cd.getMonth());
   const [activeYear, setActiveYear] = useState(cd.getFullYear());
   const [monthlyData, setMonthlyData] = useState<CalendarItem[][]>([]);
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState(new Date());
+  const [pickerState, setPickerState] = useState<"date" | "time" | null>(null);
 
   const effect = () => {
     const { arr } = getCalendarDays(activeYear, activeMonth);
@@ -113,8 +127,35 @@ export const MeasurementsHooks = () => {
     }
   };
 
-  const onRemind = () => {
-    console.log("onRemind");
+  const setAlarm = async () => {
+    console.log("SETTING");
+    try {
+      let status = await ReactNativeCalendarEvents.checkPermissions();
+      if (status !== "authorized") {
+        await ReactNativeCalendarEvents.requestPermissions();
+        ReactNativeCalendarEvents.saveEvent("Title of event", {
+          startDate: "2023-12-21T19:26:00.000Z",
+          endDate: "2023-12-21T19:26:00.000Z",
+          alarms: [
+            {
+              date: "2023-12-21T19:21:00.000Z",
+            },
+          ],
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!!time && !!date) {
+      setAlarm();
+    }
+  }, [pickerState]);
+
+  const onRemind = async () => {
+    setPickerState("time");
   };
 
   const onSet = (i: number, ii: number) => {
@@ -252,5 +293,9 @@ export const MeasurementsHooks = () => {
     onRemoveRow,
     onRemind,
     onClose,
+    date,
+    setDate,
+    pickerState,
+    setPickerState,
   };
 };

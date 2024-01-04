@@ -94,13 +94,13 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 16,
     fontWeight: "600",
-    color: COLORS.GREY6,
+    color: COLORS.GREEN,
   },
   btnText2: {
     fontSize: 12,
     lineHeight: 16,
     fontWeight: "600",
-    color: COLORS.WHITE,
+    color: COLORS.YELLOW,
   },
   btnText3: {
     fontSize: 12,

@@ -7,7 +7,7 @@ import { MyDataHooks } from "./hooks";
 import { styles } from "./style";
 
 const MyDataView = () => {
-  const { active, setActive } = MyDataHooks();
+  const { active, setActive, apprenticeId } = MyDataHooks();
 
   return (
     <View style={styles.container}>
@@ -27,9 +27,9 @@ const MyDataView = () => {
         </View>
       </View>
 
-      {active === 0 && <MyNutrition />}
-      {active === 1 && <MyWorkout />}
-      {active === 2 && <MyMeasurements />}
+      {active === 0 && <MyNutrition apprenticeId={apprenticeId} />}
+      {active === 1 && <MyWorkout apprenticeId={apprenticeId} />}
+      {active === 2 && <MyMeasurements apprenticeId={apprenticeId} />}
     </View>
   );
 };

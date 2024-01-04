@@ -4,7 +4,7 @@ import Modal from "./nmodal";
 import { MyNutritionHooks } from "./nhooks";
 import { styles } from "./nstyle";
 
-const MyNutritionView = () => {
+const MyNutritionView = ({ apprenticeId = "" }) => {
   const {
     show,
     loading,
@@ -35,7 +35,7 @@ const MyNutritionView = () => {
     onRemove,
     onRemoveByIndex,
     navigateAddProducts,
-  } = MyNutritionHooks();
+  } = MyNutritionHooks(apprenticeId);
 
   return (
     <View style={styles.container}>

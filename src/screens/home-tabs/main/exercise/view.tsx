@@ -27,6 +27,11 @@ const ExerciseView = () => {
             key={exercise.video}
             height={300}
             videoId={youtube_parser(exercise.video)}
+            initialPlayerParams={{
+              modestbranding: true,
+              rel: false,
+            }}
+            play={true}
           />
           <Text style={styles.text}>{exercise.description}</Text>
           {/* <Text style={styles.text}>{exercise.metadescription}</Text> */}

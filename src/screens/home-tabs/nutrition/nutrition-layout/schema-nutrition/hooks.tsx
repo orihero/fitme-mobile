@@ -20,6 +20,7 @@ import { ApiService } from "../../../../../services";
 import { getIndexSN } from "../../../../../utils/getIndexSN";
 import { getSumValues } from "../../../../../utils/getSumValues";
 import { convertDishToProduct } from "../../../../../utils/convertDishToProduct";
+import EventEmitter from "../../../../../utils/EventEmitter";
 
 export type SchemaNutritionScreenNavigationProp = NativeStackNavigationProp<
   NutritionStackParamList,
@@ -99,6 +100,12 @@ export const SchemaNutritionHooks = () => {
   useEffect(() => {
     effect();
   }, [user]);
+
+  const event = () => setShow("e");
+  useEffect(() => {
+    EventEmitter.addListener("showDeficitModal", () => event());
+    return () => EventEmitter.removeListener("showDeficitModal", event);
+  }, []);
 
   const effect1 = () => {
     if (schemaNutrition) {

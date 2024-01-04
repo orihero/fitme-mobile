@@ -14,6 +14,7 @@ const ProfileHomeView = () => {
     user,
     onUsersPress,
     isTrainer,
+    onAdPress,
   } = ProfileHomeHooks();
 
   return (
@@ -44,6 +45,7 @@ const ProfileHomeView = () => {
           {!!isAdmin && (
             <Profile_btn title="Пользователи" onPress={onUsersPress} />
           )}
+          {!!isAdmin && <Profile_btn title="Реклами" onPress={onAdPress} />}
           <Profile_btn
             textStyle={styles.titleBtn}
             title="Выйти из аккаунта"

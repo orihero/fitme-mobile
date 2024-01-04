@@ -32,7 +32,8 @@ export const CreateWorkoutPlanHooks = () => {
   const navigation = useNavigation<CreateWorkoutPlanScreenNavigationProp>();
 
   const [user, dispatch] = useRedux(selectUser);
-  const isSuperAdmin = user?.role === ROLES.SUPERADMIN;
+  const isSuperAdminOrTrainer =
+    user?.role === ROLES.SUPERADMIN || user?.role === ROLES.TRAINER;
 
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
@@ -43,6 +44,7 @@ export const CreateWorkoutPlanHooks = () => {
   const [groupWorkouts, setGroupWorkouts] = useState<Workout[][]>([[]]);
   const [shouldShow, setShouldShow] = useState(true);
   const [toggle, setToggle] = useState(false);
+  const [publicly, setPublic] = useState(false);
   const [drop, setDrop] = useState<keyof typeof levelsMapper>("Опытный");
 
   const setToGroupWorkouts = ({ arr, i }: { arr: Workout[]; i: number }) => {
@@ -140,6 +142,7 @@ export const CreateWorkoutPlanHooks = () => {
         week: week * 4,
         creator: user?._id,
         workouts,
+        isPublic: publicly,
       };
 
       const res = await ApiService.post<Response<WorkoutPlan>>(
@@ -178,7 +181,7 @@ export const CreateWorkoutPlanHooks = () => {
     onSave,
     name,
     setName,
-    isSuperAdmin,
+    isSuperAdminOrTrainer,
     shouldShow,
     setShouldShow,
     drop,
@@ -187,5 +190,7 @@ export const CreateWorkoutPlanHooks = () => {
     setToggle,
     price,
     setPrice,
+    publicly,
+    setPublic,
   };
 };
