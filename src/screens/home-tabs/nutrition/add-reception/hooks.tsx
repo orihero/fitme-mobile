@@ -103,7 +103,7 @@ export const AddReceptionHooks = () => {
       ),
       dishes: products
         .filter((p) => p.category.type !== CategoryType.PRODUCT)
-        .map((a) => ({ ...a, name: a.name.en })),
+        .map((a) => ({ ...a, name: a.name.ru })),
     };
     EventEmitter.notify("onSetReceptions", { i: index, obj });
     navigation.goBack();

@@ -61,7 +61,7 @@ const ProductList = ({
           ]}
         >
           <View style={styles.left}>
-            <Text style={styles.text1}>{product.name.en}</Text>
+            <Text style={styles.text1}>{product.name.ru}</Text>
             <TouchableOpacity onPress={() => onRemoveByIndex(index)}>
               {typeof loading === "number" && loading === index ? (
                 <ActivityIndicator size={"small"} />

@@ -191,7 +191,9 @@ export const AddProductsHooks = () => {
     activeCategory,
     setActiveCategory,
     loading,
-    products,
+    products: !!searchValue
+      ? products.filter((e) => e.name.ru.indexOf(searchValue) !== -1)
+      : products,
     selected,
     onSearch,
     onCreate,

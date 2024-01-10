@@ -35,7 +35,7 @@ export const BaseProductsHooks = () => {
       setProducts(
         !!allProducts && allProducts.length > 0
           ? allProducts
-              .filter((e) => e.name.ru.indexOf(search) !== -1)
+              .filter((e) => e.name?.ru?.indexOf(search) !== -1)
               .filter(
                 (p) => p.category?._id === productCategories[activeTab]?._id
               )
