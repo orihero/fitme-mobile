@@ -8,6 +8,8 @@ import {
 } from "../../../../../store/slices/appSlice";
 import { selectExerciseCategories } from "../../../../../store/slices/categorySlice";
 import { Exercise, Response } from "../../../../../types";
+import { useNavigation } from "@react-navigation/native";
+import { NUTRITION } from "../../../../../navigation/ROUTES";
 
 export const MyExercisesHooks = () => {
   const [isFavorite, setIsFavorite] = useState(0);
@@ -23,6 +25,8 @@ export const MyExercisesHooks = () => {
   const [exerciseCategories] = useRedux(selectExerciseCategories);
   const [user, dispatch] = useRedux(selectUser);
   const { favoriteExercises } = user ?? {};
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     setActiveCategory(0);
@@ -68,6 +72,11 @@ export const MyExercisesHooks = () => {
         console.log("e: ", e);
       }
     }
+  };
+
+  const onExercisePrice = (exercise: Exercise) => {
+    //@ts-ignore
+    navigation.navigate(NUTRITION.EXERCISE, { exercise });
   };
 
   useEffect(() => {
@@ -174,5 +183,6 @@ export const MyExercisesHooks = () => {
     onSelect,
     onAdd,
     loadingSelect,
+    onExercisePrice,
   };
 };

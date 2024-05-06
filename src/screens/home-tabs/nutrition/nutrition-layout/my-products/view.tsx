@@ -33,7 +33,8 @@ const MyProductsView = () => {
     onPress,
     onAdd,
   } = MyProductsHooks();
-
+  console.log("RENDERING");
+  
   return (
     <View style={styles.container}>
       <View style={styles.scrollCont}>

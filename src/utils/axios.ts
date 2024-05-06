@@ -2,7 +2,9 @@ import axios, { AxiosRequestConfig, AxiosError } from "axios";
 import { AuthService } from "../services";
 import { ErrorType } from "../types";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { showErrToast } from "./showToast";
+import { showErrToast, showSuccessToast } from "./showToast";
+import store from "../store/configureStore";
+import { setLoading } from "../store/slices/appSlice";
 
 let oauthRequestInterceptor: number;
 
@@ -36,6 +38,7 @@ export const setOauthRequestInterceptor = (oauth: string) => {
   oauthRequestInterceptor = axios.interceptors.request.use(
     // @ts-ignore
     (config: AxiosRequestConfig) => {
+      store.dispatch(setLoading(true));
       config.headers = { ...config.headers, Authorization: oauth };
       return config;
     }
@@ -49,16 +52,14 @@ export const removeOauthInterceptor = () => {
 export const enableApiErrorInterceptor = () => {
   axios.interceptors.response.use(
     (response) => {
+      store.dispatch(setLoading(false));
       return response;
     },
     (error: AxiosError) => {
-      console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-      console.log(JSON.stringify(error));
-      console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       return new Promise((resolve, reject) => {
         // token expired
         if (error?.response?.status === 401) {
-          reject(error)
+          reject(error);
           // AuthService.refreshOauthToken((authHeader: string) => {
           //   replayRequest(
           //     {
@@ -94,8 +95,6 @@ export const enableApiErrorInterceptor = () => {
           //   }).catch((x) => reject(x));
           // }
         } else {
-          // ErrorService.apiLogError(error);
-          console.log("-----------", JSON.stringify(error, null, "\t"));
           if (!!error?.response) {
             showErrToast(error?.response?.data?.error?.message);
           } else {
@@ -114,4 +113,10 @@ export const enableApiErrorInterceptor = () => {
       });
     }
   );
+  axios.interceptors.response.use((e) => {
+    if (e.config.method === "POST" || e.config.method === "post") {
+      showSuccessToast("Операция завершена успешно");
+    }
+    return e;
+  });
 };

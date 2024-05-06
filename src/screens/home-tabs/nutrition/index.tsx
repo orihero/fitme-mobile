@@ -21,13 +21,18 @@ import {
   Product,
   Reception,
   SchemaNutrition,
+  Exercise,
 } from "../../../types";
 import CreateProductScreen from "./nutrition-layout/create-product";
+import ExerciseScreen from "../main/exercise";
 
 export type NutritionStackParamList = {
   [NUTRITION.NUTRITION_LAYOUT]: undefined;
   [NUTRITION.CREATE_PRODUCT]: undefined;
   [NUTRITION.CALC_DAILY_NORM]: undefined;
+  [NUTRITION.EXERCISE]: {
+    exercise: Exercise;
+  };
   [NUTRITION.RECOMMENDATION]: undefined;
   [NUTRITION.CONSUME_CALENDAR]: undefined;
   [NUTRITION.ADD_PRODUCTS]: {
@@ -72,6 +77,11 @@ const NutritionStack = () => {
       <Stack.Screen
         name={NUTRITION.NUTRITION_LAYOUT}
         component={NutritionLayout}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NUTRITION.EXERCISE}
+        component={ExerciseScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

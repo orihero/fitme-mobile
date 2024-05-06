@@ -31,11 +31,13 @@ export const styles = StyleSheet.create({
   btn: {
     marginTop: 50,
     borderWidth: 1,
-    paddingVertical: 18,
+    paddingVertical: 10,
     marginHorizontal: 20,
-    borderStyle: "dashed",
     borderColor: COLORS.WHITE,
     backgroundColor: "transparent",
+    alignSelf: "center",
+    alignContent: "center",
+    borderRadius: 30,
   },
   btnText: {
     fontSize: 15,

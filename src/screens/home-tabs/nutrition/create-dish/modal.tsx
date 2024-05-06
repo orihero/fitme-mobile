@@ -35,7 +35,7 @@ const CustomModal = ({ show, value, setValue, onSave, onCancel }: IProps) => {
             source={Assets.icons.close}
           />
         </TouchableOpacity>
-        <Text style={styles.modalText}>{`количество`}</Text>
+        <Text style={styles.modalText}>{`количество `}</Text>
         <InputPrimary
           value={value}
           disablePlaceholder

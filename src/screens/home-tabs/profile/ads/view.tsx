@@ -20,20 +20,18 @@ const AdsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Carousel
-          data={ads}
-          renderItem={({ ...rest }) => <AdItem {...rest} fetchAds={fetchAds} />}
-          sliderWidth={sliderWidth}
-          itemWidth={itemWidth}
-        />
-      </View>
+      <Carousel
+        data={ads}
+        renderItem={({ ...rest }) => <AdItem {...rest} fetchAds={fetchAds} />}
+        sliderWidth={sliderWidth}
+        itemWidth={itemWidth}
+      />
       <View style={{ marginHorizontal: 15 }}>
         <Text style={[styles.textOne, { marginVertical: 10 }]}>
           Чтобы добавить рекламу, пожалуйста, заполните поля ниже
         </Text>
         <Text style={[styles.textOne, { marginVertical: 10 }]}>
-        Ссылка на Изображения
+          Ссылка на Изображения
         </Text>
         <InputPrimary
           disablePlaceholder

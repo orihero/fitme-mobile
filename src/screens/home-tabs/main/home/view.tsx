@@ -16,7 +16,7 @@ import Carousel from "react-native-snap-carousel";
 import AdItem from "../../profile/ads/ad-item";
 
 const sliderWidth = Dimensions.get("window").width;
-const itemWidth = sliderWidth - 30;
+const itemWidth = sliderWidth - 0;
 
 const MainHomeView = () => {
   const { onPress, ads, fetchAds } = MainHomeHooks();

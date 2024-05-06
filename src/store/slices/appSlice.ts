@@ -8,6 +8,7 @@ export type AppState = {
   token?: Token;
   user?: User;
   trainer?: Trainer;
+  loading?: boolean;
 };
 
 const initialState: AppState = {
@@ -25,6 +26,7 @@ const {
     clearUser,
     clearAppState,
     setTrainer,
+    setLoading,
   },
   reducer,
 } = createSlice({
@@ -94,6 +96,9 @@ const {
     setTrainer: (state, action: PayloadAction<Trainer>) => {
       return { ...state, trainer: action.payload };
     },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      return { ...state, loading: action.payload };
+    },
   },
 });
 
@@ -107,6 +112,7 @@ export {
   clearUser,
   clearAppState,
   setTrainer,
+  setLoading,
 };
 
 export const selectLanguage = ({ app: { language } }: RootState) => language;

@@ -5,7 +5,12 @@ import { WORKOUT } from "../../../../../navigation/ROUTES";
 import { ApiService } from "../../../../../services";
 import { useRedux } from "../../../../../store/hooks";
 import { selectUser, setUser } from "../../../../../store/slices/appSlice";
-import { Response, ScheduleWorkout, User } from "../../../../../types";
+import {
+  Exercise,
+  Response,
+  ScheduleWorkout,
+  User,
+} from "../../../../../types";
 
 export type ScheduleWorkoutScreenNavigationProp = NavigationProp<
   WorkoutStackParamList,
@@ -65,6 +70,10 @@ export const ScheduleWorkoutHooks = () => {
     }
   };
 
+  const onExrecisePress = (exercise: Exercise) => {
+    navigation.navigate(WORKOUT.EXERCISE, { exercise });
+  };
+
   return {
     data,
     setData,
@@ -76,5 +85,6 @@ export const ScheduleWorkoutHooks = () => {
     onPress,
     onHide,
     onFinish,
+    onExrecisePress,
   };
 };

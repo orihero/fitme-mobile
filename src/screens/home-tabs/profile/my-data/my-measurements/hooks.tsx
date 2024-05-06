@@ -155,7 +155,7 @@ export const MeasurementsHooks = (apprenticeId = "") => {
   }, [pickerState]);
 
   const onRemind = async () => {
-    setPickerState("time");
+    setPickerState("date");
   };
 
   const onSet = (i: number, ii: number) => {

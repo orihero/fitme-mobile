@@ -8,7 +8,7 @@ import { styles } from "./style";
 import ReactNativeModal from "react-native-modal";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const MyMeasurementsView = ({apprenticeId=""}) => {
+const MyMeasurementsView = ({ apprenticeId = "" }) => {
   const {
     measurements,
     modalLoading,
@@ -97,15 +97,21 @@ const MyMeasurementsView = ({apprenticeId=""}) => {
         onRemoveRow={onRemoveRow}
         onClose={onClose}
       />
-      {/* <ReactNativeModal>
-      </ReactNativeModal> */}
       {!!pickerState && (
         <DateTimePicker
           mode={pickerState}
           value={date}
           onChange={(e) => {
-            setPickerState(pickerState === "time" ? "date" : null);
+            setPickerState(pickerState === "date" ? "time" : null);
             setDate(new Date(e.nativeEvent.timestamp));
+          }}
+          onPointerCancel={() => {
+            console.log("DSA");
+          }}
+          onTouchCancel={() => {
+            console.log("CANCEL");
+
+            setPickerState(null);
           }}
         />
       )}

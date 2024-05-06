@@ -1,4 +1,10 @@
-import { View, Text, ScrollView, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from "react-native";
 import {
   ButtonPrimary,
   EmptyComponent,
@@ -23,6 +29,7 @@ const ScheduleWorkoutView = () => {
     onPress,
     onHide,
     onFinish,
+    onExrecisePress,
   } = ScheduleWorkoutHooks();
   let showData = !data ? tempData : data;
   return (
@@ -55,16 +62,17 @@ const ScheduleWorkoutView = () => {
                 {show[ii] && (
                   <>
                     {ww.map((w, i) => (
-                      <View
+                      <TouchableOpacity
                         key={`${ii}/${w.exercise?._id}`}
                         style={[
                           styles.column,
                           styles.itemsStart,
                           !i && { borderTopWidth: 0 },
                         ]}
+                        onPress={() => onExrecisePress(w.exercise)}
                       >
                         <Text style={styles.text2}>{w.exercise?.title}</Text>
-                      </View>
+                      </TouchableOpacity>
                     ))}
                   </>
                 )}
@@ -97,7 +105,7 @@ const ScheduleWorkoutView = () => {
                             style={[styles.column, !i && { borderTopWidth: 0 }]}
                           >
                             <Text
-                              style={[styles.text2, { color: COLORS.GREY11 }]}
+                              style={[styles.text2, { color: 'white' }]}
                             >
                               {`${w?.approach}x${w?.repetitions}`}
                             </Text>
@@ -171,7 +179,9 @@ const ScheduleWorkoutView = () => {
               </ScrollView>
             </View>
           ))}
-
+        <Text style={styles.prompt}>
+          Выберите неделю, чтобы изменить статус прогресса
+        </Text>
         {!!data && (
           <View style={styles.btnRow}>
             <ScrollView horizontal>
@@ -195,7 +205,7 @@ const ScheduleWorkoutView = () => {
           </View>
         )}
 
-        {!!data && (
+        {/* {!!data && (
           <ButtonPrimary
             multiline
             style={styles.btn2}
@@ -203,7 +213,7 @@ const ScheduleWorkoutView = () => {
             textStyle={styles.btnText3}
             onPress={() => setShowModal(true)}
           />
-        )}
+        )} */}
         {!data ? <EmptyComponent /> : <></>}
       </View>
 

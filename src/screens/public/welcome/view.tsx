@@ -6,11 +6,13 @@ import {
   ImageBackground,
   Touchable,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import React from "react";
 import { styles } from "./style";
 import { WelcomeHooks } from "./hooks";
 import { COLORS } from "../../../constants/COLORS";
+import _ from "underscore";
 
 const Component1 = () => {
   return (
@@ -227,14 +229,39 @@ const Component4 = () => {
 };
 
 const WelcomeScreen = () => {
-  const { onPress, showedContent, onAuthorizationPress } = WelcomeHooks();
+  const { onPress, showedContent, onAuthorizationPress, scrollRef } =
+    WelcomeHooks();
+
+  const throttledPress = _.debounce(onPress, 100);
+
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        {showedContent === 0 ? <Component1 /> : null}
+        <ScrollView
+          onMomentumScrollEnd={(e) => {
+            const { nativeEvent } = e;
+            throttledPress(
+              Math.round(
+                nativeEvent.contentOffset.x / Dimensions.get("screen").width
+              ),
+              false
+            );
+          }}
+          scrollEventThrottle={16}
+          pagingEnabled
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          ref={scrollRef}
+        >
+          <Component1 />
+          <Component2 />
+          <Component3 />
+          <Component4 />
+        </ScrollView>
+        {/* {showedContent === 0 ? <Component1 /> : null}
         {showedContent === 1 ? <Component2 /> : null}
         {showedContent === 2 ? <Component3 /> : null}
-        {showedContent === 3 ? <Component4 /> : null}
+        {showedContent === 3 ? <Component4 /> : null} */}
       </View>
       <View style={styles.bottom}>
         <View style={{ flexDirection: "row" }}>
@@ -267,7 +294,7 @@ const WelcomeScreen = () => {
       <View style={{ marginVertical: 20 }}>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={onPress}
+          onPress={() => onPress(NaN, true)}
           style={styles.btn}
         >
           {showedContent === 0 ? (

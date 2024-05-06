@@ -1,11 +1,11 @@
+import React from "react";
+import { enableScreens } from "react-native-screens";
 import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
-import { enableScreens } from "react-native-screens";
-import store from "./src/store/configureStore";
+import "./ignoreWarnings";
 import Root from "./src/navigation/Root";
-import React from "react";
-import "./ignoreWarnings"
+import store from "./src/store/configureStore";
 enableScreens();
 
 const persistor = persistStore(store);

@@ -102,10 +102,10 @@ export const SchemaNutritionHooks = () => {
   }, [user]);
 
   const event = () => setShow("e");
-  useEffect(() => {
-    EventEmitter.addListener("showDeficitModal", () => event());
-    return () => EventEmitter.removeListener("showDeficitModal", event);
-  }, []);
+  // useEffect(() => {
+  //   EventEmitter.addListener("showDeficitModal", () => event());
+  //   return () => EventEmitter.removeListener("showDeficitModal", event);
+  // }, []);
 
   const effect1 = () => {
     if (schemaNutrition) {

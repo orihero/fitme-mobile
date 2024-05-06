@@ -15,7 +15,7 @@ export const useAdsHook = () => {
   };
 
   const onAdSubmit = async () => {
-    if (!state.imageUrl) {
+    if (!state.imageUrl && !state.videoUrl) {
       showErrToast("Пожалуйста, заполните все поля");
       return;
     }

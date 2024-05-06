@@ -161,7 +161,7 @@ const NutritionPlanView = () => {
             <View style={styles.recommendation}>
               <ScrollView showsVerticalScrollIndicator={false}>
                 <Text style={styles.text}>
-                  {nutritions[activePlan][activeReception].recommendation}
+                  {nutritions[activePlan][activeReception]?.recommendation}
                 </Text>
               </ScrollView>
             </View>

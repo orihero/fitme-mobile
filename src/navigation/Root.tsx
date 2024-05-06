@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { AxiosResponse } from "axios";
 import { useEffect, useMemo, useState } from "react";
-import { Image, View } from "react-native";
+import { Dimensions, Image, View } from "react-native";
 import Toast from "react-native-toast-message";
 import { ApiService, AuthService } from "../services";
 import { clearT } from "../services/AuthService";
@@ -26,16 +26,18 @@ import { setOauthRequestInterceptor } from "../utils/axios";
 import Example from "./Example";
 import HomeStack from "./HomeStack";
 import PublicStack from "./PublicStack";
+import LottieView from "lottie-react-native";
 
 const Root = () => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const [store, dispatch] = useRedux((s) => s);
+  const { width, height } = Dimensions.get("window");
 
   const example = false;
   const {
-    app: { token },
+    app: { token, loading: appLoading },
   } = store;
 
   const setBearerToken = () => {
@@ -87,9 +89,7 @@ const Root = () => {
 
         dispatch(setUser(resUser.data));
         setIsAuthenticated(true);
-      } catch (ee: any) { 
-        
-      }
+      } catch (ee: any) {}
     }
   };
 
@@ -163,7 +163,12 @@ const Root = () => {
     <NavigationContainer>
       {loading ? (
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: 'white' }}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "white",
+          }}
         >
           <Image
             source={require("../assets/images/fitmeLogo.jpg")}
@@ -174,6 +179,25 @@ const Root = () => {
         screens
       )}
       <Toast />
+      {appLoading && (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0,0,0,0.95)",
+          }}
+        >
+          <LottieView
+            source={require("../assets/lottie/loading.json")}
+            autoPlay
+            loop
+            style={{ width, height }}
+          />
+        </View>
+      )}
     </NavigationContainer>
   );
 };

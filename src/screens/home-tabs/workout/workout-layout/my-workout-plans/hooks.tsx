@@ -6,7 +6,7 @@ import { ROUTES, WORKOUT } from "../../../../../navigation/ROUTES";
 import { ApiService } from "../../../../../services";
 import { useRedux } from "../../../../../store/hooks";
 import { selectUser, setUser } from "../../../../../store/slices/appSlice";
-import { Response, User, WorkoutPlan } from "../../../../../types";
+import { ROLES, Response, User, WorkoutPlan } from "../../../../../types";
 
 export type MyWorkoutPlansScreenNavigationProp = NativeStackNavigationProp<
   WorkoutStackParamList,
@@ -38,9 +38,9 @@ export const MyWorkoutPlansHooks = () => {
         planId,
       });
 
-      const res = await ApiService.get<Response<User>>('/users/me')
+      const res = await ApiService.get<Response<User>>("/users/me");
 
-      dispatch(setUser(res.data))
+      dispatch(setUser(res.data));
 
       setLoading(undefined);
       setShow(undefined);
@@ -62,5 +62,6 @@ export const MyWorkoutPlansHooks = () => {
     onCreate,
     onRemove,
     workoutPlans,
+    isSuperAdmin: user?.role === ROLES.SUPERADMIN,
   };
 };

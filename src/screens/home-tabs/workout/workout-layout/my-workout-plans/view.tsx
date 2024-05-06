@@ -9,8 +9,16 @@ import {
 import { MyWorkoutPlansHooks } from "./hooks";
 
 const MyWorkoutPlansView = () => {
-  const { onPress, onCreate, onRemove, workoutPlans, loading, show, setShow } =
-    MyWorkoutPlansHooks();
+  const {
+    onPress,
+    onCreate,
+    onRemove,
+    workoutPlans,
+    loading,
+    show,
+    setShow,
+    isSuperAdmin,
+  } = MyWorkoutPlansHooks();
 
   return (
     <View style={styles.container}>
@@ -43,16 +51,17 @@ const MyWorkoutPlansView = () => {
           )}
         </View>
       </ScrollView>
-
-      <View style={{ paddingBottom: 90, paddingTop: 20 }}>
-        <ButtonPrimary
-          fill
-          onPress={onCreate}
-          style={styles.button}
-          text="Составить свою программу"
-          textStyle={styles.buttonText}
-        />
-      </View>
+      {isSuperAdmin && (
+        <View style={{ paddingBottom: 90, paddingTop: 20 }}>
+          <ButtonPrimary
+            fill
+            onPress={onCreate}
+            style={styles.button}
+            text="Составить свою программу"
+            textStyle={styles.buttonText}
+          />
+        </View>
+      )}
     </View>
   );
 };

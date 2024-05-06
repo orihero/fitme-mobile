@@ -61,15 +61,15 @@ const SignInView = () => {
           />
         </View>
         <View style={styles.footerContainer}>
-          <Text style={styles.textFooter}>Авторизоваться при помощи</Text>
+          {/* <Text style={styles.textFooter}>Авторизоваться при помощи</Text>
           <View style={{ alignItems: "center" }}>
             <View style={styles.iconContainer}>
-              {/* <TouchableOpacity activeOpacity={0.7}>
+              <TouchableOpacity activeOpacity={0.7}>
               <AppleIcon />
               </TouchableOpacity>
               <TouchableOpacity activeOpacity={0.7}>
               <FacebookIcon />
-            </TouchableOpacity> */}
+            </TouchableOpacity>
               <TouchableOpacity activeOpacity={0.7}>
                 <Image
                   style={{ width: 49, height: 50 }}
@@ -79,7 +79,7 @@ const SignInView = () => {
                 />
               </TouchableOpacity>
             </View>
-          </View>
+          </View> */}
           <Text style={styles.text}>или</Text>
           <TouchableOpacity
             onPress={onRegisterPress}

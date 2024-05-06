@@ -28,6 +28,7 @@ const MyExercisesView = () => {
     onSelect,
     onAdd,
     loadingSelect,
+    onExercisePrice,
   } = MyExercisesHooks();
 
   return (
@@ -55,10 +56,10 @@ const MyExercisesView = () => {
         titles={
           !!exerciseCategories && exerciseCategories.length > 0
             ? [
-              ...exerciseCategories[activeCategory].children.map(
-                (a) => a.name[language]
-              ),
-            ]
+                ...exerciseCategories[activeCategory].children.map(
+                  (a) => a.name[language]
+                ),
+              ]
             : []
         }
         containerStyle={styles.subCategoryBtnCont}
@@ -70,6 +71,7 @@ const MyExercisesView = () => {
             key={e._id}
             activeOpacity={0.6}
             style={{ marginTop: 10 }}
+            onPress={() => onExercisePrice(e)}
           >
             <Box
               dots={!!!isFavorite}
